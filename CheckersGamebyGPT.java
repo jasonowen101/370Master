@@ -2,7 +2,7 @@
 
 import java.util.Scanner;
 
-public class CheckersGame {
+public class CheckersGamebyGPT {
     private static char[][] board;
     private static final int BOARD_SIZE = 8;
     private static final char EMPTY_CELL = '-';
