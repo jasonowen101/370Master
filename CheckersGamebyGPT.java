@@ -46,13 +46,13 @@ public class CheckersGamebyGPT {
         for (int x = 0; x < BOARD_SIZE; x++) {
             for (int y = 0; y < BOARD_SIZE; y++) {
                 if ((x + y) % 2 == 0) {
-                    board[x][y] = new Piece();      //this piece should be effectively null and wont be visible
+                    board[x][y] = new LogicPiece(x, y, "empty");      //this piece should be effectively null and wont be visible
                 } else if (y <= 2) {
-                    board[x][y] = new Piece();      //call piece constructor with either player 1 parameter or player 2 parameter
+                    board[x][y] = new LogicPiece(x, y, "player1");      //call piece constructor with either player 1 parameter or player 2 parameter
                 } else if (y >= BOARD_SIZE - 3) {
-                    board[x][y] = new Piece();      //call piece constructor with other player parameter
+                    board[x][y] = new LogicPiece(x, y, "player2");      //call piece constructor with other player parameter
                 } else {
-                    board[x][y] = new Piece();      //this piece should be effectively null and wont be visible
+                    board[x][y] = new LogicPiece(x, y, "empty");      //this piece should be effectively null and wont be visible
                 }
             }
         }
