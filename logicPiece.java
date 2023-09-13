@@ -5,9 +5,9 @@ class LogicPiece {
 
   private String team;
 
-  private Boolean king;
+  private Boolean kingStatus;
 
-  public logicPiece(int x, int y) {
+  public LogicPiece(int x, int y) {
     this.x = x;
     this.y = y;
 
@@ -16,11 +16,11 @@ class LogicPiece {
     team = "empty";
   }
 
-  public logicPiece(int x, int y, String team) {
+  public LogicPiece(int x, int y, String team) {
     this.x = x;
     this.y = y;
 
-    king = false;
+    kingStatus = false;
 
     this.team = team;
   }
