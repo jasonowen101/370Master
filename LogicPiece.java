@@ -25,6 +25,10 @@ class LogicPiece {
     this.team = team;
   }
 
+  public String getTeam() {
+    return team;
+  }
+  
   public int getX(){
     return x;
   }
