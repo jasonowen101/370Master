@@ -7,7 +7,7 @@ class LogicPiece {
 
   private Boolean kingStatus;
 
-  public LogicPiece(int x, int y) {
+  public LogicPiece(int x, int y) {           //didn't use this constructor
     this.x = x;
     this.y = y;
 
@@ -28,7 +28,7 @@ class LogicPiece {
   public String getTeam() {
     return team;
   }
-  
+
   public int getX(){
     return x;
   }
@@ -41,11 +41,11 @@ class LogicPiece {
     return kingStatus;
   }
 
-  public void setX(int x){
+  public void setX(int x){             //as of now, our plan is to not actually move any of the pieces within the array, so the set X and Y methods shouldn't be used
     this.x = x;
   }
 
-  public void setY(int y){
+  public void setY(int y){            //see above comment
     this.y = y;
   }
 
