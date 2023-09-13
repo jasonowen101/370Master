@@ -1,4 +1,4 @@
-class logicPiece {
+class LogicPiece {
 
   private int x;
   private int y;
@@ -6,7 +6,7 @@ class logicPiece {
   private String team;
 
   private Boolean king;
-  
+
   public logicPiece(int x, int y) {
     this.x = x;
     this.y = y;
@@ -48,5 +48,5 @@ class logicPiece {
   public void promote(){
     kingStatus = true;
   }
-  
+
 }
