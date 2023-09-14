@@ -7,7 +7,7 @@ class LogicPiece {
 
   private Boolean kingStatus;
 
-  public LogicPiece(int x, int y) {           //didn't use this constructor
+  public LogicPiece(int x, int y) {           //move utilises this constructor, see Nathan
     this.x = x;
     this.y = y;
 
