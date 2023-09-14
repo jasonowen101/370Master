@@ -78,7 +78,7 @@ public class CheckersGamebyGPT {
         return move;
     }
 
-    private static boolean isValidMove(LogicPiece startPiece, LogicPiece endPiece) {
+    private static boolean isValidMove(logicPiece startPiece, LogicPiece endPiece) {
         /*
          * Moveset Rules:
          * Must be in bounds
@@ -141,8 +141,14 @@ public class CheckersGamebyGPT {
                             // Is JUMP
                             int jumpedX = startPiece.getX() + ((endPiece.getX() - startPiece.getX()) / 2);
                             int jumpedY = startPiece.getY() + ((endPiece.getY() - startPiece.getY()) / 2);
-                            LogicPiece jumpedPiece = board[jumpedX][jumpedY];
-                            return isValidMove(startPiece, jumpedPiece);
+                            logicPiece jumpedPiece = board[jumpedX][jumpedY];
+                            
+                            if(jumpedPiece.getClass().equals(startPiece.getClass())){
+                                // Trying to jump friendly Piece
+                                return false;
+                            }else{
+                                return true;
+                            }
                         }else{
                             // Is MOVE
                             return true;
@@ -160,7 +166,12 @@ public class CheckersGamebyGPT {
                             int jumpedX = startPiece.getX() + ((endPiece.getX() - startPiece.getX()) / 2);
                             int jumpedY = startPiece.getY() + ((endPiece.getY() - startPiece.getY()) / 2);
                             LogicPiece jumpedPiece = board[jumpedX][jumpedY];
-                            return isValidMove(startPiece, jumpedPiece);
+                            if(jumpedPiece.getClass().equals(startPiece.getClass())){
+                                // Trying to jump friendly Piece
+                                return false;
+                            }else{
+                                return true;
+                            }                       
                         }else{
                             // Is MOVE
                             return true;
