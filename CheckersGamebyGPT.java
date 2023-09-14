@@ -131,7 +131,6 @@ public class CheckersGamebyGPT {
                 }
             }else{
                 // Piece is NOT King
-
                 if(player1Turn == true){ // 2nd Conditional Branch [Determines Forward direction]
                     if(endPiece.getY() - startPiece.getY() < 0){
                         // Is BACKWARD
@@ -168,10 +167,8 @@ public class CheckersGamebyGPT {
                         }
                     }
                 }
-
             }
         }
-        
         return false;// Failsafe return; shouldn't be reachable...
     }
 
