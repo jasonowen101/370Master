@@ -3,7 +3,7 @@ package HelperFiles;
 
 import java.util.Scanner;
 
-public class CheckersGamebyGPT {
+public class LogicBoard {
     private static LogicPiece[][] board;
     private static final int BOARD_SIZE = 8;
     private static final char EMPTY_CELL = '-';
