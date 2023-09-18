@@ -25,6 +25,16 @@ class LogicPiece {
     this.team = team;
   }
 
+  public LogicPiece(LogicPiece piece, boolean isEmpty){
+    // A constuctor I made for moving, just an idea, but this may change from what I understand
+    this.x = piece.getX();
+    this.y = piece.getY();
+
+    kingStatus = piece.getKingStatus();
+
+    this.team = isEmpty ? "empty" : piece.getTeam();
+  }
+
   public String getTeam() {
     return team;
   }
@@ -37,7 +47,7 @@ class LogicPiece {
     return y;
   }
 
-  public Boolean getKingStatus(){
+  public boolean getKingStatus(){
     return kingStatus;
   }
 
