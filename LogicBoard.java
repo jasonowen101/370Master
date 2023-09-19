@@ -90,7 +90,8 @@ public class LogicBoard {
          * King? => Forward move?
          */
 
-        if((player1Turn == true) ^ (startPiece.getTeam().equals("player1"))){ // IF Piece is not yours
+         //changed player1turn and the string "player1" to isBlueTurn check and "blue"
+        if((Checkers.isBlueTurn() == true) ^ (startPiece.getTeam().equals("blue"))){ // IF Piece is not yours
             // (Turn = P1 AND Piece = P2) OR (Turn = P2 AND Piece = P1) {^ == XOR}
             return false;
         }else if(((endPiece.getX() < 0) || (endPiece.getX() >= BOARD_SIZE)) // IF X out of bounds {0-7}
@@ -124,7 +125,7 @@ public class LogicBoard {
                 }
             }else{
                 // Piece is NOT King
-                if(player1Turn == true){ // 2nd Conditional Branch [Determines Forward direction]
+                if(Checkers.isBlueTurn() == true){ // 2nd Conditional Branch [Determines Forward direction]
                     if(endPiece.getY() - startPiece.getY() < 0){
                         // Is BACKWARD
                         return false;
@@ -178,6 +179,7 @@ public class LogicBoard {
 
     private static void makeMove(LogicPiece startPiece, LogicPiece endLocation){
         if (isValidMove(startPiece, endLocation)){
+            //here instead of creating a new piece can we not just reuse start piece or change the flags of the piece? idk just wondering
             board[endLocation.getX()][endLocation.getY()] = new LogicPiece(startPiece, false);
             board[startPiece.getX()][startPiece.getY()] = new LogicPiece(endLocation,  true);
         }

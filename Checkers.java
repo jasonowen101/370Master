@@ -1,7 +1,7 @@
 public class Checkers {
     private static LogicBoard gameBoard = new LogicBoard();
     private static boolean blueTurn;
-    public boolean isBlueTurn() {
+    public static boolean isBlueTurn() {
         return blueTurn;
     }
     public static void main(String[] args) {
