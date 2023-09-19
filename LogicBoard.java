@@ -1,4 +1,4 @@
-package HelperFiles;
+//package HelperFiles;
 //JTO: This may prove helpful to get you started
 
 import java.util.Scanner;
