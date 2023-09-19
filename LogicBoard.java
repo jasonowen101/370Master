@@ -10,6 +10,10 @@ public class LogicBoard {
     private static final char PLAYER_1_PIECE = 'X';
     private static final char PLAYER_2_PIECE = 'O';
 
+    public LogicPiece[][] getBoard() {
+        return board;
+    }
+
     public static void main(String[] args) {
         initializeBoard();
         boolean player1Turn = true;
@@ -41,7 +45,7 @@ public class LogicBoard {
         System.out.println("Game over!");
     }
 
-    private static void initializeBoard() {
+    public void initializeBoard() {
         board = new LogicPiece[BOARD_SIZE][BOARD_SIZE];  //use whatever class the checkers pieces are
 
         for (int x = 0; x < BOARD_SIZE; x++) {
