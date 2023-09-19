@@ -33,10 +33,9 @@ public class Checkers {
         System.out.println(team + "'s turn");
         Scanner scanner = new Scanner(System.in);
         int[] move = new int[4];
-        System.out.print("Enter your move (startX startY endX endY): ");
+        System.out.println("Enter your move (startX startY endX endY pressing enter after every value): ");
         for (int i = 0; i < 4; i++) {
             move[i] = scanner.nextInt();
-            System.out.println(move[i]);
         }
         scanner.close();
         return new LogicPiece[]{gameBoard.getPieceArray()[move[0]][move[1]], gameBoard.getPieceArray()[move[2]][move[3]]};
