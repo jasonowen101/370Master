@@ -8,12 +8,11 @@ public class Checkers {
     }
     public static void main(String[] args) {
         gameBoard.initializeBoard();
-        boolean gameIsRunning = false;
+        boolean gameIsRunning = true;
         blueTurn = true;
         while (gameIsRunning) {
-            gameBoard.makeMove(getPlayerMove());
-
             printBoardToConsole();
+            gameBoard.makeMove(getPlayerMove());
             // Check for game over conditions (e.g., one player has no pieces left)
             // Implement this logic according to the rules of checkers.
 
@@ -37,6 +36,7 @@ public class Checkers {
         System.out.print("Enter your move (startX startY endX endY): ");
         for (int i = 0; i < 4; i++) {
             move[i] = scanner.nextInt();
+            System.out.println(move[i]);
         }
         scanner.close();
         return new LogicPiece[]{gameBoard.getPieceArray()[move[0]][move[1]], gameBoard.getPieceArray()[move[2]][move[3]]};
