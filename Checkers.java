@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Checkers {
     private static LogicBoard gameBoard = new LogicBoard();
     private static boolean blueTurn;
@@ -20,6 +22,26 @@ public class Checkers {
         printBoardToConsole();
         System.out.println("Game over!");
     }
+
+    //method to get move
+    private static int[] getPlayerMove() {
+        String team;
+        if(blueTurn){
+            team = "Blue";
+        } else {
+            team = "Yellow";
+        }
+        System.out.println(team + "'s turn");
+        Scanner scanner = new Scanner(System.in);
+        int[] move = new int[4];
+        System.out.print("Enter your move (startX startY endX endY): ");
+        for (int i = 0; i < 4; i++) {
+            move[i] = scanner.nextInt();
+        }
+        scanner.close();
+        return move;
+    }
+
     //GUI should basically do this but with cool graphics
     public static void printBoardToConsole() {
         for(int y = 0; y < 8; ++y){

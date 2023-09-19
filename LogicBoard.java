@@ -1,8 +1,6 @@
 //package HelperFiles;
 //JTO: This may prove helpful to get you started
 
-import java.util.Scanner;
-
 public class LogicBoard {
     private static LogicPiece[][] board;
     private static final int BOARD_SIZE = 8;
@@ -59,16 +57,6 @@ public class LogicBoard {
                 }
             }
         }
-    }
-
-    private static int[] getPlayerMove() {
-        Scanner scanner = new Scanner(System.in);
-        int[] move = new int[4];
-        System.out.print("Enter your move (startX startY endX endY): ");
-        for (int i = 0; i < 4; i++) {
-            move[i] = scanner.nextInt();
-        }
-        return move;
     }
 
     private static boolean isValidMove(LogicPiece startPiece, LogicPiece endPiece) {
