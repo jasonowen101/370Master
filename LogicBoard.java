@@ -13,37 +13,38 @@ public class LogicBoard {
     public LogicPiece[][] getBoard() {
         return board;
     }
+    // I COMMENTED OUT THIS MAIN METHOD SINCE THE GAME WILL BE RUN FROM CHECKERS CLASS, AND I WASN'T SURE IF THERE WAS ANYTHING IMPORTANT IN HERE.
+    //
+    // public static void main(String[] args) {
+    //     initializeBoard();
+    //     boolean player1Turn = true;
+    //     boolean gameIsRunning = true;
 
-    public static void main(String[] args) {
-        initializeBoard();
-        boolean player1Turn = true;
-        boolean gameIsRunning = true;
+    //     while (gameIsRunning) {
+    //         printBoard();
+    //         char currentPlayerPiece = player1Turn ? PLAYER_1_PIECE : PLAYER_2_PIECE;
+    //         System.out.println("Player " + (player1Turn ? "1" : "2") + "'s turn (" + currentPlayerPiece + ")");
+    //         int[] move = getPlayerMove();
+    //         int startX = move[0];
+    //         int startY = move[1];
+    //         int endX = move[2];
+    //         int endY = move[3];
 
-        while (gameIsRunning) {
-            printBoard();
-            char currentPlayerPiece = player1Turn ? PLAYER_1_PIECE : PLAYER_2_PIECE;
-            System.out.println("Player " + (player1Turn ? "1" : "2") + "'s turn (" + currentPlayerPiece + ")");
-            int[] move = getPlayerMove();
-            int startX = move[0];
-            int startY = move[1];
-            int endX = move[2];
-            int endY = move[3];
+    //         if (isValidMove(startX, startY, endX, endY, currentPlayerPiece)) {
+    //             makeMove(startX, startY, endX, endY, currentPlayerPiece);
+    //             player1Turn = !player1Turn;
+    //         } else {
+    //             System.out.println("Invalid move! Try again.");
+    //         }
 
-            if (isValidMove(startX, startY, endX, endY, currentPlayerPiece)) {
-                makeMove(startX, startY, endX, endY, currentPlayerPiece);
-                player1Turn = !player1Turn;
-            } else {
-                System.out.println("Invalid move! Try again.");
-            }
+    //         // Check for game over conditions (e.g., one player has no pieces left)
+    //         // Implement this logic according to the rules of checkers.
 
-            // Check for game over conditions (e.g., one player has no pieces left)
-            // Implement this logic according to the rules of checkers.
+    //         // You can add AI logic here to make the computer player's move.
+    //     }
 
-            // You can add AI logic here to make the computer player's move.
-        }
-
-        System.out.println("Game over!");
-    }
+    //     System.out.println("Game over!");
+    // }
 
     public void initializeBoard() {
         board = new LogicPiece[BOARD_SIZE][BOARD_SIZE];  //use whatever class the checkers pieces are
