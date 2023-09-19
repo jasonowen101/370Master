@@ -5,7 +5,7 @@ public class LogicBoard {
     private static LogicPiece[][] board;
     private static final int BOARD_SIZE = 8;
 
-    public LogicPiece[][] getBoard() {
+    public LogicPiece[][] getPieceArray() {
         return board;
     }
     // I COMMENTED OUT THIS MAIN METHOD SINCE THE GAME WILL BE RUN FROM CHECKERS CLASS, AND I WASN'T SURE IF THERE WAS ANYTHING IMPORTANT IN HERE.
@@ -165,7 +165,9 @@ public class LogicBoard {
         return false;// Failsafe return; shouldn't be reachable...
     }
 
-    private static void makeMove(LogicPiece startPiece, LogicPiece endLocation){
+    public static void makeMove(LogicPiece [] moves){
+        LogicPiece startPiece = moves[0];
+        LogicPiece endLocation = moves[1];
         if (isValidMove(startPiece, endLocation)){
             //here instead of creating a new piece can we not just reuse start piece or change the flags of the piece? idk just wondering
             board[endLocation.getX()][endLocation.getY()] = new LogicPiece(startPiece, false);
