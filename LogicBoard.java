@@ -165,7 +165,7 @@ public class LogicBoard {
         return false;// Failsafe return; shouldn't be reachable...
     }
 
-    public static void makeMove(LogicPiece [] moves){
+    public void makeMove(LogicPiece [] moves){
         LogicPiece startPiece = moves[0];
         LogicPiece endLocation = moves[1];
         if (isValidMove(startPiece, endLocation)){
