@@ -1,10 +1,13 @@
 public class Checkers {
     private static LogicBoard gameBoard = new LogicBoard();
+    private static boolean blueTurn;
+    public boolean isBlueTurn() {
+        return blueTurn;
+    }
     public static void main(String[] args) {
         gameBoard.initializeBoard();
-        boolean blueTurn = true;
         boolean gameIsRunning = false;
-
+        blueTurn = true;
         while (gameIsRunning) {
             
 
