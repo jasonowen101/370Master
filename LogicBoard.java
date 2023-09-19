@@ -6,9 +6,6 @@ import java.util.Scanner;
 public class LogicBoard {
     private static LogicPiece[][] board;
     private static final int BOARD_SIZE = 8;
-    private static final char EMPTY_CELL = '-';
-    private static final char PLAYER_1_PIECE = 'X';
-    private static final char PLAYER_2_PIECE = 'O';
 
     public LogicPiece[][] getBoard() {
         return board;
@@ -61,17 +58,6 @@ public class LogicBoard {
                     board[x][y] = new LogicPiece(x, y, "empty");      //this piece should be effectively null and wont be visible
                 }
             }
-        }
-    }
-
-    private static void printBoard() {
-        System.out.println("  0 1 2 3 4 5 6 7");
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            System.out.print(i + " ");
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 
