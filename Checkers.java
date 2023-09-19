@@ -20,6 +20,7 @@ public class Checkers {
         printBoardToConsole();
         System.out.println("Game over!");
     }
+    //GUI should basically do this but with cool graphics
     public static void printBoardToConsole() {
         for(int y = 0; y < 8; ++y){
             for(int x = 0; x < 8; ++x){
