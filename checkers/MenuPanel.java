@@ -83,14 +83,14 @@ class MenuPanel extends JPanel {
         playerVsPlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               //add the game panel once ready
+                Ctegame.cl.show(Ctegame.cards, "GamePanel");
             }
         });
 
         playVsComputer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //add the game panel once ready
+                Ctegame.cl.show(Ctegame.cards, "GamePanel");
             }
         });
 

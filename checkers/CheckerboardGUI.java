@@ -1,18 +1,16 @@
-package src;
+package checkers;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CheckerboardGUI extends JFrame {
+public class CheckerboardGUI extends JPanel {
     private static final int BOARD_SIZE = 8;
     private CheckerSquare[][] squares;
 
     public CheckerboardGUI() {
-        setTitle("Checkerboard");
         setSize(400, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel boardPanel = new JPanel(new GridLayout(BOARD_SIZE, BOARD_SIZE));
         squares = new CheckerSquare[BOARD_SIZE][BOARD_SIZE];
@@ -60,7 +58,7 @@ public class CheckerboardGUI extends JFrame {
 
         add(buttonPanel, BorderLayout.SOUTH);
 
-        setVisible(true);
+//        setVisible(true);
     }
 
 
