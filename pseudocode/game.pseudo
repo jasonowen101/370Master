@@ -1,0 +1,160 @@
+Checkers AI Pseudocode
+-----------------------------------------------------------
+
+- Using Greedy Approach -
+
+STEPS:
+1. Define the moves
+2. Select best move
+
+SUMMARY: 
+>   Using a TreeMap is critical for the way I designed the algorithm. A TreeMap serves as a HashMap, but 
+    it sorts the map by Keys, allowing us to pick the highest number easily. This eliminates the need
+    to sort a data structure.
+>   A Move class should be implemented. This class needs to contain the point value associated with the move,
+    the starting point, and the ending point.To best do this, I reccomend defining 'Point extends SimpleEntry<Integer, Integer>'
+    to represent coordinates in the coordinate grid. Below is the documentation for SimpleEntry<K, V>.
+    https://docs.oracle.com/javase/8/docs/api/java/util/AbstractMap.SimpleEntry.html 
+>   In the program, a TreeMap is kept, tying Move.score to the move itself. This is redundant, but prevents needing
+    to sort the data structure, which can get time consuming at larger scale.
+>   Each move possibility is represented using recursive descent (everything gets its own function).
+>   The way that I chose to implement it involves retaining, at most, 12 moves at a time (representing the 12 pieces),
+    which is the best move for that piece. this cuts down on storage needs and calculations.
+>   I would reccomend implementing Move.NO_MOVE to represent when a move option is not available (if this has not
+    already been defined in team A's code). Then, rather than returning some "bad move," you can return Move.NO_MOVE.
+
+
+ ASSIGNED POINT SYSTEM FOR MOVES:
+    (some of this could change if other team members decide on other types of moves we should consider.
+    We would just have to add/ remove those.)
+-- I assigned them based on a mirrored number system, this way it is wasy to determine what the value of each move is. --
+
+ -  4: Jump more than one piece (declared in pseudocode as "checkMultiJump")
+ -  3: Jump a piece (declared in pseudocode as "checkJump")
+ -  2: Become a King (declared in pseudocode as "becomeKing")
+ -  1: Block a piece from being taken (declared in pseudocode as "blockOpp")
+ -  0: Move to a space where nothing could happen (declared in pseudocode as "noEvent")
+ - -1: Move to where I am blocked from jumping (declared in pseudocode as "becomeBlocked")
+ - -2: Opponent can make a King (declared in pseudocode as "oppKing")
+ - -3: Opponent can now take a piece (declared in pseudocode as "oppJump")
+ - -4: Opponent can now take multiple pieces (declared in pseudocode as "oppMultiJump")
+
+-- The highest number represents what we want to happen most, the lowest number represents what we want to happen the least --
+
+
+EXTRA NOTES:
+-> Everything is written in pseudocode with hints of Java since that is the language we are using.
+-> You can change whatever is needed and nothing is final, this is just a skeleton of what we are trying to implement.
+-> I am also not trying to make anything definitive. If you completely hate how I have written the pseudocode for something,
+    you can completely change it to something else. I just wanted to try and describe out as much as I could to create
+    less work for everyone else.
+-> Some things may not need to be implemented due to what is defined in the code written by team A, I just tried to 
+    write out as much pseudocode as possible to show what you would need.
+
+program
+{
+    main(listOfPieces)                                  // listOfPieces = all of our pieces
+    {
+
+        TreeMap <Integer, Move> = allMoves              // Ties a score to the move it represents
+                                                        
+        when is your turn
+        {
+            for(piece in pieces)
+            {
+                Move = valuate(piece)
+                scores.put(Move.score, Move);           // Calculates best possible move for each piece
+            }
+
+            executeMove(scores.keySet.get(0));          // Grabs highest integer in move set and delegates to executeMove
+        }                                               // This is what makes our approach Greedy
+    }
+
+    executeMove(someMove)                        
+    {                                                  
+        move from Move.start to Move.end                // Define logic for how to move, then move
+    }
+
+    valuate(piece)
+    {
+        values = [checkMultiJump(piece), checkJump(piece), becomeKing(piece), blockOpp(piece), 
+                    noEvent(piece), becomeBlocked(piece), oppKing(piece),oppJump(piece), oppMultiJump(piece)];
+
+        return Move whose key is highest
+    }
+
+    checkMultiJump(piece)
+    {
+        numOfJumps = 0;
+        loop call to checkJump, increment num of numOfJumps
+        
+        if(Num of Jumps > 1)
+            return Move = {4, {starting location, ending location}};
+        else
+            return Move = {-25, {(-1, -1), (-1, -1)}};    // return some unusable move (will be disconsidered from move options)
+    }                                                     // this is applied to the rest of the move possibilities.
+                                                          // If Move.NO_MOVE is defined, return that here instead.
+    checkJump(piece)
+    {
+        if(piece Can Jump)
+            return Move = {3, {starting location, ending location}};
+        else   
+            return Move = {-25, {(-1, -1), (-1, -1)}};           
+    }
+
+    becomeKing(piece)
+    {
+        if(piece Can Become King)
+            return Move = {2, {starting location, ending location}};
+        else   
+            return Move = {-25, {(-1, -1), (-1, -1)}};
+    }
+
+    blockOpp(piece)
+    {
+        if(piece Can Block Opponent)
+            return Move = {1, {starting location, ending location}};
+        else   
+            return Move = {-25, {(-1, -1), (-1, -1)}};
+    }
+
+    noEvent(piece)
+    {
+        if(piece Has A Non-productive Move)
+            return Move = {0, {starting location, ending location}};
+        else   
+            return Move = {-25, {(-1, -1), (-1, -1)}};
+    }
+
+    becomeBlocked(piece)
+    {
+        if(piece Becomes Blocked)
+            return Move = {-1, {starting location, ending location}};
+        else   
+            return Move = {-25, {(-1, -1), (-1, -1)}};
+    }
+
+    oppKing(piece)
+    {
+        if(opponent Becomes King)
+            return Move = {-2, {starting location, ending location}};
+        else   
+            return Move = {-25, {(-1, -1), (-1, -1)}};
+    }
+
+    oppJump(piece)
+    {
+        if(opponent Can Jump After)
+            return Move = {-3, {starting location, ending location}};
+        else   
+            return Move = {-25, {(-1, -1), (-1, -1)}};
+    }
+
+    oppMultiJump(piece)
+    {
+        if(opponent Can Multi Jump)
+            return Move = {-4, {starting location, ending location}};
+        else   
+            return Move = {-25, {(-1, -1), (-1, -1)}};
+    }
+}
