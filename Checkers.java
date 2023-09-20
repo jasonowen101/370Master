@@ -1,6 +1,5 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 public class Checkers {
     private static LogicBoard gameBoard = new LogicBoard();
     private static boolean blueTurn;
@@ -12,6 +11,7 @@ public class Checkers {
         gameBoard.initializeBoard();
         boolean gameIsRunning = true;
         blueTurn = true;
+        //MAIN GAME LOOP
         while (gameIsRunning) {
             printBoardToConsole();
             while(true){
@@ -31,7 +31,7 @@ public class Checkers {
         System.out.println("Game over!");
     }
 
-    //method to get move (returns array containing start and end piece)
+    //method to get move (returns array containing start and end piece) SHOULDNT BE NEEDED ONCE GUI IS INTEGRATED
     private static LogicPiece[] getPlayerMove() {
         String team;
         if(blueTurn){
