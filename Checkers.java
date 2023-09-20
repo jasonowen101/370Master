@@ -54,6 +54,7 @@ public class Checkers {
                 break;
             } catch(InputMismatchException e) {
                 System.out.println("Invalid Input");
+                scn.nextLine(); //should prevent infinite exception loop i hope
             }
         }
         return new LogicPiece[]{gameBoard.getPieceArray()[startX][startY], gameBoard.getPieceArray()[endX][endY]};
