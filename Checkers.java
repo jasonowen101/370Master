@@ -1,8 +1,10 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Checkers {
     private static LogicBoard gameBoard = new LogicBoard();
     private static boolean blueTurn;
+    private static Scanner scn = new Scanner(System.in);
     public static boolean isBlueTurn() {
         return blueTurn;
     }
@@ -12,13 +14,20 @@ public class Checkers {
         blueTurn = true;
         while (gameIsRunning) {
             printBoardToConsole();
-            gameBoard.makeMove(getPlayerMove());
+            while(true){
+                if(gameBoard.makeMove(getPlayerMove())) {
+                    blueTurn = !blueTurn;
+                    break;
+                } else {
+                    System.out.println("Invalid move. Please try again.");
+                }
+            }
             // Check for game over conditions (e.g., one player has no pieces left)
             // Implement this logic according to the rules of checkers.
 
             // You can add AI logic here to make the computer player's move.
         }
-        
+        //on end game condition this executes
         System.out.println("Game over!");
     }
 
@@ -31,14 +40,23 @@ public class Checkers {
             team = "Yellow";
         }
         System.out.println(team + "'s turn");
-        Scanner scanner = new Scanner(System.in);
-        int[] move = new int[4];
-        System.out.println("Enter your move (startX startY endX endY pressing enter after every value): ");
-        for (int i = 0; i < 4; i++) {
-            move[i] = scanner.nextInt();
+        System.out.println("Enter your move (startX startY endX endY): ");
+        int startX;
+        int startY;
+        int endX;
+        int endY;
+        while(true) {
+            try{
+                startX = scn.nextInt();
+                startY = scn.nextInt();
+                endX = scn.nextInt();
+                endY = scn.nextInt();
+                break;
+            } catch(InputMismatchException e) {
+                System.out.println("Invalid Input");
+            }
         }
-        scanner.close();
-        return new LogicPiece[]{gameBoard.getPieceArray()[move[0]][move[1]], gameBoard.getPieceArray()[move[2]][move[3]]};
+        return new LogicPiece[]{gameBoard.getPieceArray()[startX][startY], gameBoard.getPieceArray()[endX][endY]};
     }
 
     //GUI should basically do this but with cool graphics

@@ -162,16 +162,19 @@ public class LogicBoard {
                 }
             }
         }
-        return false;// Failsafe return; shouldn't be reachable...
+        //return false;// Failsafe return; shouldn't be reachable...
     }
 
-    public void makeMove(LogicPiece [] moves){
+    public boolean makeMove(LogicPiece [] moves){
         LogicPiece startPiece = moves[0];
         LogicPiece endLocation = moves[1];
         if (isValidMove(startPiece, endLocation)){
             //here instead of creating a new piece can we not just reuse start piece or change the flags of the piece? idk just wondering
             board[endLocation.getX()][endLocation.getY()] = new LogicPiece(startPiece, false);
             board[startPiece.getX()][startPiece.getY()] = new LogicPiece(endLocation,  true);
+            return true;
+        } else {
+            return false;
         }
     }
 }
