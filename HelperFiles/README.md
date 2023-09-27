@@ -1,15 +1,3 @@
-
-# 370MasterTeamB
-TeamB_Repository
-
-Project Title: Agile Checkers AI Development Competition
-
-Course: Introduction to Artificial Intelligence
-
-Objective: In this agile coding project, you will organize into two development teams to create independent components of a Checkers AI. Each team will build their AI agent, and at the end of the project, these two teams will compete against each other to determine the superior Checkers AI.
-
-Week 4 - Sprint Planning:
-
 # 370Master
 Master repository for Fall2023 370
 
@@ -20,7 +8,6 @@ Course: Introduction to Artificial Intelligence
 Objective: In this agile AI coding project, you will organize into two development teams to create independent components of a Checkers AI. Each team will build their AI agent, and at the end of the project, these two teams will compete against each other to determine the superior Checkers AI.
 
 Week 4 - Team Planning:
-
    - The class will form two development teams, each being broken into sub teams consisting of 1-4 students.
    - Choose team names.
    - Plan the development sprints and distribute tasks.
