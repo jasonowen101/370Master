@@ -21,6 +21,7 @@ public class CheckerSquareMouse extends MouseAdapter {
             // Checks if no square is selected and the clicked square has a piece
             if(currentSelection == null && square.getCheckerColor() != null) {
                 currentSelection = square;
+                currentSelection.setSelected(true);
                 System.out.println("Square selected!");
             }
             // Checks if currentSelection has a square
@@ -28,6 +29,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                 // Checks if the square is the same as the selection or that the square is already occupied
                 // Sets currentSelection to null
                 if(square.equals(currentSelection) || square.getCheckerColor() != null) {
+                    currentSelection.setSelected(false);
                     currentSelection = null;
                     System.out.println("Square deselected!");
                 }
@@ -35,6 +37,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                 else if(square.getCheckerColor() == null) {
                     square.toggleChecker(currentSelection.getCheckerColor());
                     currentSelection.toggleChecker(null);
+                    currentSelection.setSelected(false);
                     currentSelection = null;
                     System.out.println("Square toggled!");
                 }
@@ -42,6 +45,7 @@ public class CheckerSquareMouse extends MouseAdapter {
         }
         // Executes on right click - clears current selection
         else if (e.getButton() == MouseEvent.BUTTON3) {
+            currentSelection.setSelected(false);
             currentSelection = null;
             System.out.println("Square deselected!");
         }

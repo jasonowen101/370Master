@@ -9,6 +9,12 @@ public class CheckerSquare extends JPanel {
     private Color checkerColor = null;
     private boolean isKing;
     private int row, col;
+    private boolean selected;
+
+    public void setSelected(boolean s){
+        this.selected = s;
+        repaint(); //highlights or dehighlights the selected checker
+    }
 
     CheckerSquare(int row, int col) {
         this.row = row;
@@ -30,7 +36,6 @@ public class CheckerSquare extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // TODO Implement highlighting the piece or square when selected
         // Draw the square
         g.setColor((row + col) % 2 == 0 ? Color.WHITE : Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
@@ -41,6 +46,10 @@ public class CheckerSquare extends JPanel {
             g.fillOval(5, 5, getWidth() - 10, getHeight() - 10);
             if(isKing) {
                 // TODO Implement graphics for a piece that is a king
+            }
+            if(selected) {      //check if selected and highlight if so
+                g.setColor(Color.RED);
+                g.drawOval(5, 5, getWidth() - 10, getHeight() - 10);
             }
         }
     }
