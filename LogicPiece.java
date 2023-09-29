@@ -5,7 +5,7 @@ class LogicPiece {
 
   private String team;
 
-  private Boolean kingStatus;
+  private boolean kingStatus;
 
   public LogicPiece(int x, int y) {           //move utilises this constructor, see Nathan
     this.x = x;

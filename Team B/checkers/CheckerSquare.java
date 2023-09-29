@@ -18,6 +18,7 @@ public class CheckerSquare extends JPanel {
     }
 
     public void toggleChecker(Color color) {
+        //Maybe want to get rid of null check because you need to pass in something anyways
         if (checkerColor == null) {
             checkerColor = color;
         } else {
@@ -45,11 +46,45 @@ public class CheckerSquare extends JPanel {
         }
     }
 
+    //is equivalent to LogicPiece getTeam
     public Color getCheckerColor() {
         return checkerColor;
     }
 
+    public boolean teamCheck(Color color){
+        return this.checkerColor.equals(color);
+    }
+
+    //is euqivilent to getY
+    public int getRow(){
+        return this.row;
+    }
+
+    //is euqivilent to getY
+    public int getColumn(){
+        return this.col;
+    }
+
+    //return the xy as a 1d list, can remove is deemed useless
+    public int[] getPosition(){
+        return new int[] {this.row, this.col};
+    }
+
+    //is equivilent to getKingStatus
+    public boolean isKing(){
+        return this.isKing;    }
+
+
     public void setIsKing(boolean isKing) {
         this.isKing = isKing;
     }
+
+    public void promote(){
+        if (this.checkerColor == CheckerSquare.TEAM1 && this.row == 0){
+          this.isKing = true;
+        }
+        else if (this.checkerColor == CheckerSquare.TEAM2 && this.row == 7){
+          this.isKing = true;
+        }
+      }
 }
