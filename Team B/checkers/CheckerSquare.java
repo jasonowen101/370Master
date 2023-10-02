@@ -45,11 +45,35 @@ public class CheckerSquare extends JPanel {
         }
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     public Color getCheckerColor() {
         return checkerColor;
     }
 
+    //Names are only place orders, Team1 is the placeholder for the team who's pieces start on the bottom of the board with the top left being (0,0). Team2 is the opposite
+    //Feel free to adjust as needed. Also, this method should be called at the end of the movement and jump for the piece that is at the new location.
+    public void promote() {
+        if (checkerColor == TEAM1 && row == 0){
+            isKing = true;
+            //Call method that changes a piece to appear to be a king or however that is handled
+            repaint(); // Repaint the square to show change in piece
+        }
+        if (checkerColor == TEAM2 && row == 8){
+            isKing = true;
+            //Call method that changes a piece to appear to be a king or however that is handled
+            repaint(); // Repaint the square to show change in piece
+        }
+    }
+    /*
     public void setIsKing(boolean isKing) {
         this.isKing = isKing;
     }
+    */
 }
