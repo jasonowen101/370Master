@@ -130,7 +130,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                             int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                             CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
 
-                            if(jumpedPiece.getClass().equals(startPiece.getClass())){
+                            if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
                                 // Trying to jump friendly Piece
                                 System.out.println("6");
                                 return false;
@@ -155,7 +155,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                             int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                             int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                             CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
-                            if(jumpedPiece.getClass().equals(startPiece.getClass())){
+                            if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
                                 // Trying to jump friendly Piece
                                 System.out.println("8");
                                 return false;
