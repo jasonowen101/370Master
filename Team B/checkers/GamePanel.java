@@ -7,7 +7,12 @@ import java.awt.event.ActionListener;
 
 public class GamePanel extends JPanel {
     private static final int BOARD_SIZE = 8;
-    private CheckerSquare[][] squares;
+    private static CheckerSquare[][] squares;
+
+    public static CheckerSquare[][] getSquares() {
+        return squares;
+    }
+
 
     public GamePanel() {
         setSize(400, 400);

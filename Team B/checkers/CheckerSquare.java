@@ -8,7 +8,19 @@ public class CheckerSquare extends JPanel {
     public static final Color TEAM2 = Color.BLUE;
     private Color checkerColor = null;
     private boolean isKing;
+    public boolean isKing() {
+        return isKing;
+    }
+
     private int row, col;
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     private boolean selected;
 
     public void setSelected(boolean s){
