@@ -135,6 +135,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                                 System.out.println("6");
                                 return false;
                             }else{
+                                jumpedPiece.toggleChecker(null);
                                 return true;
                             }
                         }else{
@@ -160,6 +161,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                                 System.out.println("8");
                                 return false;
                             }else{
+                                jumpedPiece.toggleChecker(null);
                                 return true;
                             }
                         }else{
