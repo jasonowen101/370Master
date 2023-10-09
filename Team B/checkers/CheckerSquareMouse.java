@@ -103,7 +103,7 @@ public class CheckerSquareMouse extends MouseAdapter {
         else{
             if(startPiece.isKing() == true){// 1st Conditional Branch [King Vs Pawn]
                 // If Piece is King => Don't need to worry about "Forward" direction
-                if(endPiece.getCol() - startPiece.getCol() == 2){
+                if(Math.abs(endPiece.getCol() - startPiece.getCol()) == 2){
                     // Is JUMP
                     int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                     int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
@@ -124,7 +124,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                         return false;
                     }else{
                         // FORWARD
-                        if(endPiece.getCol() - startPiece.getCol() == 2){
+                        if(Math.abs(endPiece.getCol() - startPiece.getCol()) == 2){
                             // Is JUMP
                             int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                             int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
