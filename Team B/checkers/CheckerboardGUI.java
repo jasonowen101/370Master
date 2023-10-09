@@ -9,6 +9,11 @@ public class CheckerboardGUI extends JPanel {
     private static final int BOARD_SIZE = 8;
     private CheckerSquare[][] squares;
 
+    public CheckerSquare[][] getSquares() {
+        return squares;
+    }
+
+
     public CheckerboardGUI() {
         setSize(400, 400);
 
