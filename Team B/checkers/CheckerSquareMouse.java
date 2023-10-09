@@ -80,12 +80,12 @@ public class CheckerSquareMouse extends MouseAdapter {
         if((blueTurn == true) ^ (startPiece.getCheckerColor().equals(Color.BLUE))){ // IF Piece is not yours
             // (Turn = P1 AND Piece = P2) OR (Turn = P2 AND Piece = P1) {^ == XOR}
             return false;
-        }else if(((endPiece.getRow() < 0) || (endPiece.getRow() >= 8)) // IF X out of bounds {0-7}
+        }else if(((endPiece.getCol() < 0) || (endPiece.getCol() >= 8)) // IF X out of bounds {0-7}
             || // OR
-            ((endPiece.getCol() < 0) || (endPiece.getCol() >= 8))){ // IF Y out of bounds {0-7}
+            ((endPiece.getRow() < 0) || (endPiece.getRow() >= 8))){ // IF Y out of bounds {0-7}
             return false;
-        }else if(Math.abs(endPiece.getRow() - startPiece.getRow()) != Math.abs(endPiece.getCol() - startPiece.getCol())
-        || Math.abs(endPiece.getRow() - startPiece.getRow()) > 2 ){
+        }else if(Math.abs(endPiece.getCol() - startPiece.getCol()) != Math.abs(endPiece.getRow() - startPiece.getRow())
+        || Math.abs(endPiece.getCol() - startPiece.getCol()) > 2 ){
             /*
              * Move within Bounds, but not Diagonal
              * |OR|
@@ -101,10 +101,10 @@ public class CheckerSquareMouse extends MouseAdapter {
         else{
             if(startPiece.isKing() == true){// 1st Conditional Branch [King Vs Pawn]
                 // If Piece is King => Don't need to worry about "Forward" direction
-                if(endPiece.getRow() - startPiece.getRow() == 2){
+                if(endPiece.getCol() - startPiece.getCol() == 2){
                     // Is JUMP
-                    int jumpedX = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                    int jumpedY = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
+                    int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
+                    int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                     CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedX][jumpedY];
                     return isValidMove(startPiece, jumpedPiece);
                 }else{
@@ -114,15 +114,15 @@ public class CheckerSquareMouse extends MouseAdapter {
             }else{
                 // Piece is NOT King
                 if(blueTurn == true){ // 2nd Conditional Branch [Determines Forward direction]
-                    if(endPiece.getCol() - startPiece.getCol() < 0){
+                    if(endPiece.getRow() - startPiece.getRow() < 0){
                         // Is BACKWARD
                         return false;
                     }else{
                         // FORWARD
-                        if(endPiece.getRow() - startPiece.getRow() == 2){
+                        if(endPiece.getCol() - startPiece.getCol() == 2){
                             // Is JUMP
-                            int jumpedX = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                            int jumpedY = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
+                            int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
+                            int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                             CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedX][jumpedY];
 
                             if(jumpedPiece.getClass().equals(startPiece.getClass())){
@@ -138,15 +138,15 @@ public class CheckerSquareMouse extends MouseAdapter {
                     }
                 }else{
                     // Player 2
-                    if(endPiece.getCol() - startPiece.getCol() > 0){
+                    if(endPiece.getRow() - startPiece.getRow() > 0){
                         // Is BACKWARD
                         return false;
                     }else{
                         // FORWARD
-                        if(endPiece.getRow() - startPiece.getRow() == 2){
+                        if(endPiece.getCol() - startPiece.getCol() == 2){
                             // Is JUMP
-                            int jumpedX = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                            int jumpedY = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
+                            int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
+                            int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                             CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedX][jumpedY];
                             if(jumpedPiece.getClass().equals(startPiece.getClass())){
                                 // Trying to jump friendly Piece
