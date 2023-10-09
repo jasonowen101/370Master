@@ -10,6 +10,7 @@ public class Ctegame extends JFrame
     static MenuPanel mp = new MenuPanel();
     static HelpPanel hp = new HelpPanel();
     static GamePanel gp = new GamePanel();
+
     static splashscreen splash = new splashscreen(); // Adding the SplashScreen
 
     static CardLayout cl = new CardLayout();
