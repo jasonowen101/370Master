@@ -144,7 +144,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                     }
                 }else{
                     // Player 2
-                    if(endPiece.getRow() - startPiece.getRow() > 0){
+                    if(endPiece.getRow() - startPiece.getRow() < 0){
                         // Is BACKWARD
                         System.out.println("7");
                         return false;
