@@ -151,7 +151,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                         return false;
                     }else{
                         // FORWARD
-                        if(endPiece.getCol() - startPiece.getCol() == 2){
+                        if(Math.abs(endPiece.getCol() - startPiece.getCol()) == 2){
                             // Is JUMP
                             int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                             int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
