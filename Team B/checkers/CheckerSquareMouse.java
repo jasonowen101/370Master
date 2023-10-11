@@ -57,6 +57,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                         } else {
                             GamePanel.setTurnLabelText("Yellow's turn");
                         }
+                        //add endgame here
                     }
                 }
             }
