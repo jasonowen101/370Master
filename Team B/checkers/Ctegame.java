@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class Ctegame extends JFrame
-{   
+public class Ctegame extends JFrame {   
+    
     static MenuPanel mp = new MenuPanel();
     static HelpPanel hp = new HelpPanel();
     static GamePanel gp = new GamePanel();
@@ -17,6 +17,7 @@ public class Ctegame extends JFrame
     
     Ctegame()
     {
+        
         cards.setLayout(cl); // setting the layout to cardlayout
         cards.add(splash, "SplashScreen"); // Addding the SplashScreen as a card
         cards.add(mp, "MenuPanel");
@@ -31,6 +32,7 @@ public class Ctegame extends JFrame
         setTitle("Checkers");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(720, 720); // frame size
+        setLocationRelativeTo(null);
         setVisible(true);   // frame visibility
 
         // Started a timer to transition from the SplashScreen to the MenuPanel after 3 seconds

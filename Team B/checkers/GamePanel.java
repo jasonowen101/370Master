@@ -8,6 +8,11 @@ import java.awt.event.ActionListener;
 public class GamePanel extends JPanel {
     private static final int BOARD_SIZE = 8;
     private static CheckerSquare[][] squares;
+    public static JLabel turn = new JLabel("Blue's turn");
+
+    public static void setTurnLabelText(String txt){
+        turn.setText(txt);
+    }
 
     public static CheckerSquare[][] getSquares() {
         return squares;
@@ -60,6 +65,7 @@ public class GamePanel extends JPanel {
         buttonPanel.add(startGameButton);
         buttonPanel.add(clearBoardButton);
         buttonPanel.add(helpButton);
+        buttonPanel.add(turn);
 
         add(buttonPanel, BorderLayout.SOUTH);
 

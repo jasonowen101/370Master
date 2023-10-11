@@ -8,7 +8,11 @@ public class CheckerSquareMouse extends MouseAdapter {
 
     private final CheckerSquare square;
     private static CheckerSquare currentSelection;
-    private static boolean blueTurn = true;
+    public static boolean blueTurn = true;
+
+    public static boolean isBlueTurn() {
+        return blueTurn;
+    }
 
     CheckerSquareMouse(CheckerSquare square) {
         super();
@@ -44,6 +48,11 @@ public class CheckerSquareMouse extends MouseAdapter {
                         currentSelection = null;
                         System.out.println("Square toggled!");
                         blueTurn = !blueTurn;
+                        if(blueTurn){
+                            GamePanel.setTurnLabelText("Blue's turn");
+                        } else {
+                            GamePanel.setTurnLabelText("Yellow's turn");
+                        }
                     }
                 }
             }
