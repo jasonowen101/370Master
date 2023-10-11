@@ -109,9 +109,15 @@ public class CheckerSquareMouse extends MouseAdapter {
                     int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                     CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
                     System.out.println("4");
-                    return isValidMove(startPiece, jumpedPiece);
+                    if(isValidMove(startPiece, jumpedPiece)){
+                        checkPromote(endPiece, startPiece);
+                        jumpedPiece.toggleChecker(null);
+                        return true;
+                    }
+                    return false;
                 }else{
                     // Is MOVE
+                    checkPromote(endPiece, startPiece);
                     return true;
                 }
             }else{
@@ -136,10 +142,12 @@ public class CheckerSquareMouse extends MouseAdapter {
                                 return false;
                             }else{
                                 jumpedPiece.toggleChecker(null);
+                                checkPromote(endPiece, startPiece);
                                 return true;
                             }
                         }else{
                             // Is MOVE
+                            checkPromote(endPiece, startPiece);
                             return true;
                         }
                     }
@@ -162,10 +170,12 @@ public class CheckerSquareMouse extends MouseAdapter {
                                 return false;
                             }else{
                                 jumpedPiece.toggleChecker(null);
+                                checkPromote(endPiece, startPiece);
                                 return true;
                             }
                         }else{
                             // Is MOVE
+                            checkPromote(endPiece, startPiece);
                             return true;
                         }
                     }
@@ -173,5 +183,12 @@ public class CheckerSquareMouse extends MouseAdapter {
             }
         }
         //return false;// Failsafe return; shouldn't be reachable...
+    }
+    //this check promote method not only checks for promote but also toggles the king status...it must be called during any valid move
+    private static void checkPromote(CheckerSquare endPiece, CheckerSquare startPiece){
+        endPiece.setIsKing(startPiece.isKing());
+        if(startPiece.getCheckerColor().equals(Color.BLUE) && (endPiece.getRow() == 0) || startPiece.getCheckerColor().equals(Color.YELLOW) && (endPiece.getRow() == 7)){
+            endPiece.setIsKing(true);
+        }
     }
 }
