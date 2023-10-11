@@ -74,6 +74,7 @@ public class GamePanel extends JPanel {
 
 
     private void startGame() {
+        clearBoard();
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 if (row < 3 && (row + col) % 2 == 1) {
@@ -91,6 +92,7 @@ public class GamePanel extends JPanel {
                 squares[row][col].toggleChecker(null);
             }
         }
+        CheckerSquareMouse.setBlueTurn(true);
     }
 
     private void showHelpDialog() {

@@ -13,6 +13,10 @@ public class CheckerSquareMouse extends MouseAdapter {
     public static boolean isBlueTurn() {
         return blueTurn;
     }
+    
+    public static void setBlueTurn(boolean turn) {
+        blueTurn = turn;
+    }
 
     CheckerSquareMouse(CheckerSquare square) {
         super();
