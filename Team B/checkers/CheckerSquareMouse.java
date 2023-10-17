@@ -43,6 +43,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                 else if(square.getCheckerColor() == null) {
                     if(isValidMove(currentSelection, square)){
                         square.toggleChecker(currentSelection.getCheckerColor());
+                        System.out.println("MultiJump: " + Boolean.toString(checkMultiJump(square, currentSelection.getCheckerColor())));
                         currentSelection.toggleChecker(null);
                         currentSelection.setSelected(false);
                         currentSelection = null;
@@ -58,10 +59,16 @@ public class CheckerSquareMouse extends MouseAdapter {
             }
         }
         // Executes on right click - clears current selection
+        // BUG: Right Click when nothing is selected causes NullPointerException
+        // quick fix by Nathan Borchelt, feel free to change
         else if (e.getButton() == MouseEvent.BUTTON3) {
-            currentSelection.setSelected(false);
-            currentSelection = null;
-            System.out.println("Square deselected!");
+
+            if (currentSelection != null){
+                currentSelection.setSelected(false);
+                currentSelection = null;
+                System.out.println("Square deselected!");
+            }
+            else System.out.println("Nothing was selected");
         }
     }
 
@@ -96,6 +103,8 @@ public class CheckerSquareMouse extends MouseAdapter {
             return false;
         }else if(Math.abs(endPiece.getCol() - startPiece.getCol()) != Math.abs(endPiece.getRow() - startPiece.getRow())
         || Math.abs(endPiece.getCol() - startPiece.getCol()) > 2 ){
+
+
             /*
              * Move within Bounds, but not Diagonal
              * |OR|
@@ -104,7 +113,7 @@ public class CheckerSquareMouse extends MouseAdapter {
              * !!! NOT DESIGNED to handle Multijumps !!!
              */
             System.out.println("3");
-             return false;
+            return false;
         }
         // else if(!endPiece.getCheckerColor().equals(null)){ // IF Target tile is not empty
         //         return false;
@@ -152,6 +161,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                             }else{
                                 jumpedPiece.toggleChecker(null);
                                 checkPromote(endPiece, startPiece);
+                                //current personal theory is check for multi jump here
                                 return true;
                             }
                         }else{
@@ -193,6 +203,88 @@ public class CheckerSquareMouse extends MouseAdapter {
         }
         //return false;// Failsafe return; shouldn't be reachable...
     }
+
+
+    //current testing action for multiJump
+    private static boolean checkMultiJump(CheckerSquare recheckPiece, Color pieceColor){
+        int x = recheckPiece.getCol();
+        int y = recheckPiece.getRow();
+        Color playerColor = pieceColor;
+        Color enemyColor = playerColor == CheckerSquare.TEAM1 ? CheckerSquare.TEAM2 : CheckerSquare.TEAM1;
+        CheckerSquare[][] gameBoard =  GamePanel.getSquares();
+        boolean jUpLeft = false;
+        boolean jDownLeft = false;
+        boolean jUpRight = false;
+        boolean jDownRight = false;
+
+        System.out.println("".join(" ", "x", Integer.toString(x), "y", Integer.toString(y)));
+        if(recheckPiece.isKing()){
+            try{
+                jUpLeft = ((gameBoard[x-1][y-1].getCheckerColor() == enemyColor) && (gameBoard[x-2][y-2].getCheckerColor() == null));
+            }
+            catch(Exception e){
+                jUpLeft = false;
+            }
+            try{
+                jDownLeft = ((gameBoard[x-1][y+1].getCheckerColor() == enemyColor) && (gameBoard[x-2][y+2].getCheckerColor() == null));
+            }
+            catch(Exception e){
+                jDownLeft = false;
+            }
+            try{
+                jUpRight = ((gameBoard[x+1][y-1].getCheckerColor() == enemyColor) && (gameBoard[x+2][y-2].getCheckerColor() == null));
+            }
+            catch(Exception e){
+                jUpRight = false;
+            }
+            try{
+                jDownRight = ((gameBoard[x+1][y+1].getCheckerColor() == enemyColor) && (gameBoard[x+2][y+2].getCheckerColor() == null));
+            }
+            catch(Exception e){
+                jDownRight = false;
+            }
+        }
+
+        else{
+            System.out.println("Not King Multi Jump");
+            if(playerColor == CheckerSquare.TEAM2){
+                try{
+                    jUpLeft = ((gameBoard[x-1][y-1].getCheckerColor() == enemyColor) && (gameBoard[x-2][y-2].getCheckerColor() == null));
+                    System.out.println("jUpLeft:"+jUpLeft);
+                }
+                catch(Exception e){
+                    jUpLeft = false;
+                }
+                try{
+                    jUpRight = ((gameBoard[x+1][y-1].getCheckerColor() == enemyColor) && (gameBoard[x+2][y-2].getCheckerColor() == null));
+                    System.out.println("jUpRight:"+jUpRight);
+                }
+                catch(Exception e){
+                    jUpRight = false;
+                }
+            }
+            else{
+                try{
+                    jDownLeft = ((gameBoard[x-1][y+1].getCheckerColor() == enemyColor) && (gameBoard[x-2][y+2].getCheckerColor() == null));
+                    System.out.println("jDownLeft:"+jDownLeft);
+                }
+                catch(Exception e){
+                    jDownLeft = false;
+                }
+                try{
+                    jDownRight = ((gameBoard[x+1][y+1].getCheckerColor() == enemyColor) && (gameBoard[x+2][y+2].getCheckerColor() == null));
+                    System.out.println("jDownRight:"+jDownRight);
+                }
+                catch(Exception e){
+                    jDownRight = false;
+                }
+            }
+
+        }
+
+        return jUpLeft || jDownLeft || jUpRight || jDownRight;
+    }
+
     //this check promote method not only checks for promote but also toggles the king status...it must be called during any valid move
     private static void checkPromote(CheckerSquare endPiece, CheckerSquare startPiece){
         endPiece.setIsKing(startPiece.isKing());
