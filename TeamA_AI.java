@@ -21,7 +21,7 @@ public class TeamA_AI{
         if(isMaximizerPlayer == true){
             gameNode maxEval = negInfinity; 
             for(gameNode child : gameState.children){
-                gameNode eval = Minimax(child, depth - 1, alpha, beta, false);
+                gameNode eval = Minimax(child, depth - 1, alpha, beta, false); // Recursive Call to bottom of tree
                 maxEval = max(maxEval, eval);
                 alpha = max(alpha, eval);
                 if(beta.score <= alpha.score){
@@ -32,7 +32,7 @@ public class TeamA_AI{
         }else{
             gameNode minEval = posInfity;
             for(gameNode child : gameState.children){
-                gameNode eval = Minimax(child, depth - 1, alpha, beta, true);
+                gameNode eval = Minimax(child, depth - 1, alpha, beta, true); // Recursive Call to bottom of tree
                 minEval = min(minEval, eval);
                 beta = min(beta, eval);
                 if(beta.score <= alpha.score){
