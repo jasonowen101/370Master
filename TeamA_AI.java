@@ -36,7 +36,7 @@ public class TeamA_AI{
                 minEval = min(minEval, eval);
                 beta = min(beta, eval);
                 if(beta.score <= alpha.score){
-                    break; // 
+                    break; // Ignore branch if it CANNOT affect outcome
                 }
             }
             return minEval;
