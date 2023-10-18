@@ -68,6 +68,9 @@ public class CheckerboardGUI extends JPanel {
 
 
     private void startGame() {
+        //King persisting bug fix , MP
+        clearBoard();
+
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 if (row < 3 && (row + col) % 2 == 1) {
