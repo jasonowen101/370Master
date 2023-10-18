@@ -66,14 +66,6 @@ public class CheckerSquare extends JPanel {
         }
     }
 
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
     public Color getCheckerColor() {
         return checkerColor;
     }
