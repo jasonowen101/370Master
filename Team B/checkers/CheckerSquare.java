@@ -37,11 +37,14 @@ public class CheckerSquare extends JPanel {
     }
 
     public void toggleChecker(Color color) {
+        /*
         if (checkerColor == null) {
             checkerColor = color;
         } else {
             checkerColor = null;
         }
+        */
+        checkerColor = color;
         repaint(); // Repaint the square to show or hide the checker
     }
 

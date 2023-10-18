@@ -43,7 +43,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                 else if(square.getCheckerColor() == null) {
                     if(isValidMove(currentSelection, square)){
                         square.toggleChecker(currentSelection.getCheckerColor());
-                        System.out.println("MultiJump: " + Boolean.toString(checkMultiJump(square, currentSelection.getCheckerColor())));
+                        //System.out.println("MultiJump: " + Boolean.toString(checkMultiJump(square, currentSelection.getCheckerColor())));
                         currentSelection.toggleChecker(null);
                         currentSelection.setSelected(false);
                         currentSelection = null;
@@ -204,13 +204,13 @@ public class CheckerSquareMouse extends MouseAdapter {
         //return false;// Failsafe return; shouldn't be reachable...
     }
 
-
+    /*
     //current testing action for multiJump
     private static boolean checkMultiJump(CheckerSquare recheckPiece, Color pieceColor){
         int x = recheckPiece.getCol();
         int y = recheckPiece.getRow();
         Color playerColor = pieceColor;
-        Color enemyColor = playerColor == CheckerSquare.TEAM1 ? CheckerSquare.TEAM2 : CheckerSquare.TEAM1;
+        Color enemyColor = (playerColor == CheckerSquare.TEAM1) ? CheckerSquare.TEAM2 : CheckerSquare.TEAM1;
         CheckerSquare[][] gameBoard =  GamePanel.getSquares();
         boolean jUpLeft = false;
         boolean jDownLeft = false;
@@ -249,6 +249,9 @@ public class CheckerSquareMouse extends MouseAdapter {
             System.out.println("Not King Multi Jump");
             if(playerColor == CheckerSquare.TEAM2){
                 try{
+
+                    System.out.println(gameBoard[x-1][y-1].getCheckerColor());
+                    System.out.println(gameBoard[x-2][y-2].getCheckerColor());
                     jUpLeft = ((gameBoard[x-1][y-1].getCheckerColor() == enemyColor) && (gameBoard[x-2][y-2].getCheckerColor() == null));
                     System.out.println("jUpLeft:"+jUpLeft);
                 }
@@ -285,6 +288,7 @@ public class CheckerSquareMouse extends MouseAdapter {
         return jUpLeft || jDownLeft || jUpRight || jDownRight;
     }
 
+    */
     //this check promote method not only checks for promote but also toggles the king status...it must be called during any valid move
     private static void checkPromote(CheckerSquare endPiece, CheckerSquare startPiece){
         endPiece.setIsKing(startPiece.isKing());
