@@ -1,5 +1,7 @@
 package AITeamB;
 
+import checkers.CheckerSquare;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,7 @@ public final class MinMaxTreeNode {
     // TODO Add fields for keeping track of game state. Also add relevant methods for those fields.
     private final boolean isMaxPlayer;
     private int score;
+    private final checkers.CheckerSquare[][] boardState;
     private final List<MinMaxTreeNode> children;
 
     /**
@@ -22,9 +25,10 @@ public final class MinMaxTreeNode {
      *
      * @param isMaxPlayer Defines if a player is a max player or not
      */
-    public MinMaxTreeNode(boolean isMaxPlayer) {
+    public MinMaxTreeNode(boolean isMaxPlayer, checkers.CheckerSquare[][] boardState) {
         this.isMaxPlayer = isMaxPlayer;
         this.score = 0;
+        this.boardState = Objects.requireNonNull(boardState);
         this.children = new ArrayList<MinMaxTreeNode>();
     }
 
@@ -43,6 +47,10 @@ public final class MinMaxTreeNode {
 
     public int getScore() {
         return score;
+    }
+
+    public CheckerSquare[][] getBoardState() {
+        return boardState;
     }
 
     public List<MinMaxTreeNode> getChildren() {
