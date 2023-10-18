@@ -9,11 +9,9 @@ import java.util.Objects;
 /**
  * Defines a TreeNode for use with deciding the best move for the Team B AI to choose.
  * The first node is considered the root node, as all nodes added on to it and it's
- * children will be accessible from it. CURRENT IMPLEMENTATION IS MISSING FIELDS TO
- * KEEP TRACK OF GAME STATE. CAN BE ADDED ONCE IT IS DECIDED WHAT NEEDS TO BE STORED.
+ * children will be accessible from it.
  */
 public final class MinMaxTreeNode {
-    // TODO Add fields for keeping track of game state. Also add relevant methods for those fields.
     private final boolean isMaxPlayer;
     private int score;
     private final checkers.CheckerSquare[][] boardState;
@@ -24,6 +22,7 @@ public final class MinMaxTreeNode {
      * children to an empty ArrayList storing MinMaxTreeNodes
      *
      * @param isMaxPlayer Defines if a player is a max player or not
+     * @param boardState The current state of the board in this node
      */
     public MinMaxTreeNode(boolean isMaxPlayer, checkers.CheckerSquare[][] boardState) {
         this.isMaxPlayer = isMaxPlayer;
