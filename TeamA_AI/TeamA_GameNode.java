@@ -1,3 +1,6 @@
+//Potential Help
+//https://github.com/Mchristos/checkers
+
 package TeamA_AI;
 
 import java.awt.Color;
@@ -10,11 +13,11 @@ public class TeamA_GameNode {
     List<TeamA_GameNode> childNodes;
     Color playerColor;
     Color enemyColor;
-    int value;
-    byte playerPeon;
-    byte playerKings;
-    byte enemyPeon;
-    byte enemyKings;
+    int value = 0;
+    byte playerPeon = 0;
+    byte playerKings = 0;
+    byte enemyPeon = 0;
+    byte enemyKings = 0;
     byte depth;
 
     public TeamA_GameNode(CheckerSquare[][] board, Color playerColor, byte depth){
@@ -22,6 +25,29 @@ public class TeamA_GameNode {
         this.board = board;
         this.playerColor = playerColor;
         this.enemyColor = (playerColor == CheckerSquare.TEAM1) ? CheckerSquare.TEAM2 : CheckerSquare.TEAM1;
+
+        this.depth = depth;
+
+        for(CheckerSquare[] col : board){
+            for(CheckerSquare indSquare : col){
+                if (indSquare.getCheckerColor() == playerColor){
+                    if(indSquare.isKing()) this.playerKings++;
+                    else this.playerPeon++;
+                }
+                else if (indSquare.getCheckerColor() == enemyColor){
+                    if(indSquare.isKing()) this.enemyKings++;
+                    else this.enemyPeon++;
+                }
+            }
+        }
+        this.value += (this.playerKings * TeamA_Weight.PLAYER_KING);
+        this.value += (this.playerPeon * TeamA_Weight.PLAYER_PEON);
+        this.value += (this.enemyKings * TeamA_Weight.ENEMY_KING);
+        this.value += (this.enemyPeon * TeamA_Weight.ENEMY_PEON);
+
+    }
+
+    public TeamA_GameNode(TeamA_GameNode parentNode){
 
     }
 
