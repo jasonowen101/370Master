@@ -100,4 +100,8 @@ public class GamePanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         setFocusable(true);
     }
+
+    public CheckerSquare[][] getCheckersSquare() {
+        return squares;
+    }
 }
