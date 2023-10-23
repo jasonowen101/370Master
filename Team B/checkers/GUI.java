@@ -19,9 +19,11 @@ public class GUI {
                 exception.printStackTrace();
             }
         } 
-        System.out.println("reached");
+
         CheckerSquare[] move = new CheckerSquare[2];
+        //create bots here
         jarvis = new BotBoi(Color.YELLOW);
+        
         //GAME LOOP 
         while(!gameOver) {
             move = nextMove();      //gets a move based on game mode.....also for the bots, checkerSelected should be updated in nextMove for graphics so we can tell whats going on
@@ -47,7 +49,7 @@ public class GUI {
         }
         if(gameMode == "pvc") {
             if(!blueTurn){
-                move = jarvis.getMove();
+                move = jarvis.getMove();   //bot makes move here
                 return move;
             } else {
                 return getMoveFromMouse();
