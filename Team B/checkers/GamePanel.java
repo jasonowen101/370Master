@@ -92,7 +92,7 @@ public class GamePanel extends JPanel {
                 squares[row][col].toggleChecker(null);
             }
         }
-        CheckerSquareMouse.setBlueTurn(true);
+        GUI.blueTurn = true;
     }
 
     private void showHelpDialog() {

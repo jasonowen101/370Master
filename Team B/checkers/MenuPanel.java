@@ -86,13 +86,15 @@ class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                GUI.gameMode = "pvp";
             }
-        });
+        }); 
 
         playerVsComputer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                GUI.gameMode = "pvc";
             }
         });
 
@@ -100,6 +102,7 @@ class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                GUI.gameMode = "cvc";
             }
         });
     
