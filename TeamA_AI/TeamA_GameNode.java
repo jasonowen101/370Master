@@ -55,6 +55,23 @@ public class TeamA_GameNode {
 
     }
 
+    private CheckerSquare[][] copy(CheckerSquare[][] original){
+        CheckerSquare[][] copied;
+        if(original.length > 0) if (original[0].length > 0){
+            copied = new CheckerSquare[original.length][original[0].length];
+
+            for(byte x = 0; x <  original.length; x++){
+                for(byte y = 0; y <  original[x].length; y++){
+                    copied[x][y] = new CheckerSquare(x,y);
+                    copied[x][y].setVisible(false);
+                    copied[x][y].setKing(original[x][y].isKing());
+                    copied[x][y].setCheckerColor(original[x][y].getCheckerColor());
+                }
+            }
+        }
+        return copied;
+    }
+
     /**
      * @return the board
      */
