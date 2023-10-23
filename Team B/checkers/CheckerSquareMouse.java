@@ -23,7 +23,6 @@ public class CheckerSquareMouse extends MouseAdapter {
         this.square = square;
     }
 
-    // TODO Implement rule validation from game logic
     @Override
     public void mouseClicked(MouseEvent e) {
         // Executes on left click
