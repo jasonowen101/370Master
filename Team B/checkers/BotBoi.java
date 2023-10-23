@@ -14,7 +14,7 @@ public class BotBoi {
 
     //The game should call bot.getMove(), and the bot should return its move as an array of 2 CheckerSquares
     public CheckerSquare[] getMove() {
-        CheckerSquare[] move = new CheckerSquare[] {pieces[0][0], pieces[1][1]};  
+        CheckerSquare[] move = new CheckerSquare[] {pieces[2][1], pieces[3][0]};  
         //^^^ initialized because i dont like red squiggles ^^^
 
         //function call to the algorithm that actually determines the best move (or any move as long as it works lmao) should go here

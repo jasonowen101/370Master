@@ -30,7 +30,6 @@ public class GamePanel extends JPanel {
                 CheckerSquare square = new CheckerSquare(row, col);
                 squares[row][col] = square;
                 boardPanel.add(square);
-
                 square.addMouseListener(new CheckerSquareMouse(square));
             }
         }
@@ -42,6 +41,7 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startGame();
+                GUI.gameOver = false;
             }
         });
 
@@ -50,6 +50,7 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearBoard();
+                GUI.gameOver = true;
             }
         });
 
@@ -68,7 +69,6 @@ public class GamePanel extends JPanel {
         buttonPanel.add(turn);
 
         add(buttonPanel, BorderLayout.SOUTH);
-
 //        setVisible(true);
     }
 
@@ -90,9 +90,11 @@ public class GamePanel extends JPanel {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 squares[row][col].toggleChecker(null);
+                squares[row][col].setIsKing(false);
             }
         }
         GUI.blueTurn = true;
+        GamePanel.setTurnLabelText("Blue's turn");
     }
 
     private void showHelpDialog() {

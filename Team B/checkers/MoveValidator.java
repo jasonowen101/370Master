@@ -56,12 +56,12 @@ public class MoveValidator {
                     int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                     int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                     CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
-                    System.out.println("4");
                     if(isValidMove(blueTurn, new CheckerSquare[] {startPiece, jumpedPiece})){
                         checkPromote(endPiece, startPiece);
                         jumpedPiece.toggleChecker(null);
                         return true;
                     }
+                    System.out.println("3");
                     return false;
                 }else{
                     // Is MOVE

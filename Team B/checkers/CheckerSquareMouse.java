@@ -7,10 +7,13 @@ import java.awt.event.MouseEvent;
 public class CheckerSquareMouse extends MouseAdapter {
 
     private final CheckerSquare square;
-    private static CheckerSquare currentSelection;
+    private static CheckerSquare selectedSquare;
     public static boolean active = false;
-    public static CheckerSquare[] move;
+    private static CheckerSquare[] move;
 
+    public static CheckerSquare[] getMove() {
+        return move;
+    }
     public static void clearMove() {
         move = null;
     }
@@ -26,33 +29,31 @@ public class CheckerSquareMouse extends MouseAdapter {
             // Executes on left click
             if (e.getButton() == MouseEvent.BUTTON1) {
                 // Checks if no square is selected and the clicked square has a piece
-                if(currentSelection == null && ((square.getCheckerColor() == Color.BLUE) == GUI.blueTurn)) {
-                    currentSelection = square;
-                    currentSelection.setSelected(true);
+                if(selectedSquare == null && ((square.getCheckerColor() == Color.BLUE) == GUI.blueTurn)) {
+                    selectedSquare = square;
+                    selectedSquare.setSelected(true);
                 }
-                // Checks if currentSelection has a square
-                else if (currentSelection != null) {
+                // Checks if selectedSquare has a square
+                else if (selectedSquare != null) {
                     // Checks if the square is the same as the selection or that the square is already occupied
-                    // Sets currentSelection to null
-                    if(square.equals(currentSelection) || square.getCheckerColor() != null) {
-                        currentSelection.setSelected(false);
-                        currentSelection = null;
+                    // Sets selectedSquare to null
+                    if(square.equals(selectedSquare) || square.getCheckerColor() != null) {
+                        selectedSquare.setSelected(false);
+                        selectedSquare = null;
                     }
-                    // Checks if the clicked checkerSquare does not have a piece
+                    // Checks if the clicked square does not have a piece
                     else if(square.getCheckerColor() == null) {
-                        move = new CheckerSquare[] {currentSelection, square};
-                        currentSelection.setSelected(false);
-                        currentSelection = null;
+                        move = new CheckerSquare[] {selectedSquare, square};
+                        selectedSquare.setSelected(false);
+                        selectedSquare = null;
                     }
                 }
             }
             // Executes on right click - clears current selection
             else if (e.getButton() == MouseEvent.BUTTON3) {
-                currentSelection.setSelected(false);
-                currentSelection = null;
-                System.out.println("Square deselected!");
+                selectedSquare.setSelected(false);
+                selectedSquare = null;
             }
-    
         }
     }
 }
