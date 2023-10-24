@@ -5,6 +5,7 @@ import java.awt.Color;
 public class GUI {
     public static String gameMode = null;
     public static boolean gameOver = true;
+    public static int drawMoves = 0; //for check end
     public static boolean blueTurn;
     public static BotBoi jarvis;
     public static void main(String[] args){
@@ -20,10 +21,11 @@ public class GUI {
             }
         } 
 
-        CheckerSquare[] move = new CheckerSquare[2];
+        
         //create bots here
         jarvis = new BotBoi(Color.YELLOW);
-        
+
+        CheckerSquare[] move = new CheckerSquare[2];
         //GAME LOOP 
         while(!gameOver) {
             move = nextMove();      //gets a move based on game mode.....also for the bots, checkerSelected should be updated in nextMove for graphics so we can tell whats going on
@@ -37,7 +39,7 @@ public class GUI {
             } else {
                 GamePanel.setTurnLabelText("Yellow's turn");
             }
-            //checkGameOver(); This should do game-over things
+            checkGameOver();
         }
 
     } 
@@ -81,5 +83,43 @@ public class GUI {
     private static void updateBoard(CheckerSquare[] move){
         move[1].toggleChecker(move[0].getCheckerColor());
         move[0].toggleChecker(null);
+    }
+
+    //Call everywhere checkPromote is called
+    public static boolean checkGameOver(){
+        int activeBluePiece = 0;
+        int activeYellowPiece = 0;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                if(((GamePanel.getSquares())[row][col]).getCheckerColor() == Color.BLUE){
+                    activeBluePiece = activeBluePiece + 1;
+                }
+                if(((GamePanel.getSquares())[row][col]).getCheckerColor() == Color.YELLOW){
+                    activeYellowPiece = activeYellowPiece + 1;
+                }
+            }
+        }
+
+        if (activeBluePiece == 0 && drawMoves <= 40){
+            // Call win panel with blue as victor
+            return true;
+        } else if (activeYellowPiece == 0 && drawMoves <= 40) {
+            // Call win panel with yellow as victor
+            return true;
+        } else if (drawMoves > 40){
+            // Call draw panel
+            return true;
+        }
+        return false;
+    }
+
+    // Call after every jump
+    public static void pieceJumped(){
+        drawMoves = 0;
+    }
+
+    // Call after every move that is not a jump
+    public static void pieceMoved(){
+        drawMoves = drawMoves + 1;
     }
 }
