@@ -39,9 +39,9 @@ public class Move {
     }
 
     public String toString()
-{
+    {
     return PieceFrom + " " + PieceTo + " " + score;
-}
+    }
 
 
 }
