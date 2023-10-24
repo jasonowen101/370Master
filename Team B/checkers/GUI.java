@@ -14,7 +14,7 @@ public class GUI {
         //this loop waits for a game mode to be selected before entering game loop
         while(gameMode == null || gameOver){
             try{
-                Thread.sleep(200);
+                Thread.sleep(100);
                 //waiting for game mode...we have a delay so the machine doesn't kill itself checking the while condition
             } catch(InterruptedException exception) {
                 exception.printStackTrace();
@@ -39,7 +39,7 @@ public class GUI {
             } else {
                 GamePanel.setTurnLabelText("Yellow's turn");
             }
-            checkGameOver();
+            gameOver = checkGameOver();
         }
 
     } 
@@ -67,7 +67,7 @@ public class GUI {
         CheckerSquareMouse.active = true;
         while(CheckerSquareMouse.getMove() == null) {
             try{
-                Thread.sleep(200);
+                Thread.sleep(75);
             } catch(InterruptedException exception) {
                 exception.printStackTrace();
             }
@@ -102,12 +102,15 @@ public class GUI {
 
         if (activeBluePiece == 0 && drawMoves <= 40){
             // Call win panel with blue as victor
+            GamePanel.setTurnLabelText("Blue Wins!");
             return true;
         } else if (activeYellowPiece == 0 && drawMoves <= 40) {
             // Call win panel with yellow as victor
+            GamePanel.setTurnLabelText("Yellow Wins!");
             return true;
         } else if (drawMoves > 40){
             // Call draw panel
+            GamePanel.setTurnLabelText("It's a draw!");
             return true;
         }
         return false;
