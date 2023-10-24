@@ -27,19 +27,21 @@ public class GUI {
 
         CheckerSquare[] move = new CheckerSquare[2];
         //GAME LOOP 
-        while(!gameOver) {
-            move = nextMove();      //gets a move based on game mode.....also for the bots, checkerSelected should be updated in nextMove for graphics so we can tell whats going on
-            while(!MoveValidator.isValidMove(blueTurn, move)){      //check if the move is valid and if not, get a new one
-                move = nextMove();                                  //^^^The AIs should not rely on this check and should validate their own moves with the same method...in other words
-            }                                                       //      this check is mainly for the human players
-            updateBoard(move);      //updates game board state and graphics
-            blueTurn = !blueTurn;   //changing of turns
-            if(blueTurn){
-                GamePanel.setTurnLabelText("Blue's turn");
-            } else {
-                GamePanel.setTurnLabelText("Yellow's turn");
+        while(true) {
+            if(!gameOver) {
+                move = nextMove();      //gets a move based on game mode.....also for the bots, checkerSelected should be updated in nextMove for graphics so we can tell whats going on
+                while(!MoveValidator.isValidMove(blueTurn, move)){      //check if the move is valid and if not, get a new one
+                    move = nextMove();                                  //^^^The AIs should not rely on this check and should validate their own moves with the same method...in other words
+                }                                                       //      this check is mainly for the human players
+                updateBoard(move);      //updates game board state and graphics
+                blueTurn = !blueTurn;   //changing of turns
+                if(blueTurn){
+                    GamePanel.setTurnLabelText("Blue's turn");
+                } else {
+                    GamePanel.setTurnLabelText("Yellow's turn");
+                }
+                gameOver = checkGameOver();
             }
-            gameOver = checkGameOver();
         }
 
     } 
