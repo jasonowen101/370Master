@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import checkers.CheckerSquare;
 
 
-public class TeamB_AI {
+public class TeamB_AI implements AI {
 
     int sumOfScores = 0; //need to make addToScore method
 
@@ -42,7 +42,7 @@ public class TeamB_AI {
 
     }
 
-    public static void executeMove(Move move) {
+    public static void getMove(Move move) {
         /*place holder for main move method when 
         executing the executeMove method, parameters are the starting
         position and ending position of the piece being moved*/
