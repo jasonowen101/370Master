@@ -1,12 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
+//EndScreens is a parent class
 abstract class EndScreens extends JFrame{
+
+    //1 label and 2 buttons
     protected JLabel winnerLabel;
     protected JButton restartButton;
     protected JButton homeButton;
 
+//condition is passed and can be changed to the actual condition
     public EndScreens(String condition) {
 
         setTitle("Game Over");
@@ -33,10 +36,11 @@ abstract class EndScreens extends JFrame{
         setVisible(true);
         }
     }
-}
 
+//only changes needed to be made for each screen is the title
 class BlueWinScreen extends EndScreens {
 
+    //method for when Blue wins
     public BlueWinScreen() {
         super("Blue Wins");
     } 
@@ -44,6 +48,7 @@ class BlueWinScreen extends EndScreens {
 
 class YellowWinScreen extends EndScreens {
 
+    //method for when Yellow wins
     public YellowWinScreen() {
         super("Yellow Wins");
 
@@ -52,6 +57,7 @@ class YellowWinScreen extends EndScreens {
 
 class DrawScreen extends EndScreens {
 
+    //method for draw
     public DrawScreen() {
         super("Draw");
 
