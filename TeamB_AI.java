@@ -42,7 +42,7 @@ public class TeamB_AI implements AI {
 
     }
 
-    public static void getMove(Move move) {
+    public static void executeMove(Move move) {
         /*place holder for main move method when 
         executing the executeMove method, parameters are the starting
         position and ending position of the piece being moved*/
