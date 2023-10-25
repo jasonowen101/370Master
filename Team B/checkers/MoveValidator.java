@@ -56,11 +56,13 @@ public class MoveValidator {
                     int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                     int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                     CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
-                    if(isValidMove(blueTurn, new CheckerSquare[] {startPiece, jumpedPiece})){
-                        checkPromote(endPiece, startPiece);
-                        jumpedPiece.toggleChecker(null);
-                        GUI.pieceJumped();
-                        return true;
+                    if(jumpedPiece.getCheckerColor() != null){
+                        if(isValidMove(blueTurn, new CheckerSquare[] {startPiece, jumpedPiece})){
+                            checkPromote(endPiece, startPiece);
+                            jumpedPiece.toggleChecker(null);
+                            GUI.pieceJumped();
+                            return true;
+                        }
                     }
                     System.out.println("3");
                     return false;
@@ -84,17 +86,19 @@ public class MoveValidator {
                             int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                             int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                             CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
-
-                            if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
-                                // Trying to jump friendly Piece
-                                System.out.println("6");
-                                return false;
-                            }else{
-                                jumpedPiece.toggleChecker(null);
-                                checkPromote(endPiece, startPiece);
-                                GUI.pieceJumped();
-                                return true;
+                            if(jumpedPiece.getCheckerColor() != null) {
+                                if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
+                                    // Trying to jump friendly Piece
+                                    System.out.println("6");
+                                    return false;
+                                }else{
+                                    jumpedPiece.toggleChecker(null);
+                                    checkPromote(endPiece, startPiece);
+                                    GUI.pieceJumped();
+                                    return true;
+                                }
                             }
+                            return false;
                         }else{
                             // Is MOVE
                             checkPromote(endPiece, startPiece);
@@ -114,16 +118,19 @@ public class MoveValidator {
                             int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                             int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
                             CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
-                            if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
-                                // Trying to jump friendly Piece
-                                System.out.println("8");
-                                return false;
-                            }else{
-                                jumpedPiece.toggleChecker(null);
-                                checkPromote(endPiece, startPiece);
-                                GUI.pieceJumped();
-                                return true;
+                            if(jumpedPiece.getCheckerColor() != null) {
+                                if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
+                                    // Trying to jump friendly Piece
+                                    System.out.println("8");
+                                    return false;
+                                }else{
+                                    jumpedPiece.toggleChecker(null);
+                                    checkPromote(endPiece, startPiece);
+                                    GUI.pieceJumped();
+                                    return true;
+                                }
                             }
+                            return false;
                         }else{
                             // Is MOVE
                             checkPromote(endPiece, startPiece);

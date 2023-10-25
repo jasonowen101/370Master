@@ -9,6 +9,7 @@ public class splashscreen extends JPanel {
         setLayout(new BorderLayout()); // Set the layout for this panel
 
         // Load the image
+        String imagePath = System.getProperty("user.home") + "\\OneDrive\\Documents\\My Games\\Sherl0ck's_Snek\\";
         ImageIcon imageIcon = new ImageIcon("src/images/splash.png"); // Replace with the path to your image
 
         // Create a JLabel to display the image
