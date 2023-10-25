@@ -56,4 +56,42 @@ public class CheckerSquareMouse extends MouseAdapter {
             }
         }
     }
+
+    //put at top of file
+    public static int drawMoves = 0;
+
+    //Call everywhere checkPromote is called
+    public static void checkEnd(){
+        int activeBluePiece = 0;
+        int activeYellowPiece = 0;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                if(((getCheckersSquare())[row][col]).getCheckerColor == Color.BLUE){
+                    activeBluePiece = activeBluePiece + 1;
+                }
+                if(((getCheckersSquare())[row][col]).getCheckerColor == Color.YELLOW){
+                    activeYellowPiece = activeYellowPiece + 1;
+                }
+            }
+        }
+
+        if (activeBluePiece == 0 && drawMoves <= 40){
+            // Call win panel with blue as victor
+        } else if (activeYellowPiece == 0 && drawMoves <= 40) {
+            // Call win panel with yellow as victor
+        } else if (drawMoves > 40){
+            // Call draw panel
+        }
+    }
+
+    // Call after every jump
+    public static void pieceJumped(){
+        drawMoves = 0;
+    }
+
+    // Call after every move that is not a jump
+    public static void pieceMoved(){
+        drawMoves = drawMoves + 1;
+    }
+
 }

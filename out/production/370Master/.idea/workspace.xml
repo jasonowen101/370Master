@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="de62e9c5-58d5-4c72-b28d-c4d54acc2193" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/370Master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/370Master.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/CheckerSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/CheckerSquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/CheckerSquareMouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/CheckerSquareMouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/CheckerboardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/CheckerboardGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/Ctegame.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/Ctegame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/HelpPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/HelpPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/MenuPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team B/checkers/splashscreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/checkers/splashscreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamA_AI/TeamA_GameNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamA_AI/TeamA_GameNode.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2X0JBdNo2X1fnbXPkYgFVvgDWdh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mpayne&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Application.GUI">
+    <configuration name="Checkers" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Checkers" />
+      <module name="370Master" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="checkers.GUI" />
+      <module name="370Master" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="checkers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GUI" />
+        <item itemvalue="Application.Checkers" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="de62e9c5-58d5-4c72-b28d-c4d54acc2193" name="Changes" comment="" />
+      <created>1697759931524</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1697759931524</updated>
+    </task>
+    <servers />
+  </component>
+</project>
