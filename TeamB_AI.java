@@ -1,4 +1,4 @@
-package AITeamB;
+
 
 import java.util.List;
 import java.util.ArrayList;
@@ -10,10 +10,9 @@ import checkers.CheckerSquare;
 
 public class TeamB_AI {
 
-    int sumOfScores=0; //need to make addToScore method
+    int sumOfScores = 0; //need to make addToScore method
 
-    public static void main(CheckerSquare[][] boardState)
-    {
+    public static void main(CheckerSquare[][] boardState) {
         Map<Integer, Move> allMoves = new TreeMap<>();
         /*treeMap.put("JumpPiece", 3);
         treeMap.put("becomeKing", 2);
@@ -24,8 +23,8 @@ public class TeamB_AI {
         treeMap.put("becomeBlocked", -3);*/
 
         //if(maxPlayerTurn==True)
-        
-        for(LogicPiece piece : boardState) //needs logic piece to be done first
+
+        for (LogicPiece piece : boardState) //needs logic piece to be done first
         {
             Move move;
             move = valuate(piece);
@@ -33,24 +32,20 @@ public class TeamB_AI {
         }
 
         int bestScore = 0;
-        for(int key : allMoves.keySet())
-        {
-            if(key>bestScore)
-            {
+        for (int key : allMoves.keySet()) {
+            if (key > bestScore) {
                 bestScore = key;
             }
         }
         Move moveToExec = allMoves.get(bestScore);
         executeMove(moveToExec);
-        
+
     }
 
-    public static void executeMove(Move move)
-    {
+    public static void executeMove(Move move) {
         /*place holder for main move method when 
         executing the executeMove method, parameters are the starting
         position and ending position of the piece being moved*/
-        moveMove(move.getpieceFrom, move.getPieceTo);              
+        moveMove(move.getpieceFrom, move.getPieceTo);
     }
-
 }
