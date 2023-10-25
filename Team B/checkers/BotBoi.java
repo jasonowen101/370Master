@@ -1,6 +1,7 @@
 package checkers;
 import java.awt.Color;
-
+//THIS WAS MADE JUST TO SEE IF THINGS WORK, NOT FOR USE BY TEAMS UNLESS YOU WANT TO,
+// BUT THE AI CLASS OF EACH TEAM NEEDS A getMove() METHOD THAT WORKS LIKE THE ONE IN THIS CLASS
 public class BotBoi {
     //aight, sooo this class is going to take in game data and select the best move (prolly not the best).
     //the game should create an object of BotBoi which will be a robot player. 
