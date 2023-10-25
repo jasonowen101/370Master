@@ -21,25 +21,6 @@ public class MinMaxPsuedo
         return checkers;
     }
 
-    //  Iterates through the columns and rows of the board and adds the yellow pieces to a 2D array
-    public static Checker[][] findTheirCheckers(GameState gamestate)
-    {
-        Checker[][] checkers = new Checker[8][8];
-        int checkerCount = 0;
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j < 8; j++) 
-            {
-                if(gamestate.board[i][j] == 1 && getTeam(gamestate.board[i][j]) == "yellow") 
-                {
-                    checkers[i][j] = new Checker(i, j);
-                    checkerCount++;
-                }
-            }
-        }
-        return checkers;
-    }
-
     //  Minmax algorithm to find the best move for the AI (blue), not using alpha-beta pruning
     public static Move minmax(GameState gamestate, int depth, boolean maximizingPlayer)
     {

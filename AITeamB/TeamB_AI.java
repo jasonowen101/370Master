@@ -23,7 +23,7 @@ public class TeamB_AI {
         treeMap.put("OppKing", -2);
         treeMap.put("becomeBlocked", -3);*/
 
-        //if(maxPlayerTurn==True){
+        //if(maxPlayerTurn==True)
         
         for(LogicPiece piece : boardState) //needs logic piece to be done first
         {
@@ -45,6 +45,12 @@ public class TeamB_AI {
         
     }
 
-    //public void executeMove(Move move)
+    public static void executeMove(Move move)
+    {
+        /*place holder for main move method when 
+        executing the executeMove method, parameters are the starting
+        position and ending position of the piece being moved*/
+        moveMove(move.getpieceFrom, move.getPieceTo);              
+    }
 
 }
