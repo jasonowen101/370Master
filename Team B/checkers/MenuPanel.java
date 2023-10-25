@@ -74,28 +74,42 @@ class MenuPanel extends JPanel {
     private void showPlayMenu(Component invoker) {
         JPopupMenu playMenu = new JPopupMenu();
         JMenuItem playerVsPlayer = new JMenuItem("Player1 vs Player2");
-        JMenuItem playVsComputer = new JMenuItem("Play vs Computer");
+        JMenuItem playerVsComputer = new JMenuItem("Play vs Computer");
+        JMenuItem computerVsComputer = new JMenuItem("Computer vs Computer");
 
         configureMenuItem(playerVsPlayer); // Configured dropdown item
-        configureMenuItem(playVsComputer); // Configured dropdown item
+        configureMenuItem(playerVsComputer); // Configured dropdown item
+        configureMenuItem(computerVsComputer);
 
         // Added action listeners to menu items
         playerVsPlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                GUI.gameMode = "pvp";
             }
-        });
+        }); 
 
-        playVsComputer.addActionListener(new ActionListener() {
+        playerVsComputer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                GUI.gameMode = "pvc";
             }
         });
 
+        computerVsComputer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                GUI.gameMode = "cvc";
+            }
+        });
+    
+
         playMenu.add(playerVsPlayer);
-        playMenu.add(playVsComputer);
+        playMenu.add(playerVsComputer);
+        playMenu.add(computerVsComputer);
         playMenu.show(invoker, 0, invoker.getHeight());
     }
 

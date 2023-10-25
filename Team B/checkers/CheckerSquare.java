@@ -8,8 +8,13 @@ public class CheckerSquare extends JPanel {
     public static final Color TEAM2 = Color.BLUE;
     private Color checkerColor = null;
     private boolean isKing;
+
     public boolean isKing() {
         return isKing;
+    }
+
+    public void setIsKing(boolean king){
+        isKing = king;
     }
 
     private int row, col;
@@ -56,8 +61,13 @@ public class CheckerSquare extends JPanel {
         if (checkerColor != null) {
             g.setColor(checkerColor);
             g.fillOval(5, 5, getWidth() - 10, getHeight() - 10);
+            g.setColor(Color.BLACK);   
+            g.drawOval(9, 9, getWidth() - 18, getHeight() - 18);
             if(isKing) {
-                // TODO Implement graphics for a piece that is a king
+                // TODO Implement graphics for a piece that is a king (its a 7 point crown)
+                g.setColor(Color.BLACK);
+                g.fillPolygon(new int[]{getWidth() - 26 - 9, getWidth() - 24 - 9, getWidth() - 8 - 9, getWidth() - 6 - 9, getWidth() - 12 - 9, getWidth() - 16 - 9, getWidth() - 20 - 9}, 
+                new int[]{getHeight() - 20 - 9, getHeight() - 10 - 9,getHeight() - 10 - 9, getHeight() - 20 - 9, getHeight() - 16 - 9, getHeight() - 24 - 9, getHeight() - 16 - 9}, 7);
             }
             if(selected) {      //check if selected and highlight if so
                 g.setColor(Color.RED);
@@ -65,15 +75,7 @@ public class CheckerSquare extends JPanel {
             }
         }
     }
-
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
+    
     public Color getCheckerColor() {
         return checkerColor;
     }

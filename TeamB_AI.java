@@ -1,4 +1,4 @@
-package AITeamB;
+
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import checkers.CheckerSquare;
+import checkers.GamePanel;
 
 
-public class TeamB_AI {
+public class TeamB_AI implements AI {
 
-    int sumOfScores=0; //need to make addToScore method
+    int sumOfScores = 0; //need to make addToScore method
 
-    public static void main(CheckerSquare[][] boardState)
-    {
+    public static void main(CheckerSquare[][] boardState) {
         Map<Integer, Move> allMoves = new TreeMap<>();
         /*treeMap.put("JumpPiece", 3);
         treeMap.put("becomeKing", 2);
@@ -23,9 +23,9 @@ public class TeamB_AI {
         treeMap.put("OppKing", -2);
         treeMap.put("becomeBlocked", -3);*/
 
-        //if(maxPlayerTurn==True){
-        
-        for(LogicPiece piece : boardState) //needs logic piece to be done first
+        //if(maxPlayerTurn==True)
+
+        for (CheckerSquare[] piece : boardState) //needs logic piece to be done first
         {
             Move move;
             move = valuate(piece); // assign best move to piece
@@ -33,16 +33,14 @@ public class TeamB_AI {
         }
 
         int bestScore = 0;
-        for(int key : allMoves.keySet())
-        {
-            if(key>bestScore)
-            {
+        for (int key : allMoves.keySet()) {
+            if (key > bestScore) {
                 bestScore = key;
             }
         }
         Move moveToExec = allMoves.get(bestScore);
         executeMove(moveToExec);
-        
+
     }
 
     // returns highest score move to be executed
