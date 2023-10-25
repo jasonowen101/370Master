@@ -41,6 +41,8 @@ public class GUI {
                     GamePanel.setTurnLabelText("Yellow's turn");
                 }
                 gameOver = checkGameOver();     //check to see if anybody has won
+            } else{
+                //do something to reset game  (might need to sleep thread)
             }
         }
 
