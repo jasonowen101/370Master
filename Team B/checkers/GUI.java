@@ -57,12 +57,12 @@ public class GUI {
             if(!blueTurn){
                 move = jarvis.getMove();   //bot makes move here
                 move[0].setSelected(true);      //"animation" of bot move starts here
-                try{                
-                    Thread.sleep(2000);
+                try{                              //bots selected piece gets highlighted 
+                    Thread.sleep(1000);    //the piece stays highlighted for a second for player to see
                 } catch(InterruptedException e) {
                     e.printStackTrace();
                 }
-                 move[0].setSelected(false);
+                 move[0].setSelected(false); 
                 return move;
             } else {
                 return getMoveFromMouse();  //player makes move here if it's their turn
