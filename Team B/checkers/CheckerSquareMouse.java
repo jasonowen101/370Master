@@ -50,7 +50,7 @@ public class CheckerSquareMouse extends MouseAdapter {
                 }
             }
             // Executes on right click - clears current selection
-            else if (e.getButton() == MouseEvent.BUTTON3) {
+            else if (e.getButton() == MouseEvent.BUTTON3 && selectedSquare != null) {
                 selectedSquare.setSelected(false);
                 selectedSquare = null;
             }
