@@ -13,6 +13,10 @@ public class CheckerSquare extends JPanel {
         return isKing;
     }
 
+    public void setIsKing(boolean king){
+        isKing = king;
+    }
+
     private int row, col;
     public int getRow() {
         return row;
