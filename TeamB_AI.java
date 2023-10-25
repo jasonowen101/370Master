@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import checkers.CheckerSquare;
+import checkers.GamePanel;
 
 
 public class TeamB_AI implements AI {
@@ -24,7 +25,7 @@ public class TeamB_AI implements AI {
 
         //if(maxPlayerTurn==True)
 
-        for (LogicPiece piece : boardState) //needs logic piece to be done first
+        for (CheckerSquare[] piece : boardState) //needs logic piece to be done first
         {
             Move move;
             move = valuate(piece);
@@ -47,5 +48,10 @@ public class TeamB_AI implements AI {
         executing the executeMove method, parameters are the starting
         position and ending position of the piece being moved*/
         moveMove(move.getpieceFrom, move.getPieceTo);
+    }
+
+    public CheckerSquare[] getMove(){
+        
+        return null;
     }
 }
