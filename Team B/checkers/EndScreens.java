@@ -18,6 +18,7 @@ abstract class EndScreens extends JFrame{
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         winnerLabel = new JLabel(condition);
+        winnerLabel.setFont(new Font("Arial", Font.BOLD, 24));
         restartButton = new JButton("Restart");
         homeButton = new JButton("Home");
 
@@ -42,7 +43,7 @@ class BlueWinScreen extends EndScreens {
 
     //method for when Blue wins
     public BlueWinScreen() {
-        super("Blue Wins");
+        super("Blue Wins!");
     } 
 }
 
@@ -50,7 +51,7 @@ class YellowWinScreen extends EndScreens {
 
     //method for when Yellow wins
     public YellowWinScreen() {
-        super("Yellow Wins");
+        super("Yellow Wins!");
     }
 }
 
