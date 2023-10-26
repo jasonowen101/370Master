@@ -51,7 +51,6 @@ class YellowWinScreen extends EndScreens {
     //method for when Yellow wins
     public YellowWinScreen() {
         super("Yellow Wins");
-
     }
 }
 
@@ -60,6 +59,7 @@ class DrawScreen extends EndScreens {
     //method for draw
     public DrawScreen() {
         super("Draw");
-
     }
 }
+
+
