@@ -8,6 +8,11 @@ import java.awt.event.ActionListener;
 public class GamePanel extends JPanel {
     private static final int BOARD_SIZE = 8;
     private static CheckerSquare[][] squares;
+    public static JLabel turn = new JLabel("Blue's turn");
+
+    public static void setTurnLabelText(String txt){
+        turn.setText(txt);
+    }
 
     public static CheckerSquare[][] getSquares() {
         return squares;
@@ -25,7 +30,6 @@ public class GamePanel extends JPanel {
                 CheckerSquare square = new CheckerSquare(row, col);
                 squares[row][col] = square;
                 boardPanel.add(square);
-
                 square.addMouseListener(new CheckerSquareMouse(square));
             }
         }
@@ -37,6 +41,7 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startGame();
+                GUI.gameOver = false;
             }
         });
 
@@ -45,6 +50,7 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearBoard();
+                GUI.gameOver = true;
             }
         });
 
@@ -60,9 +66,9 @@ public class GamePanel extends JPanel {
         buttonPanel.add(startGameButton);
         buttonPanel.add(clearBoardButton);
         buttonPanel.add(helpButton);
+        buttonPanel.add(turn);
 
         add(buttonPanel, BorderLayout.SOUTH);
-
 //        setVisible(true);
     }
 
@@ -84,8 +90,11 @@ public class GamePanel extends JPanel {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 squares[row][col].toggleChecker(null);
+                squares[row][col].setIsKing(false);
             }
         }
+        GUI.blueTurn = true;
+        GamePanel.setTurnLabelText("Blue's turn");
     }
 
     private void showHelpDialog() {
@@ -98,7 +107,6 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
         setFocusable(true);
     }
 

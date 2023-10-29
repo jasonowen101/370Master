@@ -9,10 +9,11 @@ public class splashscreen extends JPanel {
         setLayout(new BorderLayout()); // Set the layout for this panel
 
         // Load the image
-        ImageIcon imageIcon = new ImageIcon("src/images/splash.png"); // Replace with the path to your image
+        ImageIcon imageIcon = new ImageIcon("https://drive.google.com/file/d/18mgucp-j7PwEAcoGkLWFhubJav_YBWTM/preview"); // Replace with the path to your image
 
         // Create a JLabel to display the image
-        JLabel imageLabel = new JLabel(imageIcon);
+        JLabel imageLabel = new JLabel();
+        imageLabel.setIcon(imageIcon);
         add(imageLabel, BorderLayout.CENTER);
 
         // Create a JPanel for the title with a black background
