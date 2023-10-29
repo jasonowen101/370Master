@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static checkers.GamePanel.getSquares;
+import checkers.CheckerSquare;
+
 public class CheckerSquareMouse extends MouseAdapter {
 
     private final CheckerSquare square;
@@ -170,14 +173,16 @@ public class CheckerSquareMouse extends MouseAdapter {
 
     //Call everywhere checkPromote is called
     public static void checkEnd(){
+        checkers.CheckerSquare temp;
         int activeBluePiece = 0;
         int activeYellowPiece = 0;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if(((getCheckersSquare())[row][col]).getCheckerColor == Color.BLUE){
+                temp = ((getSquares())[row][col]);
+                if((temp.getCheckerColor()) == Color.BLUE){
                     activeBluePiece = activeBluePiece + 1;
                 }
-                if(((getCheckersSquare())[row][col]).getCheckerColor == Color.YELLOW){
+                if((temp.getCheckerColor()) == Color.YELLOW){
                     activeYellowPiece = activeYellowPiece + 1;
                 }
             }
