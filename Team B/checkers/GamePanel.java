@@ -101,7 +101,4 @@ public class GamePanel extends JPanel {
         setFocusable(true);
     }
 
-    public CheckerSquare[][] getCheckersSquare() {
-        return squares;
-    }
 }

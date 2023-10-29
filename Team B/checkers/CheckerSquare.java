@@ -84,9 +84,4 @@ public class CheckerSquare extends JPanel {
             repaint(); // Repaint the square to show change in piece
         }
     }
-    /*
-    public void setIsKing(boolean isKing) {
-        this.isKing = isKing;
-    }
-    */
 }
