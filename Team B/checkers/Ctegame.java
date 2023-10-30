@@ -25,7 +25,7 @@ public class Ctegame extends JFrame {
         cards.add(gp, "GamePanel");
         
         add(cards); // adding the panel with cardlayout in JFrame
-        
+
         // Initially showing the SplashScreen
         cl.show(cards, "SplashScreen");
         
@@ -36,7 +36,7 @@ public class Ctegame extends JFrame {
         setVisible(true);   // frame visibility
 
         // Started a timer to transition from the SplashScreen to the MenuPanel after 3 seconds
-        Timer timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(7000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cards, "MenuPanel"); // Transition to the MenuPanel

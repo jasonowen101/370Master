@@ -1,8 +1,6 @@
 package checkers;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class splashscreen extends JPanel {
     public splashscreen() {
@@ -10,11 +8,6 @@ public class splashscreen extends JPanel {
 
         // Load the image
         ImageIcon imageIcon = new ImageIcon("https://drive.google.com/file/d/18mgucp-j7PwEAcoGkLWFhubJav_YBWTM/preview"); // Replace with the path to your image
-
-        // Create a JLabel to display the image
-        JLabel imageLabel = new JLabel();
-        imageLabel.setIcon(imageIcon);
-        add(imageLabel, BorderLayout.CENTER);
 
         // Create a JPanel for the title with a black background
         JPanel titlePanel = new JPanel(new BorderLayout());
@@ -28,13 +21,10 @@ public class splashscreen extends JPanel {
         titleLabel.setHorizontalAlignment(JLabel.CENTER); // Center the text horizontally
         titlePanel.add(titleLabel, BorderLayout.CENTER); // Add the title label to the titlePanel
 
-        Timer timer = new Timer(2000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Handle any actions after the splash screen (e.g., transition to MenuPanel)
-            }
-        });
-        timer.setRepeats(false); // Run only once
-        timer.start();
+        // Create a JLabel to display the image
+        JLabel imageLabel = new JLabel();
+        imageLabel.setIcon(imageIcon);
+        add(imageLabel, BorderLayout.CENTER);
+
     }
 }
