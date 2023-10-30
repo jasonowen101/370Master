@@ -13,8 +13,13 @@ public class CheckerSquare extends JPanel {
         return isKing;
     }
 
+<<<<<<< HEAD
     public void setIsKing(boolean king){
         isKing = king;
+=======
+    public void setKing(boolean isKing){
+        this.isKing = isKing;
+>>>>>>> TeamA_AI
     }
 
     private int row, col;
@@ -33,7 +38,7 @@ public class CheckerSquare extends JPanel {
         repaint(); //highlights or dehighlights the selected checker
     }
 
-    CheckerSquare(int row, int col) {
+    public CheckerSquare(int row, int col) {
         this.row = row;
         this.col = col;
         isKing = false;
@@ -75,7 +80,18 @@ public class CheckerSquare extends JPanel {
             }
         }
     }
+<<<<<<< HEAD
     
+=======
+
+    /**
+     * @param checkerColor the checkerColor to set
+     */
+    public void setCheckerColor(Color checkerColor) {
+        this.checkerColor = checkerColor;
+    }
+
+>>>>>>> TeamA_AI
     public Color getCheckerColor() {
         return checkerColor;
     }
