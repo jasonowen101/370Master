@@ -15,7 +15,7 @@ public class splashscreen extends JPanel {
         BufferedImage image = null;
         URL url = null;
         try {
-            url = new URL("https://picsum.photos/200/300"); //well it works but not with the image i need
+            url = new URL("https://picsum.photos/720/720"); //well it works but not with the image i need
             image = ImageIO.read(url);
             System.out.println("did thing");
         } catch (MalformedURLException ex) {
