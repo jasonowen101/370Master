@@ -1,3 +1,4 @@
+package checkers;
 import javax.swing.*;
 import java.awt.*;
 
