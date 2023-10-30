@@ -113,11 +113,11 @@ public class GUI {
 
         if (activeBluePiece == 0 && drawMoves <= 40){
             // Call win panel with blue as victor
-            GamePanel.setTurnLabelText("Blue Wins!");       //This will do for now but a victory panel would be nice
+            GamePanel.setTurnLabelText("Yellow Wins!");       //This will do for now but a victory panel would be nice
             return true;
         } else if (activeYellowPiece == 0 && drawMoves <= 40) {
             // Call win panel with yellow as victor
-            GamePanel.setTurnLabelText("Yellow Wins!");     //^^^^
+            GamePanel.setTurnLabelText("Blue Wins!");     //^^^^
             return true;
         } else if (drawMoves > 40){
             // Call draw panel

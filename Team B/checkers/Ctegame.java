@@ -24,10 +24,10 @@ public class Ctegame extends JFrame {
         cards.add(hp, "HelpPanel");
         cards.add(gp, "GamePanel");
         
+        add(cards); // adding the panel with cardlayout in JFrame
+        
         // Initially showing the SplashScreen
         cl.show(cards, "SplashScreen");
-        
-        add(cards); // adding the panel with cardlayout in JFrame
         
         setTitle("Checkers");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
