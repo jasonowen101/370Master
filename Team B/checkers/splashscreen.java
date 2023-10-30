@@ -1,13 +1,30 @@
 package checkers;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class splashscreen extends JPanel {
     public splashscreen() {
         setLayout(new BorderLayout()); // Set the layout for this panel
 
         // Load the image
-        ImageIcon imageIcon = new ImageIcon("https://drive.google.com/file/d/18mgucp-j7PwEAcoGkLWFhubJav_YBWTM/preview"); // Replace with the path to your image
+        BufferedImage image = null;
+        URL url = null;
+        try {
+            url = new URL("https://picsum.photos/200/300"); //well it works but not with the image i need
+            image = ImageIO.read(url);
+            System.out.println("did thing");
+        } catch (MalformedURLException ex) {
+            System.out.println("Malformed URL");
+        } catch (IOException iox) {
+            System.out.println("Can not load file");
+        }
+        JLabel imageLabel = new JLabel(new ImageIcon(image));
+        add(imageLabel, BorderLayout.CENTER);
 
         // Create a JPanel for the title with a black background
         JPanel titlePanel = new JPanel(new BorderLayout());
@@ -20,11 +37,6 @@ public class splashscreen extends JPanel {
         titleLabel.setForeground(Color.WHITE); // Set the text color to white
         titleLabel.setHorizontalAlignment(JLabel.CENTER); // Center the text horizontally
         titlePanel.add(titleLabel, BorderLayout.CENTER); // Add the title label to the titlePanel
-
-        // Create a JLabel to display the image
-        JLabel imageLabel = new JLabel();
-        imageLabel.setIcon(imageIcon);
-        add(imageLabel, BorderLayout.CENTER);
 
     }
 }
