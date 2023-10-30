@@ -1,6 +1,6 @@
-package TeamA_AI;
 
-public class BoardWeight {
+public class TeamA_BoardWeight {
+    //playing as blue
     public static final byte[][] weightUp = {{127, 108, 89, 70, 51, 32, 13, 0},//19
                                              {108,  94, 80, 66, 52, 38,  24, 10},//14
                                              { 89,  78, 67, 56, 45, 34,  23, 12},//11
@@ -9,6 +9,8 @@ public class BoardWeight {
                                              { 89,  78, 67, 56, 45, 34,  23, 12},//11
                                              {108,  94, 80, 66, 52, 38,  24, 10},//14
                                              {127, 108, 89, 70, 51, 32, 13, 0}};//19
+
+    //playing as yellow
     public static final byte[][] weightDown = {{ 0, 13, 32, 51, 70, 89, 108, 127},//19
                                                {10, 24, 38, 52, 66, 80,  94, 108},//14
                                                {12, 23, 34, 45, 56, 67,  78,  89},//11

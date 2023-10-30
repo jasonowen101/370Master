@@ -1,8 +1,6 @@
 //Potential Help
 //https://github.com/Mchristos/checkers
 
-package TeamA_AI;
-
 import java.awt.Color;
 import java.util.List;
 
@@ -41,6 +39,7 @@ public class TeamA_GameNode {
 
     public void addChildNode(TeamA_GameNode){
 
+
     }
 
     private CheckerSquare[][] copy(CheckerSquare[][] original){
@@ -61,19 +60,23 @@ public class TeamA_GameNode {
     }
 
     private void count(CheckerSquare[][] board){
+        this.value = 0;
+        byte[][] boardWeight = (this.playerColor == CheckerSquare.TEAM2) ? TeamA_BoardWeight.weightUp : TeamA_BoardWeight.weightDown;
         for(CheckerSquare[] col : board){
             for(CheckerSquare indSquare : col){
                 if (indSquare.getCheckerColor() == playerColor){
                     if(indSquare.isKing()) this.playerKings++;
                     else this.playerPeon++;
+                    this.value += boardWeight[indSquare.getRow()][indSquare.getCol()];;
                 }
                 else if (indSquare.getCheckerColor() == enemyColor){
                     if(indSquare.isKing()) this.enemyKings++;
                     else this.enemyPeon++;
+                    this.value -= boardWeight[indSquare.getRow()][indSquare.getCol()];;
                 }
             }
         }
-        this.value = score();
+        this.value += score();
     }
 
     private int score(){

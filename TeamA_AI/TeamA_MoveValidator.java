@@ -1,7 +1,14 @@
-package checkers;
 import java.awt.Color;
 
-public class MoveValidator {
+import checkers.CheckerSquare;
+
+public class TeamA_MoveValidator {
+
+    private static CheckerSquare[][] board;
+
+    public TeamA_MoveValidator(CheckerSquare[][] board){
+        TeamA_MoveValidator.board = board;
+    }
 
     public static boolean isValidMove(Color color, CheckerSquare[] move){
         return isValidMove(color==CheckerSquare.TEAM2, move);
@@ -60,12 +67,11 @@ public class MoveValidator {
                     // Is JUMP
                     int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                     int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                    CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
+                    CheckerSquare jumpedPiece = board[jumpedY][jumpedX];
                     if(jumpedPiece.getCheckerColor() != null){
                         if(isValidMove(blueTurn, new CheckerSquare[] {startPiece, jumpedPiece})){
                             checkPromote(endPiece, startPiece);
                             jumpedPiece.toggleChecker(null);
-                            GUI.pieceJumped();
                             return true;
                         }
                     }
@@ -90,7 +96,7 @@ public class MoveValidator {
                             // Is JUMP
                             int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                             int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                            CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
+                            CheckerSquare jumpedPiece = board[jumpedY][jumpedX];
                             if(jumpedPiece.getCheckerColor() != null) {
                                 if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
                                     // Trying to jump friendly Piece
@@ -99,7 +105,7 @@ public class MoveValidator {
                                 }else{
                                     jumpedPiece.toggleChecker(null);
                                     checkPromote(endPiece, startPiece);
-                                    GUI.pieceJumped();
+
                                     return true;
                                 }
                             }
@@ -122,7 +128,7 @@ public class MoveValidator {
                             // Is JUMP
                             int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
                             int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                            CheckerSquare jumpedPiece = GamePanel.getSquares()[jumpedY][jumpedX];
+                            CheckerSquare jumpedPiece = board[jumpedY][jumpedX];
                             if(jumpedPiece.getCheckerColor() != null) {
                                 if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
                                     // Trying to jump friendly Piece
@@ -131,7 +137,7 @@ public class MoveValidator {
                                 }else{
                                     jumpedPiece.toggleChecker(null);
                                     checkPromote(endPiece, startPiece);
-                                    GUI.pieceJumped();
+
                                     return true;
                                 }
                             }
@@ -149,7 +155,6 @@ public class MoveValidator {
     }
     //this check promote method not only checks for promote but also toggles the king status...it must be called during any valid move
     private static void checkPromote(CheckerSquare endPiece, CheckerSquare startPiece){
-        GUI.pieceMoved();
         endPiece.setIsKing(startPiece.isKing());
         if(startPiece.getCheckerColor().equals(Color.BLUE) && (endPiece.getRow() == 0) || startPiece.getCheckerColor().equals(Color.YELLOW) && (endPiece.getRow() == 7)){
             endPiece.setIsKing(true);
