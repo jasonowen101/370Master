@@ -4,14 +4,18 @@ import checkers.CheckerSquare;
 
 public class TeamA_MoveValidator {
 
-    private static CheckerSquare[][] board;
+    private CheckerSquare[][] board;
 
     public TeamA_MoveValidator(CheckerSquare[][] board){
-        TeamA_MoveValidator.board = board;
+        this.board = board;
     }
 
     public static boolean isValidMove(Color color, CheckerSquare[] move){
         return isValidMove(color==CheckerSquare.TEAM2, move);
+    }
+
+    public CheckerSquare[][] getBoard(){
+        return this.board;
     }
 
     public static boolean isValidMove(boolean blueTurn, CheckerSquare[] move) {
