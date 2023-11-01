@@ -17,7 +17,6 @@ public class splashscreen extends JPanel {
         try {
             url = new URL("https://drive.google.com/uc?id=18mgucp-j7PwEAcoGkLWFhubJav_YBWTM"); //so apparently to view image from googel drive u gotta have url in a certain format
             image = ImageIO.read(url);
-            System.out.println("did thing");
         } catch (MalformedURLException ex) {
             System.out.println("Malformed URL");
         } catch (IOException iox) {
