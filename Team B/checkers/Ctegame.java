@@ -51,7 +51,7 @@ public class Ctegame extends JFrame {
         cl.show(cards, "SplashScreen");
 
         // Started a timer to transition from the splashscreen to the MenuPanel after 3 seconds
-        Timer timer = new Timer(5000, new ActionListener() {
+        Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cards, "MenuPanel"); // Transition to the MenuPanel

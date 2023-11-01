@@ -69,7 +69,6 @@ public class GamePanel extends JPanel {
         buttonPanel.add(turn);
 
         add(buttonPanel, BorderLayout.SOUTH);
-//        setVisible(true);
     }
 
 
@@ -91,8 +90,10 @@ public class GamePanel extends JPanel {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 squares[row][col].toggleChecker(null);
                 squares[row][col].setIsKing(false);
+                squares[row][col].setSelected(false);
             }
         }
+        CheckerSquareMouse.clearSelection();
         GUI.blueTurn = true;
         GamePanel.setTurnLabelText("Blue's turn");
     }

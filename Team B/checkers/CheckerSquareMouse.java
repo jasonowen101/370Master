@@ -18,6 +18,10 @@ public class CheckerSquareMouse extends MouseAdapter {
         move = null;
     }
 
+    public static void clearSelection() {
+        selectedSquare = null;
+    }
+
     CheckerSquareMouse(CheckerSquare square) {
         super();
         this.square = square;
@@ -28,8 +32,8 @@ public class CheckerSquareMouse extends MouseAdapter {
         if(active){
             // Executes on left click
             if (e.getButton() == MouseEvent.BUTTON1) {
-                // Checks if no square is selected and the clicked square has a piece
-                if(selectedSquare == null && ((square.getCheckerColor() == Color.BLUE) == GUI.blueTurn)) {
+                // Checks if no square is selected and the clicked square has a piece and that the piece matches turn color
+                if(selectedSquare == null && ((square.getCheckerColor() == Color.BLUE) == GUI.blueTurn) && square.getCheckerColor() != null) {
                     selectedSquare = square;
                     selectedSquare.setSelected(true);
                 }
