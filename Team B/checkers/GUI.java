@@ -7,11 +7,14 @@ public class GUI {
     public static boolean gameOver = true;
     public static int drawMoves = 0; //for check end
     public static boolean blueTurn;
-    public static BotBoi jarvis;     //Jarvis will die...he's just here to see if things work
+    public static BotBoi jarvis;     //Jarvis will die =(...he's just here to see if things work
     public static void main(String[] args){
         new Ctegame(); //Created an instance of Ctegame
         
-        //this loop waits for a game mode to be selected and for game to start before entering game loop
+        /* this loop waits for a game mode to be selected and for game to start before entering game loop...
+        The reasoning for sleeping the thread is so the while loop doesn't bang out condition checks as fast
+        as possible and get stuck or slow things down.*/
+        
         while(gameMode == null || gameOver){
             try{
                 Thread.sleep(100);
@@ -46,7 +49,7 @@ public class GUI {
             }
         }
 
-    } 
+    } //end of main()
 
     private static CheckerSquare[] nextMove(){
         CheckerSquare[] move;
@@ -62,7 +65,7 @@ public class GUI {
                 } catch(InterruptedException e) {
                     e.printStackTrace();
                 }
-                 move[0].setSelected(false); 
+                 move[0].setSelected(false);    //removes the highlight (selected status) before making move
                 return move;
             } else {
                 return getMoveFromMouse();  //player makes move here if it's their turn
@@ -74,7 +77,7 @@ public class GUI {
         return null;
     }
     
-    private static CheckerSquare[] getMoveFromMouse() { //this function kinda scuffed but it works for now....if any one has an idea of how to make better lmk
+    private static CheckerSquare[] getMoveFromMouse() { //this function kinda scuffed but it works for now...sometimes it seems glitchy in game....if any one has an idea of how to make better lmk
         CheckerSquareMouse.active = true;               //activates the Mouse adapter
         while(CheckerSquareMouse.getMove() == null) {   //continually checks if the player has input a move
             try{
@@ -83,8 +86,8 @@ public class GUI {
                 exception.printStackTrace();
             }
         }
-        CheckerSquare[] move;                           //in order to be able to clear the move from mouse and still be able to use it
-        move = CheckerSquareMouse.getMove();            //  I used a place holder move
+        CheckerSquare[] move;                           //In order to be able to clear the move from mouse and still be able to use it,
+        move = CheckerSquareMouse.getMove();            //   I used a place holder move.
         CheckerSquareMouse.clearMove();
         CheckerSquareMouse.active = false;
         return move;
@@ -96,7 +99,7 @@ public class GUI {
         move[0].toggleChecker(null);                      //this toggles the square where piece came from....jumped pieces are toggled in MoveValidator isValidMove()
     }
 
-    //Call everywhere checkPromote is called....I actually just call it at the end of every game loop iteration 
+    //Call everywhere checkPromote is called (Mark said)....I actually just call it at the end of every game loop iteration cause why not
     public static boolean checkGameOver(){
         int activeBluePiece = 0;
         int activeYellowPiece = 0;

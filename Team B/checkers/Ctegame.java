@@ -31,7 +31,7 @@ public class Ctegame extends JFrame {
             img = null;
         }  
         
-        cards =  new BackgroundPanel(img);  //This is the main panel that is displayed by the frame. 
+        cards =  new BackgroundPanel(img, BackgroundPanel.SCALED);  //This is the main panel that is displayed by the frame. 
                                             //It holds other panels which can be displayed 1 at a time using cl.show()
 
         cards.setLayout(cl); // setting the layout to cardlayout
@@ -43,7 +43,7 @@ public class Ctegame extends JFrame {
         add(cards); // adding the panel with cardlayout in JFrame
         setTitle("Checkers");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(720, 720);  //frame size
+        setSize(720, 640);  //frame size
         setLocationRelativeTo(null);   //frame loads in center of screen
         setVisible(true);   // frame visibility
 
