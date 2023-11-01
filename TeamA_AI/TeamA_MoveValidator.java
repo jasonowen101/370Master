@@ -10,7 +10,7 @@ public class TeamA_MoveValidator {
         this.board = board;
     }
 
-    public static boolean isValidMove(Color color, CheckerSquare[] move){
+    public boolean isValidMove(Color color, CheckerSquare[] move){
         return isValidMove(color==CheckerSquare.TEAM2, move);
     }
 
@@ -18,7 +18,7 @@ public class TeamA_MoveValidator {
         return this.board;
     }
 
-    public static boolean isValidMove(boolean blueTurn, CheckerSquare[] move) {
+    public  boolean isValidMove(boolean blueTurn, CheckerSquare[] move) {
         CheckerSquare startPiece = move[0];
         CheckerSquare endPiece = move[1];
         /*
