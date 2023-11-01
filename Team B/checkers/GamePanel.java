@@ -20,7 +20,6 @@ public class GamePanel extends JPanel {
 
 
     public GamePanel() {
-        setSize(400, 400);
 
         JPanel boardPanel = new JPanel(new GridLayout(BOARD_SIZE, BOARD_SIZE));
         squares = new CheckerSquare[BOARD_SIZE][BOARD_SIZE];
