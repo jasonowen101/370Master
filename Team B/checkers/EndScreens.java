@@ -1,6 +1,8 @@
 package checkers;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //EndScreens is a parent class
 abstract class EndScreens extends JFrame{
@@ -9,6 +11,8 @@ abstract class EndScreens extends JFrame{
     protected JLabel winnerLabel;
     protected JButton restartButton;
     protected JButton homeButton;
+
+    protected JPanel endScreenPanel;
 
 //condition is passed and can be changed to the actual condition
     public EndScreens(String condition) {
@@ -22,20 +26,43 @@ abstract class EndScreens extends JFrame{
         winnerLabel.setFont(new Font("Arial", Font.BOLD, 24));
         restartButton = new JButton("Restart");
         homeButton = new JButton("Home");
+        endScreenPanel = new JPanel();
 
         winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         restartButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         homeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        add(Box.createVerticalGlue());
-        add(winnerLabel);
-        add(Box.createRigidArea(new Dimension(0, 10)));
-        add(restartButton);
-        add(Box.createRigidArea(new Dimension(0, 10)));
-        add(homeButton);
-        add(Box.createVerticalGlue());
+        add(endScreenPanel);
+        endScreenPanel.add(Box.createVerticalGlue());
+        endScreenPanel.add(winnerLabel);
+        endScreenPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        endScreenPanel.add(restartButton);
+        endScreenPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        endScreenPanel.add(homeButton);
+        endScreenPanel.add(Box.createVerticalGlue());
+
+        restartButton.addActionListener(new RestartButtonListener());
+        homeButton.addActionListener(new HomeButtonListener());
 
         setVisible(true);
+        }
+
+        public class RestartButtonListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+            }
+        }
+
+        public class HomeButtonListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+            }
         }
     }
 
