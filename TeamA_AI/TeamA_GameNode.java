@@ -1,33 +1,167 @@
+//Potential Help
+//https://github.com/Mchristos/checkers
+
 package TeamA_AI;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import checkers.CheckerSquare;
 
 public class TeamA_GameNode {
-    CheckerSquare[][] board;
-    List<TeamA_GameNode> childNodes;
-    Color playerColor;
-    Color enemyColor;
-    int value;
-    byte playerPeon;
-    byte playerKings;
-    byte enemyPeon;
-    byte enemyKings;
-    byte depth;
+    private CheckerSquare[][] board;
+    private List<TeamA_GameNode> childNodes;
+    private Color playerColor;
+    private Color enemyColor;
+    private int value = 0;
+    private byte playerPeon = 0;
+    private byte playerKings = 0;
+    private byte enemyPeon = 0;
+    private byte enemyKings = 0;
+    private byte depth;
+    private CheckerSquare[] move;
 
     public TeamA_GameNode(CheckerSquare[][] board, Color playerColor, byte depth){
 
         this.board = board;
         this.playerColor = playerColor;
-        this.enemyColor = (playerColor == CheckerSquare.TEAM1) ? CheckerSquare.TEAM2 : CheckerSquare.TEAM1;
+        this.enemyColor = oppositeColor(playerColor);
+
+        this.depth -= 1;
+
+        this.count(board);
+
+        this.childNodes = new ArrayList<TeamA_GameNode>();
+
+
+
 
     }
 
-    public void addChildNode(TeamA_GameNode){
+    public TeamA_GameNode(CheckerSquare[][] board, Color playerColor, byte depth, CheckerSquare[] move){
+
+        this.board = board;
+        this.playerColor = playerColor;
+        this.enemyColor = oppositeColor(playerColor);
+
+        this.depth -= 1;
+
+        this.count(board);
+
+        this.childNodes = new ArrayList<TeamA_GameNode>();
+
+        this.move = move;
+
+
+
 
     }
+
+    private static Color oppositeColor(Color color){
+        return (color == CheckerSquare.TEAM1) ? CheckerSquare.TEAM2 : CheckerSquare.TEAM1;
+
+    }
+
+    public void addChildNodes(){
+        if (this.depth != 0){
+            TeamA_MoveValidator moveValid  = new TeamA_MoveValidator(copy(this.board));
+            for(byte x = 0; x <  this.board.length; x++){
+                    for(byte y = 0; y <  this.board[x].length; y++){
+
+                        if (moveValid.isValidMove(playerColor, new CheckerSquare[]{this.board[x][y],this.board[x-1][y-1]})){
+                            addChildNode(new TeamA_GameNode(moveValid.getBoard(), this.enemyColor, this.depth, new CheckerSquare[]{this.board[x][y],this.board[x-1][y-1]}));
+                            moveValid  = new TeamA_MoveValidator(copy(this.board));
+                        }
+                        else if (moveValid.isValidMove(playerColor, new CheckerSquare[]{this.board[x][y],this.board[x-2][y-2]})){
+                            addChildNode(new TeamA_GameNode(moveValid.getBoard(), this.enemyColor, this.depth, new CheckerSquare[]{this.board[x][y],this.board[x-2][y-2]}));
+                            moveValid  = new TeamA_MoveValidator(copy(this.board));
+                        }
+
+                        if (moveValid.isValidMove(playerColor, new CheckerSquare[]{this.board[x][y],this.board[x-1][y+1]})){
+                            addChildNode(new TeamA_GameNode(moveValid.getBoard(), this.enemyColor, this.depth,new CheckerSquare[]{this.board[x][y],this.board[x-1][y+1]}));
+                            moveValid  = new TeamA_MoveValidator(copy(this.board));
+                        }
+                        else if (moveValid.isValidMove(playerColor, new CheckerSquare[]{this.board[x][y],this.board[x-2][y+2]})){
+                            addChildNode(new TeamA_GameNode(moveValid.getBoard(), this.enemyColor, this.depth,new CheckerSquare[]{this.board[x][y],this.board[x-2][y+2]}));
+                            moveValid  = new TeamA_MoveValidator(copy(this.board));
+                        }
+
+                        if (moveValid.isValidMove(playerColor, new CheckerSquare[]{this.board[x][y],this.board[x+1][y+1]})){
+                            addChildNode(new TeamA_GameNode(moveValid.getBoard(), this.enemyColor, this.depth,new CheckerSquare[]{this.board[x][y],this.board[x+1][y+1]}));
+                            moveValid  = new TeamA_MoveValidator(copy(this.board));
+                        }
+                        else if (moveValid.isValidMove(playerColor, new CheckerSquare[]{this.board[x][y],this.board[x+2][y+2]})){
+                            addChildNode(new TeamA_GameNode(moveValid.getBoard(), this.enemyColor, this.depth,new CheckerSquare[]{this.board[x][y],this.board[x+2][y+2]}));
+                            moveValid  = new TeamA_MoveValidator(copy(this.board));
+                        }
+
+                        if (moveValid.isValidMove(playerColor, new CheckerSquare[]{this.board[x][y],this.board[x+1][y-1]})){
+                            addChildNode(new TeamA_GameNode(moveValid.getBoard(), this.enemyColor, this.depth, new CheckerSquare[]{this.board[x][y],this.board[x+1][y-1]}));
+                            moveValid  = new TeamA_MoveValidator(copy(this.board));
+                        }
+                        else if (moveValid.isValidMove(playerColor, new CheckerSquare[]{this.board[x][y],this.board[x+2][y-2]})){
+                            addChildNode(new TeamA_GameNode(moveValid.getBoard(), this.enemyColor, this.depth,new CheckerSquare[]{this.board[x][y],this.board[x+2][y-2]}));
+                            moveValid  = new TeamA_MoveValidator(copy(this.board));
+                        }
+                }
+            }
+        }
+
+        else{
+
+        }
+    }
+
+    private void addChildNode(TeamA_GameNode childNode){
+        this.childNodes.add(childNode);
+    }
+
+
+
+
+    private static CheckerSquare[][] copy(CheckerSquare[][] original){
+        CheckerSquare[][] copied = new CheckerSquare[0][0];
+        if(original.length > 0) if(original[0].length > 0){
+            copied = new CheckerSquare[original.length][original[0].length];
+
+            for(byte x = 0; x <  original.length; x++){
+                for(byte y = 0; y <  original[x].length; y++){
+                    copied[x][y] = new CheckerSquare(x,y);
+                    copied[x][y].setVisible(false);
+                    copied[x][y].setKing(original[x][y].isKing());
+                    copied[x][y].setCheckerColor(original[x][y].getCheckerColor());
+                }
+            }
+        }
+        return copied;
+    }
+
+    private void count(CheckerSquare[][] board){
+        for(CheckerSquare[] col : board){
+            for(CheckerSquare indSquare : col){
+                if (indSquare.getCheckerColor() == playerColor){
+                    if(indSquare.isKing()) this.playerKings++;
+                    else this.playerPeon++;
+                }
+                else if (indSquare.getCheckerColor() == enemyColor){
+                    if(indSquare.isKing()) this.enemyKings++;
+                    else this.enemyPeon++;
+                }
+            }
+        }
+        this.value = score();
+    }
+
+    private int score(){
+        int value = 0;
+        value += (this.playerKings * TeamA_Weight.PLAYER_KING);
+        value += (this.playerPeon * TeamA_Weight.PLAYER_PEON);
+        value += (this.enemyKings * TeamA_Weight.ENEMY_KING);
+        value += (this.enemyPeon * TeamA_Weight.ENEMY_PEON);
+        return value;
+    }
+
 
     /**
      * @return the board
