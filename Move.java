@@ -1,10 +1,18 @@
-
-
+import checkers.CheckerSquare;
 
 public class Move {
     int score;
     int[] PieceFrom = new int[1]; //uses values of existing boardstate
     int[] PieceTo = new int[1] ; //dependent on move
+    private CheckerSquare[] movement;
+    private int i;
+
+    public Move(CheckerSquare[] movement, int i)
+    {
+        this.movement = movement;
+        this.i = i;
+
+    }
 
     public void setPieceTo(int x, int y)
     {
@@ -23,12 +31,12 @@ public class Move {
         this.score = score;
     }
 
-    public int[] getPieceTo()
+    public CheckerSquare[] getPieceTo()
     {
         return PieceTo;
     }
 
-    public int[] getpieceFrom()
+    public CheckerSquare[] getPieceFrom()
     {
         return PieceFrom;
     }
