@@ -15,7 +15,6 @@ import checkers.GamePanel;
 public class TeamB_AI implements AI {
 
     private static CheckerSquare[][] boardState;
-	private Color ourColor;
 	private static Color enemyColor;
 	
 	final static int KING_VALUE = 4;
