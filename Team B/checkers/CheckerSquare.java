@@ -66,7 +66,7 @@ public class CheckerSquare extends JPanel {
             if(isKing) {
                 //graphics for a piece that is a king (its a 7 point crown)
                 g.setColor(Color.BLACK);
-                int offset = 20;
+                int offset = 18;
                 g.fillPolygon(new int[]{getWidth() - 26 - offset, getWidth() - 24 - offset, getWidth() - 8 - offset, getWidth() - 6 - offset, getWidth() - 12 - offset, getWidth() - 16 - offset, getWidth() - 20 - offset}, 
                 new int[]{getHeight() - 20 - offset, getHeight() - 10 - offset, getHeight() - 10 - offset, getHeight() - 20 - offset, getHeight() - 16 - offset, getHeight() - 24 - offset, getHeight() - 16 - offset}, 7);
             }
