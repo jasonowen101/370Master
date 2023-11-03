@@ -79,10 +79,10 @@ public class GamePanel extends JPanel {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 if (row < 3 && (row + col) % 2 == 1) {
                     squares[row][col].toggleChecker(CheckerSquare.TEAM1);
-                    squares[row][col].setIsKing(true);
+                    //squares[row][col].setIsKing(true); uncomment to test king graphics quickly
                 } else if (row > 4 && (row + col) % 2 == 1) {
                     squares[row][col].toggleChecker(CheckerSquare.TEAM2);
-                    squares[row][col].setIsKing(true);
+                    //squares[row][col].setIsKing(true); uncomment to test king graphics quickly
                 }
             }
         }
