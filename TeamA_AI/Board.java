@@ -153,10 +153,24 @@ public class Board {
         return jumpResult;
     }
 
-    public ArrayList<Board> getSuccessors(Piece piece, byte[] position, boolean jump){
+    private ArrayList<Board> getSuccessors(Piece piece, byte[] position, boolean jump){
         if(piece.getPlayer() != this.turn) return new ArrayList<Board>();
         if(jump) return jumpSuccessors(piece, position);
         else return nonJumpSuccessors(piece, position);
+    }
+
+    private ArrayList<Board> nonJumpSuccessors(Piece piece, byte[] position){
+        ArrayList<Board> result = new ArrayList<>();
+
+        for(byte dx : new byte[]{-1,1}){
+            for(byte dy : new byte[]{-1,1}){
+                byte[] endCord = new byte[]{(byte) (position[0] + dx), (byte) (position[1] + dy)};
+                if(TeamA_MoveValidator.isValidMove(state, turn, position, endCord)){
+                    result.add(createNewState(position, endCord, piece, false));
+                }
+            }
+        }
+        return result;
     }
 
 

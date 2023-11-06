@@ -8,20 +8,18 @@ public class TeamA_MoveValidator {
         this.board = board;
     }
 
-    public boolean isValidMove(Color color, Piece[] move){
-        return isValidMove(color==Piece.TEAM2, move);
-    }
-
     public Piece[][] getBoard(){
         return this.board;
     }
-    
+
     private static byte abs(int num){
         return (byte) Math.abs(num);
     }
 
-    public static boolean isValidMove(Piece[][] board, Color playerColor, Piece start, byte[] startCord, Piece end, byte[] endCord){
+    public static boolean isValidMove(Piece[][] board, Color playerColor, byte[] startCord, byte[] endCord){
 
+        Piece start = board[startCord[0]][startCord[1]];
+        Piece end = board[endCord[0]][endCord[1]];
         if(!start.getPlayer().equals(playerColor)) return false;
 
         else if (((endCord[0] < 0) || (endCord[0] > 7)) || ((endCord[1] < 0) || (endCord[1] > 7))) return false;
