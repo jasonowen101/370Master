@@ -46,6 +46,11 @@ public class GUI {
                 gameOver = checkGameOver();     //check to see if anybody has won
             } else{
                 //do something to reset game  (might need to sleep thread)
+                try{
+                    Thread.sleep(500);
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         }
 
