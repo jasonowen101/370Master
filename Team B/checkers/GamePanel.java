@@ -20,7 +20,8 @@ public class GamePanel extends JPanel {
 
 
     public GamePanel() {
-
+        BackgroundPanel boardPanelHolder = new BackgroundPanel(new Color(50, 50, 50, 90));
+        boardPanelHolder.setPreferredSize(new Dimension(550, 550));
         JPanel boardPanel = new JPanel(new GridLayout(BOARD_SIZE, BOARD_SIZE));
         squares = new CheckerSquare[BOARD_SIZE][BOARD_SIZE];
 
@@ -33,7 +34,8 @@ public class GamePanel extends JPanel {
             }
         }
 
-        add(boardPanel, BorderLayout.CENTER);
+        boardPanelHolder.add(boardPanel, BorderLayout.CENTER);
+        add(boardPanelHolder, BorderLayout.CENTER);
 
         JButton startGameButton = new JButton("Start Game");
         startGameButton.addActionListener(new ActionListener() {
@@ -77,8 +79,10 @@ public class GamePanel extends JPanel {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 if (row < 3 && (row + col) % 2 == 1) {
                     squares[row][col].toggleChecker(CheckerSquare.TEAM1);
+                    //squares[row][col].setIsKing(true); uncomment to test king graphics quickly
                 } else if (row > 4 && (row + col) % 2 == 1) {
                     squares[row][col].toggleChecker(CheckerSquare.TEAM2);
+                    //squares[row][col].setIsKing(true); uncomment to test king graphics quickly
                 }
             }
         }

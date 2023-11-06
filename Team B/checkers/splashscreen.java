@@ -2,24 +2,18 @@ package checkers;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class splashscreen extends JPanel {
     public splashscreen() {
         setLayout(new BorderLayout()); // Set the layout for this panel
 
         // Load the image
-        BufferedImage image = null;
-        URL url = null;
+        Image image = null;
         try {
-            url = new URL("https://drive.google.com/uc?id=18mgucp-j7PwEAcoGkLWFhubJav_YBWTM"); //so apparently to view image from googel drive u gotta have url in a certain format
-            image = ImageIO.read(url);
-        } catch (MalformedURLException ex) {
-            System.out.println("Malformed URL");
-        } catch (IOException iox) {
+            image = ImageIO.read(new File("Team B/images/ultimaterobotcheckers7.jpeg"));  //"https://drive.google.com/uc?id=18mgucp-j7PwEAcoGkLWFhubJav_YBWTM"
+        } catch (IOException e) {
             System.out.println("Can not load file");
         }
         JLabel imageLabel = new JLabel(new ImageIcon(image));
