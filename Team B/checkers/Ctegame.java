@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.URL;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class Ctegame extends JFrame {
         //This creates an image that will be used as the background to the game
         Image img = null;
         try{
-            img = ImageIO.read(new URL("https://drive.google.com/uc?id=17X4N_GoW9BAyFgYueQHDUFTvz5GwweyC"));
+            img = ImageIO.read(new File("Team B/images/METAL_BG.jpg")); //"https://drive.google.com/uc?id=17X4N_GoW9BAyFgYueQHDUFTvz5GwweyC"
         } catch(IOException e) {
             e.printStackTrace();
         }  

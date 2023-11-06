@@ -2,8 +2,8 @@ package checkers;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class splashscreen extends JPanel {
     public splashscreen() {
@@ -12,7 +12,7 @@ public class splashscreen extends JPanel {
         // Load the image
         Image image = null;
         try {
-            image = ImageIO.read(new URL("https://drive.google.com/uc?id=18mgucp-j7PwEAcoGkLWFhubJav_YBWTM"));
+            image = ImageIO.read(new File("Team B/images/ultimaterobotcheckers7.jpeg"));  //"https://drive.google.com/uc?id=18mgucp-j7PwEAcoGkLWFhubJav_YBWTM"
         } catch (IOException e) {
             System.out.println("Can not load file");
         }
