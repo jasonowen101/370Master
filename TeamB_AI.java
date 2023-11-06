@@ -61,11 +61,16 @@ public class TeamB_AI implements AI {
 
     public CheckerSquare[] getMove()
     {
-        CheckerSquare[] moveToPerform = {
-            perform.getPieceFrom(),
-            perform.getPieceTo()
+        // made two arrays of ints, one of where our piece started from and one where our piece is going to
+        int[] startingArray = perform.getPieceFrom();
+        int[] endingArray = perform.getPieceTo();
 
-        };
+        // made two CheckerSquares, one of where our piece started from and one where our piece is going to
+        CheckerSquare startSquare = checkers[startingArray[0]][startingArray[1]];
+        CheckerSquare endSquare = checkers[endingArray[0]][endingArray[1]];
+
+        // made an array of CheckerSquares that will be returned
+        CheckerSquare[] moveToPerform = new CheckerSquare[] {startSquare, endSquare};
         
         return moveToPerform;
     } 
