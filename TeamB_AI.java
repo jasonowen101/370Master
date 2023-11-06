@@ -118,11 +118,11 @@ public class TeamB_AI implements AI {
     }
 
 	// check if position is safe
-    private static boolean isSafe(int r, int c) {
-		return !(isEnemy(r-1, c-1) && isEmpty(r+1, c+1))
-                || (isEnemy(r-1, c+1) && isEmpty(r+1, c-1))
-                || (isEnemyKing(r+1, c-1) && isEmpty(r-1, c+1))
-                || (isEnemyKing(r+1, c+1) && isEmpty(r-1, c-1));
+    private static boolean isSafe(int r, int c, boolean isLeft, boolean isDown) {
+		return !(isEnemy(r-1, c-1) && (isEmpty(r+1, c+1) || (isLeft && !isDown)))
+                || (isEnemy(r-1, c+1) && (isEmpty(r+1, c-1) || (!isLeft && !isDown)))
+                || (isEnemyKing(r+1, c-1) && (isEmpty(r-1, c+1) || (isLeft && isDown)))
+                || (isEnemyKing(r+1, c+1) && (isEmpty(r-1, c-1) || (!isLeft && isDown)));
     }
 	
 	// check if position will king a piece
@@ -158,7 +158,7 @@ public class TeamB_AI implements AI {
 			// check if position results in a king, is safe, or is unsafe
 			if(isKingSpace(r-1, c-1) && !piece.isKing()) {
 				moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r-1][c-1]}, KING_VALUE));
-			} else if(isSafe(r-1, c-1)) {
+			} else if(isSafe(r-1, c-1, true, false)) {
 				moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r-1][c-1]}, MOVE_VALUE));
 			} else {
 				moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r-1][c-1]}, UNSAFE_MOVE_VALUE));
@@ -169,7 +169,7 @@ public class TeamB_AI implements AI {
 			// check if position results in a king, is safe, or is unsafe
 			if(isKingSpace(r-1, c+1) && !piece.isKing()) {
 				moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r-1][c+1]}, KING_VALUE));
-			} else if(isSafe(r-1, c+1)) {
+			} else if(isSafe(r-1, c+1, false, false)) {
 				moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r-1][c+1]}, MOVE_VALUE));
 			} else {
 				moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r-1][c+1]}, UNSAFE_MOVE_VALUE));
@@ -188,7 +188,7 @@ public class TeamB_AI implements AI {
 			// check if diagonal down-left is empty
 			if (isEmpty(r+1, c-1)) {
 				// check if position is safe
-				if(isSafe(r+1, c-1)) {
+				if(isSafe(r+1, c-1, true, true)) {
 					moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r+1][c-1]}, MOVE_VALUE));
 				} else {
 					moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r+1][c-1]}, UNSAFE_MOVE_VALUE));
@@ -197,7 +197,7 @@ public class TeamB_AI implements AI {
 			// check if diagonal down-right is empty
 			if (isEmpty(r+1, c+1)) {
 				// check if position is safe
-				if(isSafe(r+1, c+1)) {
+				if(isSafe(r+1, c+1, false, true)) {
 					moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r+1][c+1]}, MOVE_VALUE));
 				} else {
 					moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r+1][c+1]}, UNSAFE_MOVE_VALUE));
