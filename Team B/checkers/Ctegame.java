@@ -17,6 +17,8 @@ public class Ctegame extends JFrame {
 
     static splashscreen splash = new splashscreen(); //this is the splashscreen panel that displays on game launch
 
+    static EndScreen endScreen = new EndScreen();
+
     static CardLayout cl = new CardLayout();        //this layout contains the different panels (menu, game, etc.)
     static BackgroundPanel cards;                   //to contain the panels as cards
     
@@ -38,6 +40,7 @@ public class Ctegame extends JFrame {
         cards.add(mp, "MenuPanel");
         cards.add(hp, "HelpPanel");
         cards.add(gp, "GamePanel");
+        cards.add(endScreen, "EndScreen");
         
         add(cards); // adding the panel with cardlayout in JFrame
         setTitle("Checkers");
