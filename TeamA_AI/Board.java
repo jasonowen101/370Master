@@ -133,5 +133,32 @@ public class Board {
         return ((pieceCount.get(Piece.TEAM1) == 0) || (pieceCount.get(Piece.TEAM2) == 0));
     }
 
+    public ArrayList<Board> getSuccessors(){
+        ArrayList<Board> successors = getSuccessors(true);
+        successors.addAll(getSuccessors(false));
+
+        return successors;
+    }
+
+    public ArrayList<Board> getSuccessors(boolean jump){
+        ArrayList<Board> jumpResult = new ArrayList<>();
+
+        for(byte x = 0; x < this.state.length; x++){
+            for(byte y = 0; y < this.state[x].length; y++){
+                if(this.state[x][y] != null) if (this.state[x][y].getPlayer() == this.turn){
+                    jumpResult.addAll(getSuccessors(this.state[x][y], new byte[]{x,y} , jump));
+                }
+            }
+        }
+        return jumpResult;
+    }
+
+    public ArrayList<Board> getSuccessors(Piece piece, byte[] position, boolean jump){
+        if(piece.getPlayer() != this.turn) return new ArrayList<Board>();
+        if(jump) return jumpSuccessors(piece, position);
+        else return nonJumpSuccessors(piece, position);
+    }
+
+
 
 }
