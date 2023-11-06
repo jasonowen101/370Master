@@ -26,6 +26,14 @@ public class TeamB_AI implements AI {
     private static CheckerSquare[][] checkers = GamePanel.getSquares();
     private static Move perform;
 
+    // constructor for AI
+    public TeamB_AI(Color team) {
+        if(team.equals(Color.BLUE))
+            enemyColor = Color.YELLOW;
+        else
+            enemyColor = Color.BLUE;
+    }
+
     public static void mainAI() 
     {
         
@@ -61,6 +69,8 @@ public class TeamB_AI implements AI {
 
     public CheckerSquare[] getMove()
     {
+        mainAI();
+
         // made two arrays of ints, one of where our piece started from and one where our piece is going to
         int[] startingArray = perform.getPieceFrom();
         int[] endingArray = perform.getPieceTo();
