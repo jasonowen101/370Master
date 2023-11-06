@@ -117,7 +117,7 @@ public class TeamB_AI implements AI {
         return isEmpty(r1, c1) && isEnemy(r2, c2);
     }
 
-	// check if position is safe
+	// check if position is safe. isLeft and isDown are for indicating the direction a piece is moving
     private static boolean isSafe(int r, int c, boolean isLeft, boolean isDown) {
 		return !(isEnemy(r-1, c-1) && (isEmpty(r+1, c+1) || (isLeft && !isDown)))
                 || (isEnemy(r-1, c+1) && (isEmpty(r+1, c-1) || (!isLeft && !isDown)))
