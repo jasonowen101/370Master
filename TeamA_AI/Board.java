@@ -124,6 +124,14 @@ public class Board {
         return this.pieceCount.get(player) + this.kingCount.get(player);
     }
 
-    
+
+    public Color getTurn() {
+        return turn;
+    }
+
+    public boolean isGameOver(){
+        return ((pieceCount.get(Piece.TEAM1) == 0) || (pieceCount.get(Piece.TEAM2) == 0));
+    }
+
 
 }

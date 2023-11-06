@@ -1,167 +1,82 @@
 import java.awt.Color;
 
-import checkers.CheckerSquare;
-
 public class TeamA_MoveValidator {
 
-    private CheckerSquare[][] board;
+    private Piece[][] board;
 
-    public TeamA_MoveValidator(CheckerSquare[][] board){
+    public TeamA_MoveValidator(Piece[][] board){
         this.board = board;
     }
 
-    public boolean isValidMove(Color color, CheckerSquare[] move){
-        return isValidMove(color==CheckerSquare.TEAM2, move);
+    public boolean isValidMove(Color color, Piece[] move){
+        return isValidMove(color==Piece.TEAM2, move);
     }
 
-    public CheckerSquare[][] getBoard(){
+    public Piece[][] getBoard(){
         return this.board;
     }
+    
+    private static byte abs(int num){
+        return (byte) Math.abs(num);
+    }
 
-    public  boolean isValidMove(boolean blueTurn, CheckerSquare[] move) {
-        CheckerSquare startPiece = move[0];
-        CheckerSquare endPiece = move[1];
-        /*
-         * Moveset Rules:
-         * Must be in bounds
-         * Must be diagonals {Only Black Tiles}
-         * Jumps: Jump over opponent's tile(s), landing point follows ruleset
-         * Normal pieces can only move forward, kings can also move back
-        */
+    public static boolean isValidMove(Piece[][] board, Color playerColor, Piece start, byte[] startCord, Piece end, byte[] endCord){
 
-        /* Check order:
-         * Piece of Correct Team?
-         * Within Bounds?
-         * Is Diagonal?
-         * Is Within Range?
-         * Is Open Target?
-         * Move or Jump?
-         * King? => Forward move?
-         */
+        if(!start.getPlayer().equals(playerColor)) return false;
 
-         //changed player1turn and the string "player1" to isBlueTurn check and "blue"
-        if((blueTurn == true) ^ (startPiece.getCheckerColor().equals(Color.BLUE))){ // IF Piece is not yours
-            // (Turn = P1 AND Piece = P2) OR (Turn = P2 AND Piece = P1) {^ == XOR}
-            System.out.println("1");
-            return false;
-        }else if(((endPiece.getCol() < 0) || (endPiece.getCol() >= 8)) // IF X out of bounds {0-7}
-            || // OR
-            ((endPiece.getRow() < 0) || (endPiece.getRow() >= 8))){ // IF Y out of bounds {0-7}
-            System.out.println("2");
-            return false;
-        }else if(Math.abs(endPiece.getCol() - startPiece.getCol()) != Math.abs(endPiece.getRow() - startPiece.getRow())
-        || Math.abs(endPiece.getCol() - startPiece.getCol()) > 2 ){
-            /*
-             * Move within Bounds, but not Diagonal
-             * |OR|
-             * Move within Bounds, is Diagonal, but is impossibly far {Longer than jump; 3+ spaces away}
-             *
-             * !!! NOT DESIGNED to handle Multijumps !!!
-             */
-            System.out.println("3");
-             return false;
-        }
-        // else if(!endPiece.getCheckerColor().equals(null)){ // IF Target tile is not empty
-        //         return false;
-        // }
+        else if (((endCord[0] < 0) || (endCord[0] > 7)) || ((endCord[1] < 0) || (endCord[1] > 7))) return false;
+
+        else if((abs(endCord[0] - startCord[0]) != abs(endCord[1] - startCord[1])) || abs(endCord[0] - startCord[0]) > 2) return false;
+
         else{
-            if(startPiece.isKing() == true){// 1st Conditional Branch [King Vs Pawn]
-                // If Piece is King => Don't need to worry about "Forward" direction
-                if(Math.abs(endPiece.getCol() - startPiece.getCol()) == 2){
-                    // Is JUMP
-                    int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
-                    int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                    CheckerSquare jumpedPiece = board[jumpedY][jumpedX];
-                    if(jumpedPiece.getCheckerColor() != null){
-                        if(isValidMove(blueTurn, new CheckerSquare[] {startPiece, jumpedPiece})){
-                            checkPromote(endPiece, startPiece);
-                            jumpedPiece.toggleChecker(null);
-                            return true;
-                        }
+            if(start.isKing()){
+                if(abs(endCord[0] - startCord[0]) == 2){
+                    Piece jumped = board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)];
+                    if (jumped != null) if (jumped.getPlayer().equals(Board.oppositeColor(playerColor))){
+                        board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)] = null;
+                        checkPromote(start, end, endCord);
+                        return true;
                     }
-                    System.out.println("3");
-                    return false;
-                }else{
-                    // Is MOVE
-                    checkPromote(endPiece, startPiece);
-                    return true;
+                    else return false;
                 }
             }else{
-                // Piece is NOT King
-                if(blueTurn == true){ // 2nd Conditional Branch [Determines Forward direction]
-                    if(endPiece.getRow() - startPiece.getRow() > 0){
-                        // Is BACKWARD
-                        System.out.println("start" + startPiece.getRow()+ "end" + endPiece.getRow());
-                        System.out.println("5");
+                if(start.getPlayer().equals(Piece.TEAM2)){
+                    if(endCord[1] - startCord[1] > 0){
                         return false;
-                    }else{
-                        // FORWARD
-                        if(Math.abs(endPiece.getCol() - startPiece.getCol()) == 2){
-                            // Is JUMP
-                            int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
-                            int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                            CheckerSquare jumpedPiece = board[jumpedY][jumpedX];
-                            if(jumpedPiece.getCheckerColor() != null) {
-                                if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
-                                    // Trying to jump friendly Piece
-                                    System.out.println("6");
-                                    return false;
-                                }else{
-                                    jumpedPiece.toggleChecker(null);
-                                    checkPromote(endPiece, startPiece);
-
-                                    return true;
-                                }
-                            }
-                            return false;
-                        }else{
-                            // Is MOVE
-                            checkPromote(endPiece, startPiece);
+                    } else {
+                        if(abs(endCord[0] - startCord[0]) == 2){
+                            Piece jumped = board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)];
+                            if (jumped != null) if (jumped.getPlayer().equals(Board.oppositeColor(playerColor))){
+                            board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)] = null;
+                            checkPromote(start, end, endCord);
                             return true;
+                        }
+                        else return false;
                         }
                     }
                 }else{
-                    // Player 2
-                    if(endPiece.getRow() - startPiece.getRow() < 0){
-                        // Is BACKWARD
-                        System.out.println("7");
+                    if(endCord[1] - startCord[1] < 0){
                         return false;
-                    }else{
-                        // FORWARD
-                        if(Math.abs(endPiece.getCol() - startPiece.getCol()) == 2){
-                            // Is JUMP
-                            int jumpedX = startPiece.getCol() + ((endPiece.getCol() - startPiece.getCol()) / 2);
-                            int jumpedY = startPiece.getRow() + ((endPiece.getRow() - startPiece.getRow()) / 2);
-                            CheckerSquare jumpedPiece = board[jumpedY][jumpedX];
-                            if(jumpedPiece.getCheckerColor() != null) {
-                                if(jumpedPiece.getCheckerColor().equals(startPiece.getCheckerColor())){
-                                    // Trying to jump friendly Piece
-                                    System.out.println("8");
-                                    return false;
-                                }else{
-                                    jumpedPiece.toggleChecker(null);
-                                    checkPromote(endPiece, startPiece);
-
-                                    return true;
-                                }
-                            }
-                            return false;
-                        }else{
-                            // Is MOVE
-                            checkPromote(endPiece, startPiece);
+                    } else {
+                        if(abs(endCord[0] - startCord[0]) == 2){
+                            Piece jumped = board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)];
+                            if (jumped != null) if (jumped.getPlayer().equals(Board.oppositeColor(playerColor))){
+                            board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)] = null;
+                            checkPromote(start, end, endCord);
                             return true;
+                        }
+                        else return false;
                         }
                     }
                 }
             }
         }
-        //return false;// Failsafe return; shouldn't be reachable...
+
+
     }
-    //this check promote method not only checks for promote but also toggles the king status...it must be called during any valid move
-    private static void checkPromote(CheckerSquare endPiece, CheckerSquare startPiece){
-        endPiece.setIsKing(startPiece.isKing());
-        if(startPiece.getCheckerColor().equals(Color.BLUE) && (endPiece.getRow() == 0) || startPiece.getCheckerColor().equals(Color.YELLOW) && (endPiece.getRow() == 7)){
-            endPiece.setIsKing(true);
-        }
+    private static void checkPromote(Piece start, Piece end, byte[] position){
+        end.setKing(start.isKing());
+        if(start.getPlayer() == Piece.TEAM2 && position[1] == 0) start.promote();
+        else if(start.getPlayer() == Piece.TEAM1 && position[1] == 7) start.promote();
     }
 }
