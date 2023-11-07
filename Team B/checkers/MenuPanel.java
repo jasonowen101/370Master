@@ -85,7 +85,9 @@ class MenuPanel extends JPanel {
         playerVsPlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                //Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                EndScreen.setWinner("draw");
+                Ctegame.cl.show(Ctegame.cards, "EndScreen");
                 GUI.gameMode = "pvp";
             }
         }); 

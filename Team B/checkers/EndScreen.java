@@ -1,8 +1,8 @@
 package checkers;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 
 //EndScreens is a parent class
 public class EndScreen extends JPanel{
-    private JPanel titlePanel = new JPanel();
+    private static JPanel titlePanel = new JPanel();
     private static JLabel winnerLabel = new JLabel();
-    private JPanel imgPanel = new JPanel();
+    private static JPanel imgPanel = new JPanel();
     private static JLabel imgLabel = new JLabel();
     private static Random rand = new Random();
 
@@ -24,8 +24,10 @@ public class EndScreen extends JPanel{
     private static Image[] draw = new Image[] {readImg("draw1.jpeg"), readImg("draw2.jpeg"), readImg("draw3.jpeg")};
 
     private static Image readImg(String fileName) {
+        BufferedImage img;
         try{
-            return ImageIO.read(new File("Team B/images/"+ fileName));
+            img = ImageIO.read(new File("Team B/images/"+ fileName));
+            return img.getScaledInstance(Ctegame.getFrameWidth() - titlePanel.getWidth(), Ctegame.getFrameHeight() - titlePanel.getHeight(), Image.SCALE_SMOOTH);
         } catch(IOException e) {
             System.out.println(fileName);
             return null;
@@ -33,12 +35,13 @@ public class EndScreen extends JPanel{
     }
 
     public EndScreen() {
-        titlePanel.setBackground(Color.BLACK);
+        titlePanel.setBackground(new Color(0, 0, 0, 175));
 
-        winnerLabel.setFont(new Font("Roboto", Font.BOLD, 36));
-        winnerLabel.setForeground(Color.BLUE);
+        winnerLabel.setFont(new Font("Roboto", Font.BOLD, 39));
+        winnerLabel.setForeground(Color.WHITE);
         titlePanel.add(winnerLabel);
         
+        imgPanel.setBackground(new Color(0, 0, 0, 0));
         imgPanel.add(imgLabel);
 
         add(titlePanel);
@@ -53,7 +56,7 @@ public class EndScreen extends JPanel{
         } else if (winner == "yellow") {
             winnerLabel.setText("Yellow has won!");
         } else {
-            winnerLabel.setText("It's a draw");
+            winnerLabel.setText("It's a draw!");
         }
     }
     
