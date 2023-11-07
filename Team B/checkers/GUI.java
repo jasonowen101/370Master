@@ -134,16 +134,22 @@ public class GUI {
             // Call win panel with blue as victor
             GamePanel.setTurnLabelText("Yellow Wins!");       //This will do for now but a victory panel would be nice
             //set endscreen winner and show
+            EndScreen.setWinner("yellow");
+            Ctegame.cl.show(Ctegame.cards, "EndScreen");
             return true;
         } else if (activeYellowPiece == 0 && drawMoves <= 40) {
             // Call win panel with yellow as victor
             GamePanel.setTurnLabelText("Blue Wins!");     //^^^^
             //set endscreen winner and show
+            EndScreen.setWinner("blue");
+            Ctegame.cl.show(Ctegame.cards, "EndScreen");
             return true;
         } else if (drawMoves > 40){
             // Call draw panel
             GamePanel.setTurnLabelText("It's a draw!");     //^^^^^
             //set endscreen winner and show
+            EndScreen.setWinner("draw");
+            Ctegame.cl.show(Ctegame.cards, "EndScreen");
             return true;
         }
         return false;

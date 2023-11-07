@@ -3,34 +3,49 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 //EndScreens is a parent class
 public class EndScreen extends JPanel{
-    JPanel titlePanel;
-    JLabel winnerLabel;
-    JPanel imgPanel;
-    JLabel imgLabel;
+    private JPanel titlePanel = new JPanel();
+    private static JLabel winnerLabel = new JLabel();
+    private JPanel imgPanel = new JPanel();
+    private static JLabel imgLabel = new JLabel();
+    private static Random rand = new Random();
 
-    Image[] yellowWins = new Image[] {}
+    private static Image[] yellowWins = new Image[] {readImg("bigolrobotfight.jpg"), readImg("yellow win1.jpeg"), readImg("yellow win2.jpeg"), readImg("yellow win3.jpeg")};
+    private static Image[] blueWins = new Image[] {readImg("blue win1.jpeg"), readImg("blue win2.jpeg"), readImg("blue win3.jpeg")};
+    private static Image[] draw = new Image[] {readImg("draw1.jpeg"), readImg("draw2.jpeg"), readImg("draw3.jpeg")};
 
+    private static Image readImg(String fileName) {
+        try{
+            return ImageIO.read(new File("Team B/images/"+ fileName));
+        } catch(IOException e) {
+            System.out.println(fileName);
+            return null;
+        }
+    }
 
     public EndScreen() {
-        titlePanel.setLayout(new BorderLayout());
         titlePanel.setBackground(Color.BLACK);
 
         winnerLabel.setFont(new Font("Roboto", Font.BOLD, 36));
         winnerLabel.setForeground(Color.BLUE);
         titlePanel.add(winnerLabel);
         
+        imgPanel.add(imgLabel);
+
         add(titlePanel);
         add(imgPanel);
     }
 
-    public void setWinner(String winner) {
+    public static void setWinner(String winner) {
         Image img = getImg(winner);
         imgLabel.setIcon(new ImageIcon(img));
         if(winner == "blue"){
@@ -42,8 +57,19 @@ public class EndScreen extends JPanel{
         }
     }
     
-    public Image getImg(String winner) {
-
+    private static Image getImg(String winner) {
+        switch(winner) {
+            case "blue":
+                return randImg(blueWins);
+            case "yellow":
+                return randImg(yellowWins);
+            default: 
+                return randImg(draw);
+        }
+    }
+    
+    private static Image randImg(Image[] imageArray) {
+        return imageArray[rand.nextInt(imageArray.length)];
     }
 }
 
