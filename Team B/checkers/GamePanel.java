@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
 
 
     public GamePanel() {
-        BackgroundPanel boardPanelHolder = new BackgroundPanel(new Color(50, 50, 50, 90));
+        BackgroundPanel boardPanelHolder = new BackgroundPanel(new Color(0, 0, 0, 90));
         boardPanelHolder.setPreferredSize(new Dimension(550, 550));
         JPanel boardPanel = new JPanel(new GridLayout(BOARD_SIZE, BOARD_SIZE));
         squares = new CheckerSquare[BOARD_SIZE][BOARD_SIZE];
@@ -63,15 +63,29 @@ public class GamePanel extends JPanel {
             }
         });
 
+        configureButton(startGameButton);
+        configureButton(clearBoardButton);
+        configureButton(helpButton);
+
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(125, 125, 125));
         buttonPanel.add(startGameButton);
         buttonPanel.add(clearBoardButton);
         buttonPanel.add(helpButton);
+        turn.setForeground(Color.WHITE);
         buttonPanel.add(turn);
 
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    private void configureButton(JButton button) {
+        button.setAlignmentX(Component.CENTER_ALIGNMENT); // Centered the button horizontally
+        button.setFont(new Font("Arial", Font.BOLD, 18)); // font and size
+        button.setForeground(Color.WHITE); // text color to white
+        button.setBackground(Color.BLACK); //background color to black
+        button.setFocusPainted(false);
+
+    }
 
     private void startGame() {
         clearBoard();

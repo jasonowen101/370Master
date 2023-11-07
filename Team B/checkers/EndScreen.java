@@ -1,13 +1,17 @@
 package checkers;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,6 +22,9 @@ public class EndScreen extends JPanel{
     private static JPanel imgPanel = new JPanel();
     private static JLabel imgLabel = new JLabel();
     private static Random rand = new Random();
+
+    private static JButton playAgainButton = new JButton("Play Again");
+    private static JButton menuButton = new JButton(" Menu ");
 
     private static Image[] yellowWins = new Image[] {readImg("bigolrobotfight.jpg"), readImg("yellow win1.jpeg"), readImg("yellow win2.jpeg"), readImg("yellow win3.jpeg")};
     private static Image[] blueWins = new Image[] {readImg("blue win1.jpeg"), readImg("blue win2.jpeg"), readImg("blue win3.jpeg")};
@@ -34,6 +41,14 @@ public class EndScreen extends JPanel{
         }
     }
 
+    private void configureButton(JButton button) {
+        button.setAlignmentX(Component.CENTER_ALIGNMENT); // Centered the button horizontally
+        button.setFont(new Font("Arial", Font.BOLD, 18)); // font and size
+        button.setForeground(Color.WHITE); // text color to white
+        button.setBackground(Color.BLACK); //background color to black
+        button.setFocusPainted(false);
+    }
+
     public EndScreen() {
         titlePanel.setBackground(new Color(0, 0, 0, 175));
 
@@ -41,6 +56,26 @@ public class EndScreen extends JPanel{
         winnerLabel.setForeground(Color.WHITE);
         titlePanel.add(winnerLabel);
         
+        playAgainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                Ctegame.cl.show(Ctegame.cards, "GamePanel");
+            }
+        });
+        configureButton(playAgainButton);
+        titlePanel.add(playAgainButton);
+
+        menuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                Ctegame.cl.show(Ctegame.cards, "MenuPanel");
+            }
+        });
+        configureButton(menuButton);
+        titlePanel.add(menuButton);
+
         imgPanel.setBackground(new Color(0, 0, 0, 0));
         imgPanel.add(imgLabel);
 
@@ -52,11 +87,11 @@ public class EndScreen extends JPanel{
         Image img = getImg(winner);
         imgLabel.setIcon(new ImageIcon(img));
         if(winner == "blue"){
-            winnerLabel.setText("Blue has won!");
+            winnerLabel.setText("  Blue has won!  ");
         } else if (winner == "yellow") {
-            winnerLabel.setText("Yellow has won!");
+            winnerLabel.setText("  Yellow has won!  ");
         } else {
-            winnerLabel.setText("It's a draw!");
+            winnerLabel.setText("  It's a draw!  ");
         }
     }
     
