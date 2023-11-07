@@ -31,12 +31,12 @@ public class Move {
         this.score = score;
     }
 
-    public CheckerSquare[] getPieceTo()
+    public int[] getPieceTo()
     {
         return PieceTo;
     }
 
-    public CheckerSquare[] getPieceFrom()
+    public int[] getPieceFrom()
     {
         return PieceFrom;
     }

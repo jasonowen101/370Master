@@ -1,6 +1,5 @@
 
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
@@ -22,7 +21,6 @@ public class TeamB_AI implements AI {
     final static int MOVE_VALUE = 2;
     final static int UNSAFE_MOVE_VALUE = 1;
 
-    private int sumOfScores = 0; //need to make addToScore method
     private static CheckerSquare[][] checkers = GamePanel.getSquares();
     private static Move perform;
 
