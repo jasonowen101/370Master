@@ -31,8 +31,6 @@ public class TeamA_MoveValidator {
                 if(abs(endCord[0] - startCord[0]) == 2){
                     Piece jumped = board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)];
                     if (jumped != null) if (jumped.getPlayer().equals(Board.oppositeColor(playerColor))){
-                        board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)] = null;
-                        checkPromote(start, end, endCord);
                         return true;
                     }
                     else return false;
@@ -45,8 +43,6 @@ public class TeamA_MoveValidator {
                         if(abs(endCord[0] - startCord[0]) == 2){
                             Piece jumped = board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)];
                             if (jumped != null) if (jumped.getPlayer().equals(Board.oppositeColor(playerColor))){
-                            board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)] = null;
-                            checkPromote(start, end, endCord);
                             return true;
                         }
                         else return false;
@@ -59,8 +55,6 @@ public class TeamA_MoveValidator {
                         if(abs(endCord[0] - startCord[0]) == 2){
                             Piece jumped = board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)];
                             if (jumped != null) if (jumped.getPlayer().equals(Board.oppositeColor(playerColor))){
-                            board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)] = null;
-                            checkPromote(start, end, endCord);
                             return true;
                         }
                         else return false;
@@ -69,6 +63,7 @@ public class TeamA_MoveValidator {
                 }
             }
         }
+        return false;
 
 
     }

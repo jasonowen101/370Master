@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import checkers.CheckerSquare;
@@ -13,6 +12,9 @@ public class Board {
 
     public HashMap<Color, Byte> pieceCount;
     public HashMap<Color, Byte> kingCount;
+
+    private byte[] fromPos;
+    private byte[] toPos;
 
     public Board(){
         state = new Piece[8][8];
@@ -124,15 +126,6 @@ public class Board {
         return this.pieceCount.get(player) + this.kingCount.get(player);
     }
 
-
-    public Color getTurn() {
-        return turn;
-    }
-
-    public boolean isGameOver(){
-        return ((pieceCount.get(Piece.TEAM1) == 0) || (pieceCount.get(Piece.TEAM2) == 0));
-    }
-
     public ArrayList<Board> getSuccessors(){
         ArrayList<Board> successors = getSuccessors(true);
         successors.addAll(getSuccessors(false));
@@ -171,6 +164,87 @@ public class Board {
             }
         }
         return result;
+    }
+
+    private ArrayList<Board> jumpSuccessors(Piece piece, byte[] position){
+        ArrayList<Board> result = new ArrayList<>();
+
+        for(byte dx : new byte[]{-2,2}){
+            for(byte dy : new byte[]{-2,2}){
+                byte[] endCord = new byte[]{(byte) (position[0] + dx), (byte) (position[1] + dy)};
+                if(TeamA_MoveValidator.isValidMove(state, turn, position, endCord)){
+                    result.add(createNewState(position, endCord, piece, true));
+                }
+            }
+        }
+        return result;
+    }
+
+    private Board createNewState(byte[] oldPos, byte[] newPos, Piece piece, boolean jumped){
+        Board result = this.deepCopy();
+
+        result.pieceCount = new HashMap<>(pieceCount);
+        result.kingCount = new HashMap<>(kingCount);
+
+        boolean rankUp = false;
+        if(rankUp(piece.getPlayer(), newPos)){
+            piece = new Piece(turn, true);
+            rankUp = true;
+
+            result.kingCount.replace(piece.getPlayer(), (byte) (result.kingCount.get(piece.getPlayer()) + 1));
+        }
+        result.state[oldPos[0]][oldPos[1]] = null;
+        result.state[newPos[0]][newPos[1]] = piece;
+
+        result.fromPos = oldPos;
+        result.toPos = newPos;
+
+        result.turn = piece.getOpposite();
+
+        if (jumped){
+            byte[] middlePos = new byte[] {(byte) (oldPos[0] + ((newPos[0] - oldPos[0])/2)), (byte) (oldPos[1] + ((newPos[1] - oldPos[1])/2))};
+            if (result.state[middlePos[0]][middlePos[1]].isKing()){
+                result.kingCount.replace(result.turn, (byte) (result.kingCount.get(result.turn) - 1));
+            }
+            result.state[middlePos[0]][middlePos[1]] = null;
+            result.pieceCount.replace(result.turn, (byte) (result.pieceCount.get(result.turn) - 1));
+        }
+        return result;
+    }
+
+
+    private boolean rankUp(Color turn, byte[] position){
+        if(turn.equals(Piece.TEAM2) && position[1] == 0) return true;
+        else if(turn.equals(Piece.TEAM1) && position[1] == 7) return true;
+        return false;
+    }
+
+    public byte[] getFromPos() {
+        return this.fromPos;
+    }
+
+    public byte getKingCount(Color turn) {
+        return this.kingCount.get(turn);
+    }
+
+    public byte getPieceCount(Color turn) {
+        return this.pieceCount.get(turn);
+    }
+
+    public Piece[][] getState() {
+        return state;
+    }
+
+    public byte[] getToPos() {
+        return toPos;
+    }
+
+    public Color getTurn() {
+        return turn;
+    }
+
+    public boolean isGameOver(){
+        return ((pieceCount.get(Piece.TEAM1) == 0) || (pieceCount.get(Piece.TEAM2) == 0));
     }
 
 
