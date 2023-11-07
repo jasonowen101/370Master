@@ -152,6 +152,9 @@ public class Board {
         else return nonJumpSuccessors(piece, position);
     }
 
+    /*
+     * future of regular move
+     */
     private ArrayList<Board> nonJumpSuccessors(Piece piece, byte[] position){
         ArrayList<Board> result = new ArrayList<>();
 
@@ -166,6 +169,9 @@ public class Board {
         return result;
     }
 
+    /*
+     * futures with jump action
+     */
     private ArrayList<Board> jumpSuccessors(Piece piece, byte[] position){
         ArrayList<Board> result = new ArrayList<>();
 
@@ -180,16 +186,17 @@ public class Board {
         return result;
     }
 
+    /*
+     * creates the next instance of valid moves to calculate
+     */
     private Board createNewState(byte[] oldPos, byte[] newPos, Piece piece, boolean jumped){
         Board result = this.deepCopy();
 
         result.pieceCount = new HashMap<>(pieceCount);
         result.kingCount = new HashMap<>(kingCount);
 
-        boolean rankUp = false;
         if(rankUp(piece.getPlayer(), newPos)){
             piece = new Piece(turn, true);
-            rankUp = true;
 
             result.kingCount.replace(piece.getPlayer(), (byte) (result.kingCount.get(piece.getPlayer()) + 1));
         }
@@ -213,6 +220,9 @@ public class Board {
     }
 
 
+    /*
+     * returns true if a piece is at the spot to rank up
+     */
     private boolean rankUp(Color turn, byte[] position){
         if(turn.equals(Piece.TEAM2) && position[1] == 0) return true;
         else if(turn.equals(Piece.TEAM1) && position[1] == 7) return true;
