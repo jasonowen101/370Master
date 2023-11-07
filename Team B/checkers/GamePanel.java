@@ -68,11 +68,11 @@ public class GamePanel extends JPanel {
         configureButton(helpButton);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(125, 125, 125));
+        buttonPanel.setBackground(new Color(200, 200, 200));
         buttonPanel.add(startGameButton);
         buttonPanel.add(clearBoardButton);
         buttonPanel.add(helpButton);
-        turn.setForeground(Color.WHITE);
+        turn.setForeground(Color.black);
         buttonPanel.add(turn);
 
         add(buttonPanel, BorderLayout.SOUTH);
