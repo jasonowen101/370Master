@@ -7,9 +7,7 @@ public class GUI {
     public static boolean gameOver = true;  //game is over when gameOver = true
     public static int drawMoves = 0;        //for check end
     public static boolean blueTurn;         //its blue's turn when blueTurn = true
-    
-    //this is where you can initialize bots...Jarvis will die =(...he's just here to see if things work
-    //public static BotBoi jarvis;
+    //Declare bots here
     public static TeamB_AI teamB;
 
     public static final int BOT_MOVE_DELAY = 1000;    //ms value of how long the bot move animation lasts
@@ -30,7 +28,6 @@ public class GUI {
 
         
         //CREATE BOTS HERE
-        //jarvis = new BotBoi(Color.YELLOW);
         teamB = new TeamB_AI(Color.YELLOW);
 
         CheckerSquare[] move = new CheckerSquare[2];  //The way our game works, a move is represented by an array containing 2 squares, the start and end respectively
