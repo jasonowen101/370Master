@@ -13,7 +13,12 @@ public class CheckerSquare extends JPanel {
         return isKing;
     }
 
+
     public void setIsKing(boolean king){
+        isKing = king;
+    }
+
+    public void setKing(boolean king){
         isKing = king;
     }
 
@@ -33,7 +38,7 @@ public class CheckerSquare extends JPanel {
         repaint(); //highlights or dehighlights the selected checker
     }
 
-    CheckerSquare(int row, int col) {
+    public CheckerSquare(int row, int col) {
         this.row = row;
         this.col = col;
         isKing = false;
@@ -76,7 +81,14 @@ public class CheckerSquare extends JPanel {
             }
         }
     }
-    
+
+    /**
+     * @param checkerColor the checkerColor to set
+     */
+    public void setCheckerColor(Color checkerColor) {
+        this.checkerColor = checkerColor;
+    }
+
     public Color getCheckerColor() {
         return checkerColor;
     }
