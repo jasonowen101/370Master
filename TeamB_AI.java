@@ -223,4 +223,18 @@ public class TeamB_AI implements AI {
 
         return perform;
     }
+
+    // vertically flips the supplied CheckerSquare[][] and returns it
+    private CheckerSquare[][] flipBoard(CheckerSquare[][] board) {
+        int length = board.length;
+        CheckerSquare[][] flippedBoard = new CheckerSquare[length][length];
+
+        for(int r = 0; r < length; r++) {
+            for(int c = 0; c < length; c++) {
+                flippedBoard[(length-1)-r][c] = board[r][c];
+            }
+        }
+
+        return flippedBoard;
+    }
 }
