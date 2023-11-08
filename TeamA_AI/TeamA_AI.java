@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+
+import checkers.CheckerSquare;
+
 import java.awt.Color;
 
 public class TeamA_AI {
@@ -11,6 +14,15 @@ public class TeamA_AI {
     public TeamA_AI(byte depth, Color player){
         this.depth = depth;
         this.player = player;
+    }
+
+    public CheckerSquare[] getMove(CheckerSquare[][] checkerBoard){
+        Board move = move(Board.InitialState(this.player, checkerBoard), this.player);
+
+        byte[] selectedPiece = move.getFromPos();
+        byte[] endPosition = move.getToPos();
+
+        return new CheckerSquare[] {checkerBoard[selectedPiece[0]][selectedPiece[1]], checkerBoard[endPosition[0]][endPosition[1]]};
     }
 
     public Board move(Board boardState, Color player){
