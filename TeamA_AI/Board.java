@@ -20,10 +20,13 @@ public class Board {
         state = new Piece[8][8];
     }
 
+    // Generic Getter method for opposite team's color
+    // Indifferent to underlying color system
     public static Color oppositeColor(Color color){
         return ((color == CheckerSquare.TEAM1) ? CheckerSquare.TEAM2 : CheckerSquare.TEAM1);
     }
 
+    
     public static Board InitialState(Color AIColor, CheckerSquare[][] boardState){
         Board board = new Board();
         board.turn = AIColor;
@@ -122,10 +125,12 @@ public class Board {
         }
     }
 
+    // Basic Score calculation [# of pieces for player]
     private int score(Color player){
         return this.pieceCount.get(player) + this.kingCount.get(player);
     }
 
+    // Builds valid move logic tree
     public ArrayList<Board> getSuccessors(){
         ArrayList<Board> successors = getSuccessors(true);
         successors.addAll(getSuccessors(false));
@@ -133,6 +138,8 @@ public class Board {
         return successors;
     }
 
+    // Helper method for getSuccessors()
+    // Splits logic to handle Moves and Jumps
     public ArrayList<Board> getSuccessors(boolean jump){
         ArrayList<Board> jumpResult = new ArrayList<>();
 
@@ -146,6 +153,8 @@ public class Board {
         return jumpResult;
     }
 
+    // Helper method for getSuccessors()
+    // ...
     private ArrayList<Board> getSuccessors(Piece piece, byte[] position, boolean jump){
         if(piece.getPlayer() != this.turn) return new ArrayList<Board>();
         if(jump) return jumpSuccessors(piece, position);
@@ -229,30 +238,37 @@ public class Board {
         return false;
     }
 
+    // Getter method for piece start position
     public byte[] getFromPos() {
         return this.fromPos;
     }
 
+    // Getter method for # of input team's king pieces
     public byte getKingCount(Color turn) {
         return this.kingCount.get(turn);
     }
 
+    // Getter method for # of input team's pieces
     public byte getPieceCount(Color turn) {
         return this.pieceCount.get(turn);
     }
 
+    // Getter method for current boardState
     public Piece[][] getState() {
         return state;
     }
 
+    // Getter method for piece end position
     public byte[] getToPos() {
         return toPos;
     }
 
+    // Getter method for current turn
     public Color getTurn() {
         return turn;
     }
 
+    // Basic GameOver check [Has a team lost all pieces?]
     public boolean isGameOver(){
         return ((pieceCount.get(Piece.TEAM1) == 0) || (pieceCount.get(Piece.TEAM2) == 0));
     }
