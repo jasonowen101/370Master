@@ -2,7 +2,7 @@ package checkers;
 
 import java.awt.Color;
 
-public class GUI {
+public class Checkers370 {
     public static String gameMode = null;   // 3 possible values, "pvp" (person vs person) "pvc" (person vs computer) "cvc" (computer vs computer)
     public static boolean gameOver = true;  //game is over when gameOver = true
     public static int drawMoves = 0;        //for check end
@@ -26,7 +26,6 @@ public class GUI {
             }
         } 
 
-        
         //CREATE BOTS HERE
         teamB = new TeamB_AI(Color.YELLOW);
 
