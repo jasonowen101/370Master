@@ -117,5 +117,3 @@ public class EndScreen extends JPanel{
         return imageArray[rand.nextInt(imageArray.length)];
     }
 }
-
-
