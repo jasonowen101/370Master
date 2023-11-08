@@ -42,7 +42,6 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startGame();
-                GUI.gameOver = false;
             }
         });
 
@@ -51,7 +50,6 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearBoard();
-                GUI.gameOver = true;
             }
         });
 
@@ -63,14 +61,25 @@ public class GamePanel extends JPanel {
             }
         });
 
+        JButton menuButton = new JButton("Menu");
+        menuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearBoard();
+                Ctegame.cl.show(Ctegame.cards, "MenuPanel");
+            }
+        });
+
         configureButton(startGameButton);
         configureButton(clearBoardButton);
+        configureButton(menuButton);
         configureButton(helpButton);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(200, 200, 200));
         buttonPanel.add(startGameButton);
         buttonPanel.add(clearBoardButton);
+        buttonPanel.add(menuButton);
         buttonPanel.add(helpButton);
         turn.setForeground(Color.black);
         buttonPanel.add(turn);
@@ -100,6 +109,7 @@ public class GamePanel extends JPanel {
                 }
             }
         }
+        GUI.gameOver = false;
     }
 
     private void clearBoard() {
@@ -113,6 +123,7 @@ public class GamePanel extends JPanel {
         CheckerSquareMouse.clearSelection();
         GUI.blueTurn = true;
         GamePanel.setTurnLabelText("Blue's turn");
+        GUI.gameOver = true;
     }
 
     private void showHelpDialog() {

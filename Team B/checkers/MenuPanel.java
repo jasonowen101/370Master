@@ -74,7 +74,7 @@ class MenuPanel extends JPanel {
     private void showPlayMenu(Component invoker) {
         JPopupMenu playMenu = new JPopupMenu();
         JMenuItem playerVsPlayer = new JMenuItem("Player1 vs Player2");
-        JMenuItem playerVsComputer = new JMenuItem("Play vs Computer");
+        JMenuItem playerVsComputer = new JMenuItem("Player vs Computer");
         JMenuItem computerVsComputer = new JMenuItem("Computer vs Computer");
 
         configureMenuItem(playerVsPlayer); // Configured dropdown item
