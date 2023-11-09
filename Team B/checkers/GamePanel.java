@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
 
 
     public GamePanel() {
-        BackgroundPanel boardPanelHolder = new BackgroundPanel(new Color(50, 50, 50, 90));
+        BackgroundPanel boardPanelHolder = new BackgroundPanel(new Color(0, 0, 0, 90));
         boardPanelHolder.setPreferredSize(new Dimension(550, 550));
         JPanel boardPanel = new JPanel(new GridLayout(BOARD_SIZE, BOARD_SIZE));
         squares = new CheckerSquare[BOARD_SIZE][BOARD_SIZE];
@@ -42,7 +42,6 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startGame();
-                GUI.gameOver = false;
             }
         });
 
@@ -51,7 +50,6 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearBoard();
-                GUI.gameOver = true;
             }
         });
 
@@ -63,15 +61,40 @@ public class GamePanel extends JPanel {
             }
         });
 
+        JButton menuButton = new JButton("Menu");
+        menuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearBoard();
+                Ctegame.cl.show(Ctegame.cards, "MenuPanel");
+            }
+        });
+
+        configureButton(startGameButton);
+        configureButton(clearBoardButton);
+        configureButton(menuButton);
+        configureButton(helpButton);
+
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(200, 200, 200));
         buttonPanel.add(startGameButton);
         buttonPanel.add(clearBoardButton);
+        buttonPanel.add(menuButton);
         buttonPanel.add(helpButton);
+        turn.setForeground(Color.black);
         buttonPanel.add(turn);
 
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    private void configureButton(JButton button) {
+        button.setAlignmentX(Component.CENTER_ALIGNMENT); // Centered the button horizontally
+        button.setFont(new Font("Arial", Font.BOLD, 18)); // font and size
+        button.setForeground(Color.WHITE); // text color to white
+        button.setBackground(Color.BLACK); //background color to black
+        button.setFocusPainted(false);
+
+    }
 
     private void startGame() {
         clearBoard();
@@ -86,6 +109,7 @@ public class GamePanel extends JPanel {
                 }
             }
         }
+        GUI.gameOver = false;
     }
 
     private void clearBoard() {
@@ -99,6 +123,7 @@ public class GamePanel extends JPanel {
         CheckerSquareMouse.clearSelection();
         GUI.blueTurn = true;
         GamePanel.setTurnLabelText("Blue's turn");
+        GUI.gameOver = true;
     }
 
     private void showHelpDialog() {

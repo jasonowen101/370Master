@@ -10,12 +10,23 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Ctegame extends JFrame {   
-    
+    static final int FRAME_WIDTH = 720;
+    public static int getFrameWidth() {
+        return FRAME_WIDTH;
+    }
+
+    static final int FRAME_HEIGHT = 640;
+    public static int getFrameHeight() {
+        return FRAME_HEIGHT;
+    }
+
     static MenuPanel mp = new MenuPanel();
     static HelpPanel hp = new HelpPanel();
     static GamePanel gp = new GamePanel();
 
     static splashscreen splash = new splashscreen(); //this is the splashscreen panel that displays on game launch
+
+    static EndScreen endScreen = new EndScreen();
 
     static CardLayout cl = new CardLayout();        //this layout contains the different panels (menu, game, etc.)
     static BackgroundPanel cards;                   //to contain the panels as cards
@@ -38,11 +49,12 @@ public class Ctegame extends JFrame {
         cards.add(mp, "MenuPanel");
         cards.add(hp, "HelpPanel");
         cards.add(gp, "GamePanel");
+        cards.add(endScreen, "EndScreen");
         
         add(cards); // adding the panel with cardlayout in JFrame
         setTitle("Checkers");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(720, 640);  //frame size
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);  //frame size
         setLocationRelativeTo(null);   //frame loads in center of screen
         setVisible(true);   // frame visibility
 
