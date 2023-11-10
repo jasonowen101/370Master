@@ -1,5 +1,3 @@
-package checkers;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -109,7 +107,7 @@ public class GamePanel extends JPanel {
                 }
             }
         }
-        GUI.gameOver = false;
+        Checkers370.gameOver = false;
     }
 
     private void clearBoard() {
@@ -121,9 +119,9 @@ public class GamePanel extends JPanel {
             }
         }
         CheckerSquareMouse.clearSelection();
-        GUI.blueTurn = true;
+        Checkers370.blueTurn = true;
         GamePanel.setTurnLabelText("Blue's turn");
-        GUI.gameOver = true;
+        Checkers370.gameOver = true;
     }
 
     private void showHelpDialog() {

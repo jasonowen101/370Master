@@ -1,5 +1,3 @@
-package checkers;
-
 import java.awt.Color;
 
 public class Checkers370 {

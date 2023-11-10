@@ -1,5 +1,3 @@
-package checkers;
-
 public class Move {
     int score;
     int[] PieceFrom = new int[1]; //uses values of existing boardstate

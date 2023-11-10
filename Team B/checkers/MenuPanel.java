@@ -1,5 +1,3 @@
-package checkers;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -86,7 +84,7 @@ class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
-                GUI.gameMode = "pvp";
+                Checkers370.gameMode = "pvp";
             }
         }); 
 
@@ -94,7 +92,7 @@ class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
-                GUI.gameMode = "pvc";
+                Checkers370.gameMode = "pvc";
             }
         });
 
@@ -102,7 +100,7 @@ class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
-                GUI.gameMode = "cvc";
+                Checkers370.gameMode = "cvc";
             }
         });
     

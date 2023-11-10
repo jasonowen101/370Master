@@ -1,5 +1,3 @@
-package checkers;
-
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,7 +31,7 @@ public class CheckerSquareMouse extends MouseAdapter {
             // Executes on left click
             if (e.getButton() == MouseEvent.BUTTON1) {
                 // Checks if no square is selected and the clicked square has a piece and that the piece matches turn color
-                if(selectedSquare == null && ((square.getCheckerColor() == Color.BLUE) == GUI.blueTurn) && square.getCheckerColor() != null) {
+                if(selectedSquare == null && ((square.getCheckerColor() == Color.BLUE) == Checkers370.blueTurn) && square.getCheckerColor() != null) {
                     selectedSquare = square;
                     selectedSquare.setSelected(true);
                 }

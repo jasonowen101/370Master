@@ -1,4 +1,3 @@
-package checkers;
 import java.awt.Color;
 
 public class MoveValidator {
@@ -65,7 +64,7 @@ public class MoveValidator {
                         if(isValidMove(blueTurn, new CheckerSquare[] {startPiece, jumpedPiece})){
                             checkPromote(endPiece, startPiece);
                             jumpedPiece.toggleChecker(null);
-                            GUI.pieceJumped();
+                            Checkers370.pieceJumped();
                             return true;
                         }
                     }
@@ -99,7 +98,7 @@ public class MoveValidator {
                                 }else{
                                     jumpedPiece.toggleChecker(null);
                                     checkPromote(endPiece, startPiece);
-                                    GUI.pieceJumped();
+                                    Checkers370.pieceJumped();
                                     return true;
                                 }
                             }
@@ -131,7 +130,7 @@ public class MoveValidator {
                                 }else{
                                     jumpedPiece.toggleChecker(null);
                                     checkPromote(endPiece, startPiece);
-                                    GUI.pieceJumped();
+                                    Checkers370.pieceJumped();
                                     return true;
                                 }
                             }
@@ -149,7 +148,7 @@ public class MoveValidator {
     }
     //this check promote method not only checks for promote but also toggles the king status...it must be called during any valid move
     private static void checkPromote(CheckerSquare endPiece, CheckerSquare startPiece){
-        GUI.pieceMoved();
+        Checkers370.pieceMoved();
         endPiece.setIsKing(startPiece.isKing());
         if(startPiece.getCheckerColor().equals(Color.BLUE) && (endPiece.getRow() == 0) || startPiece.getCheckerColor().equals(Color.YELLOW) && (endPiece.getRow() == 7)){
             endPiece.setIsKing(true);
