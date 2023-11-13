@@ -26,6 +26,7 @@ public class Checkers370 {
         }
 
         //CREATE BOTS HERE
+        teamA = new TeamA_AI((byte)2, Color.YELLOW);
         teamB = new TeamB_AI(Color.YELLOW);
         teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
 
@@ -63,7 +64,7 @@ public class Checkers370 {
         }
         if(gameMode == "pvc") {         //human v pc game mode.....as of now bot is always yellow
             if(!blueTurn){
-                move = teamB.getMove();   //bot makes move here...rest of this method is just animation (if you can call it that)
+                move = teamA.getMove(GamePanel.getSquares());   //bot makes move here...rest of this method is just animation (if you can call it that)
                 move[0].setSelected(true);      //"animation" of bot move starts here
                 try{                              //bots selected piece gets highlighted
                     Thread.sleep(BOT_MOVE_DELAY);    //the piece stays highlighted for a second for player to see
