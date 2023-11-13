@@ -7,6 +7,7 @@ public class Checkers370 {
     public static boolean blueTurn;         //its blue's turn when blueTurn = true
     //Declare bots here
     public static TeamB_AI teamB;
+    public static TeamA_AI teamA;
 
     public static final int BOT_MOVE_DELAY = 1000;    //ms value of how long the bot move animation lasts
     public static void main(String[] args){
@@ -25,6 +26,7 @@ public class Checkers370 {
         } 
 
         //CREATE BOTS HERE
+        teamA = new TeamA_AI((byte)2, Color.YELLOW);
         teamB = new TeamB_AI(Color.YELLOW);
 
         CheckerSquare[] move = new CheckerSquare[2];  //The way our game works, a move is represented by an array containing 2 squares, the start and end respectively
@@ -61,7 +63,7 @@ public class Checkers370 {
         }
         if(gameMode == "pvc") {         //human v pc game mode.....as of now bot is always yellow
             if(!blueTurn){
-                move = teamB.getMove();   //bot makes move here...rest of this method is just animation (if you can call it that)
+                move = teamA.getMove(GamePanel.getSquares());   //bot makes move here...rest of this method is just animation (if you can call it that)
                 move[0].setSelected(true);      //"animation" of bot move starts here
                 try{                              //bots selected piece gets highlighted 
                     Thread.sleep(BOT_MOVE_DELAY);    //the piece stays highlighted for a second for player to see

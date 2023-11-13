@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import checkers.CheckerSquare;
+//import checkers.CheckerSquare;
 
 import java.awt.Color;
 

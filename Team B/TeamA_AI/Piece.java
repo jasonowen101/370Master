@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-import checkers.CheckerSquare;
+//import checkers.CheckerSquare;
 
 public class Piece {
 
