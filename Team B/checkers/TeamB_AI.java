@@ -42,7 +42,8 @@ public class TeamB_AI {
         {
             for(int j=0; j<checkers[i].length; j++)
             {
-                if(checkers[i][j].getCheckerColor() == playerColor)
+
+                if(checkers[i][j] != null) if(checkers[i][j].getCheckerColor().equals(playerColor))
                 {
                     valuate(checkers[i][j]);
                 }
