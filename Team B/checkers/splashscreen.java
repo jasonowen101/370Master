@@ -10,11 +10,13 @@ public class splashscreen extends JPanel {
 
         // Load the image
         Image image = null;
+        //System.out.println("pre-image");
         try {
             image = ImageIO.read(new File("Team B/images/ultimaterobotcheckers7.jpeg"));  //"https://drive.google.com/uc?id=18mgucp-j7PwEAcoGkLWFhubJav_YBWTM"
         } catch (IOException e) {
             System.out.println("Can not load file");
         }
+        //System.out.println("Post-image");
         JLabel imageLabel = new JLabel(new ImageIcon(image));
         add(imageLabel, BorderLayout.CENTER);
 

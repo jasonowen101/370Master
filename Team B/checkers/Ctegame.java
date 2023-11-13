@@ -8,7 +8,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class Ctegame extends JFrame {   
+public class Ctegame extends JFrame {
     static final int FRAME_WIDTH = 720;
     public static int getFrameWidth() {
         return FRAME_WIDTH;
@@ -19,17 +19,17 @@ public class Ctegame extends JFrame {
         return FRAME_HEIGHT;
     }
 
-    static MenuPanel mp = new MenuPanel();
-    static HelpPanel hp = new HelpPanel();
-    static GamePanel gp = new GamePanel();
+    public static MenuPanel mp = new MenuPanel();
+    public static HelpPanel hp = new HelpPanel();
+    public static GamePanel gp = new GamePanel();
 
-    static splashscreen splash = new splashscreen(); //this is the splashscreen panel that displays on game launch
+    public static splashscreen splash = new splashscreen(); //this is the splashscreen panel that displays on game launch
 
-    static EndScreen endScreen = new EndScreen();
+    public static EndScreen endScreen = new EndScreen();
 
-    static CardLayout cl = new CardLayout();        //this layout contains the different panels (menu, game, etc.)
-    static BackgroundPanel cards;                   //to contain the panels as cards
-    
+    public static CardLayout cl = new CardLayout();        //this layout contains the different panels (menu, game, etc.)
+    public static BackgroundPanel cards;                   //to contain the panels as cards
+
     Ctegame()
     {
         //This creates an image that will be used as the background to the game
@@ -38,9 +38,9 @@ public class Ctegame extends JFrame {
             img = ImageIO.read(new File("Team B/images/METAL_BG.jpg")); //"https://drive.google.com/uc?id=17X4N_GoW9BAyFgYueQHDUFTvz5GwweyC"
         } catch(IOException e) {
             e.printStackTrace();
-        }  
-        
-        cards =  new BackgroundPanel(img, BackgroundPanel.SCALED);  //This is the main panel that is displayed by the frame. 
+        }
+
+        cards =  new BackgroundPanel(img, BackgroundPanel.SCALED);  //This is the main panel that is displayed by the frame.
                                             //It holds other panels which can be displayed 1 at a time using cl.show()
 
         cards.setLayout(cl); // setting the layout to cardlayout
@@ -49,7 +49,7 @@ public class Ctegame extends JFrame {
         cards.add(hp, "HelpPanel");
         cards.add(gp, "GamePanel");
         cards.add(endScreen, "EndScreen");
-        
+
         add(cards); // adding the panel with cardlayout in JFrame
         setTitle("Checkers");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,6 +70,6 @@ public class Ctegame extends JFrame {
         timer.setRepeats(false); // Run only once
         timer.start();
     }
-    
+
 
 }

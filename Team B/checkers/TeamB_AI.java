@@ -7,8 +7,9 @@ import java.awt.Color;
 public class TeamB_AI {
 
     private static CheckerSquare[][] boardState = GamePanel.getSquares();
+    private static Color playerColor;
 	private static Color enemyColor;
-	
+
 	final static int KING_VALUE = 4;
 	final static int JUMP_VALUE = 3;
     final static int MOVE_VALUE = 2;
@@ -19,15 +20,16 @@ public class TeamB_AI {
 
     // constructor for AI
     public TeamB_AI(Color team) {
+        playerColor = team;
         if(team.equals(Color.BLUE))
             enemyColor = Color.YELLOW;
         else
             enemyColor = Color.BLUE;
     }
 
-    public static void mainAI() 
+    public static void mainAI()
     {
-        
+
         Map<Integer, Move> allMoves = new TreeMap<>();
         /*
         for (CheckerSquare[] checkerSquares : checkers) //needs logic piece to be done first
@@ -40,7 +42,7 @@ public class TeamB_AI {
         {
             for(int j=0; j<checkers[i].length; j++)
             {
-                if(checkers[i][j].getCheckerColor() == Color.BLUE)
+                if(checkers[i][j].getCheckerColor() == playerColor)
                 {
                     valuate(checkers[i][j]);
                 }
@@ -72,9 +74,9 @@ public class TeamB_AI {
 
         // made an array of CheckerSquares that will be returned
         CheckerSquare[] moveToPerform = new CheckerSquare[] {startSquare, endSquare};
-        
+
         return moveToPerform;
-    } 
+    }
 
     // returns highest score move to be executed
     public static Move executeMove(Move move)
@@ -89,18 +91,26 @@ public class TeamB_AI {
         return r > -1 && r < 8 && c > -1 && c < 8;
     }
 
-	// check if position is an enemy 
+	// check if position is an enemy
     private static boolean isEnemy(int r, int c) {
-        if(validPos(r, c))
-            return boardState[r][c].getCheckerColor().equals(enemyColor);
+        if(validPos(r, c)){
+            if(boardState[r][c] != null){
+                return boardState[r][c].getCheckerColor().equals(enemyColor);
+            }
+            return false;
+        }
         else
             return false;
     }
 
 	// check if position is an enemy king
     private static boolean isEnemyKing(int r, int c) {
-        if(validPos(r, c))
-            return isEnemy(r, c) && boardState[r][c].isKing();
+        if(validPos(r, c)){
+            if(boardState[r][c] != null){
+                return isEnemy(r, c) && boardState[r][c].isKing();
+            }
+            return false;
+        }
         else
             return false;
     }
@@ -125,7 +135,7 @@ public class TeamB_AI {
                 || (isEnemyKing(r+1, c-1) && (isEmpty(r-1, c+1) || (isLeft && isDown)))
                 || (isEnemyKing(r+1, c+1) && (isEmpty(r-1, c-1) || (!isLeft && isDown)));
     }
-	
+
 	// check if position will king a piece
 	private static boolean isKingSpace(int r, int c) {
 		if(validPos(r ,c))
@@ -144,7 +154,7 @@ public class TeamB_AI {
         int r = piece.getRow();
         int c = piece.getCol();
 
-		// TODO: Ensure 
+		// TODO: Ensure
 
 		// check if diagonal up-left is a jump
 		if (isJump(r-1, c-1, r-2, c-2)) {

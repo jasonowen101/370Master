@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import checkers.CheckerSquare;
-
 import java.awt.Color;
 
 public class TeamA_AI {
@@ -74,7 +72,7 @@ public class TeamA_AI {
             int v = Integer.MIN_VALUE;
 
             for(Board child : node.getSuccessors()){
-                v = Math.max(v, minimax(node, (byte) (depth-1), alpha, beta));
+                v = Math.max(v, minimax(child, (byte) (depth-1), alpha, beta));
                 alpha = Math.max(alpha, v);
 
                 if(alpha >= beta) break;

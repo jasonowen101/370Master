@@ -1,7 +1,7 @@
 public class Move {
     int score;
-    int[] PieceFrom = new int[1]; //uses values of existing boardstate
-    int[] PieceTo = new int[1] ; //dependent on move
+    int[] PieceFrom = new int[2]; //uses values of existing boardstate
+    int[] PieceTo = new int[2] ; //dependent on move
     private CheckerSquare[] movement;
     private int i;
 

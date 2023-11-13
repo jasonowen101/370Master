@@ -7,11 +7,12 @@ public class Checkers370 {
     public static boolean blueTurn;         //its blue's turn when blueTurn = true
     //Declare bots here
     public static TeamB_AI teamB;
+    public static TeamA_AI teamA;
 
     public static final int BOT_MOVE_DELAY = 1000;    //ms value of how long the bot move animation lasts
     public static void main(String[] args){
         new Ctegame(); //Created an instance of Ctegame, which constructs the GUI
-        
+
         /* this loop waits for a game mode to be selected and for game to start before entering game loop...
         The reasoning for sleeping the thread is so the while loop doesn't bang out condition checks as fast
         as possible and get stuck or slow things down.*/
@@ -22,10 +23,11 @@ public class Checkers370 {
             } catch(InterruptedException e) {
                 e.printStackTrace();
             }
-        } 
+        }
 
         //CREATE BOTS HERE
         teamB = new TeamB_AI(Color.YELLOW);
+        teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
 
         CheckerSquare[] move = new CheckerSquare[2];  //The way our game works, a move is represented by an array containing 2 squares, the start and end respectively
         //GAME LOOP (runs continually until game exited)
@@ -63,7 +65,7 @@ public class Checkers370 {
             if(!blueTurn){
                 move = teamB.getMove();   //bot makes move here...rest of this method is just animation (if you can call it that)
                 move[0].setSelected(true);      //"animation" of bot move starts here
-                try{                              //bots selected piece gets highlighted 
+                try{                              //bots selected piece gets highlighted
                     Thread.sleep(BOT_MOVE_DELAY);    //the piece stays highlighted for a second for player to see
                 } catch(InterruptedException e) {
                     e.printStackTrace();
@@ -76,13 +78,13 @@ public class Checkers370 {
         }
         if(gameMode == "cvc") {         //This will work just like pvc but with two bots
             if(blueTurn){
-                //move = blueBot.getMove();
+                move = teamB.getMove();
             } else {
-                //move = yellowBot.getMove();
-            } 
+                move = teamA.getMove(GamePanel.getSquares());
+            }
             //Now we animate the move
             move[0].setSelected(true);      //"animation" of bot move starts here
-            try{                              //bots selected piece gets highlighted 
+            try{                              //bots selected piece gets highlighted
                 Thread.sleep(BOT_MOVE_DELAY);    //the piece stays highlighted for a second for player to see
             } catch(InterruptedException e) {
                 e.printStackTrace();
@@ -110,10 +112,10 @@ public class Checkers370 {
         CheckerSquareMouse.active = false;      //deactivates the Mouse (so no input to the board when not wanted)
         return move;
     }
-    
-    //This method updates the game board state as well as the board graphics 
+
+    //This method updates the game board state as well as the board graphics
     private static void updateBoard(CheckerSquare[] move){
-        move[1].toggleChecker(move[0].getCheckerColor());       //this toggles the square where piece is going 
+        move[1].toggleChecker(move[0].getCheckerColor());       //this toggles the square where piece is going
         move[0].toggleChecker(null);                      //this toggles the square where piece came from....jumped pieces are toggled in MoveValidator isValidMove()
     }
 

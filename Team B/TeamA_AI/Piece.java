@@ -1,7 +1,5 @@
 import java.awt.Color;
 
-import checkers.CheckerSquare;
-
 public class Piece {
 
     public static Color TEAM1 = CheckerSquare.TEAM1;
