@@ -26,7 +26,6 @@ public class Checkers370 {
         }
 
         //CREATE BOTS HERE
-        teamA = new TeamA_AI((byte)2, Color.YELLOW);
         teamB = new TeamB_AI(Color.YELLOW);
         teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
 
