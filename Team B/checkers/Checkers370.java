@@ -8,26 +8,16 @@ public class Checkers370 {
     //Declare bots here
     public static TeamB_AI teamB;
     public static TeamA_AI teamA;
+    //made create bots a method that is called in menu panel when game mode is selected, this way bots get recreated at start of new game
+    public static void createBots() {
+        //CREATE BOTS HERE
+        teamB = new TeamB_AI(Color.YELLOW);
+        teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
+    }
 
     public static final int BOT_MOVE_DELAY = 1000;    //ms value of how long the bot move animation lasts
     public static void main(String[] args){
         new Ctegame(); //Created an instance of Ctegame, which constructs the GUI
-
-        /* this loop waits for a game mode to be selected and for game to start before entering game loop...
-        The reasoning for sleeping the thread is so the while loop doesn't bang out condition checks as fast
-        as possible and get stuck or slow things down.*/
-        while(gameMode == null || gameOver){
-            try{
-                Thread.sleep(100);
-                //waiting for game mode...we have a delay so the machine doesn't kill itself checking the while condition
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //CREATE BOTS HERE
-        teamB = new TeamB_AI(Color.YELLOW);
-        teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
 
         CheckerSquare[] move = new CheckerSquare[2];  //The way our game works, a move is represented by an array containing 2 squares, the start and end respectively
         //GAME LOOP (runs continually until game exited)
