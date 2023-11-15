@@ -8,27 +8,16 @@ public class Checkers370 {
     //Declare bots here
     public static TeamB_AI teamB;
     public static TeamA_AI teamA;
+    //made create bots a method that is called in menu panel when game mode is selected, this way bots get recreated at start of new game
+    public static void createBots() {
+        //CREATE BOTS HERE
+        teamB = new TeamB_AI(Color.YELLOW);
+        teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
+    }
 
     public static final int BOT_MOVE_DELAY = 1000;    //ms value of how long the bot move animation lasts
     public static void main(String[] args){
         new Ctegame(); //Created an instance of Ctegame, which constructs the GUI
-
-        /* this loop waits for a game mode to be selected and for game to start before entering game loop...
-        The reasoning for sleeping the thread is so the while loop doesn't bang out condition checks as fast
-        as possible and get stuck or slow things down.*/
-        while(gameMode == null || gameOver){
-            try{
-                Thread.sleep(100);
-                //waiting for game mode...we have a delay so the machine doesn't kill itself checking the while condition
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //CREATE BOTS HERE
-        teamA = new TeamA_AI((byte)2, Color.YELLOW);
-        teamB = new TeamB_AI(Color.YELLOW);
-        teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
 
         CheckerSquare[] move = new CheckerSquare[2];  //The way our game works, a move is represented by an array containing 2 squares, the start and end respectively
         //GAME LOOP (runs continually until game exited)
@@ -46,8 +35,8 @@ public class Checkers370 {
                     GamePanel.setTurnLabelText("Yellow's turn");
                 }
                 gameOver = checkGameOver();     //check to see if anybody has won...checkGameOver also will display endscreen on game end
-            } else{     //when the game is over, continually check to see if game has restarted (on a delay so loop doesn't bang out checks and break)
-                //this effectively transforms the while loop into a timer that only has a delay when needed
+            } else{ //when the game is over, continually check to see if game has restarted (on a delay so loop doesn't bang out checks and break)
+                    //this effectively transforms the while loop into a timer that only has a delay when needed
                 try{
                     Thread.sleep(500);
                 } catch(InterruptedException e){
@@ -122,8 +111,12 @@ public class Checkers370 {
 
     //Call everywhere checkPromote is called (Mark said)....I actually just call it at the end of every game loop iteration cause why not
     public static boolean checkGameOver(){
+        boolean gameOverStatus = false;
         int activeBluePiece = 0;
         int activeYellowPiece = 0;
+
+        gameOverStatus = checkStalemate();
+
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 if(((GamePanel.getSquares())[row][col]).getCheckerColor() == Color.BLUE){
@@ -138,23 +131,49 @@ public class Checkers370 {
         if (activeBluePiece == 0 && drawMoves <= 40){
             GamePanel.setTurnLabelText("Yellow Wins!");
             //set endscreen winner and show
-            EndScreen.setWinner("yellow");
-            Ctegame.cl.show(Ctegame.cards, "EndScreen");
-            return true;
+            yellowWin();
+            gameOverStatus = true;
         } else if (activeYellowPiece == 0 && drawMoves <= 40) {
             GamePanel.setTurnLabelText("Blue Wins!");
             //set endscreen winner and show
-            EndScreen.setWinner("blue");
-            Ctegame.cl.show(Ctegame.cards, "EndScreen");
-            return true;
+            blueWin();
+            gameOverStatus = true;
         } else if (drawMoves > 40){
             GamePanel.setTurnLabelText("It's a draw!");
             //set endscreen winner and show
             EndScreen.setWinner("draw");
             Ctegame.cl.show(Ctegame.cards, "EndScreen");
-            return true;
+            gameOverStatus = true;
         }
-        return false;
+        return gameOverStatus;
+    }
+
+    //Checks if the nextMove method will return a move or if it'll be null Then based on the current turn will
+    //return true to set the status of the game to game over and call the end screens
+    public static boolean checkStalemate() {
+        if (nextMove() == null){
+            if (blueTurn) {
+                yellowWin();
+                return true;
+            } else {
+                blueWin();
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    //Call for yellow win
+    public static void yellowWin(){
+        EndScreen.setWinner("yellow");
+        Ctegame.cl.show(Ctegame.cards, "EndScreen");
+    }
+
+    //Call for blue win
+    public static void blueWin(){
+        EndScreen.setWinner("blue");
+        Ctegame.cl.show(Ctegame.cards, "EndScreen");
     }
 
     // Call after every jump...right now this is called in MoveValidator isValidMove();

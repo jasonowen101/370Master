@@ -93,6 +93,7 @@ class MenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
                 Checkers370.gameMode = "pvc";
+                Checkers370.createBots();
             }
         });
 
@@ -101,6 +102,7 @@ class MenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
                 Checkers370.gameMode = "cvc";
+                Checkers370.createBots();
             }
         });
     
