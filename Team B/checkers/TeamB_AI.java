@@ -35,7 +35,7 @@ public class TeamB_AI {
 
     public CheckerSquare[] getMove() {
         boardState = GamePanel.getSquares();
-        if(teamColor==Color.YELLOW) {
+        if(teamColor.equals(Color.YELLOW)) {
             boardState = flipBoard(boardState);
         }
 
@@ -56,6 +56,7 @@ public class TeamB_AI {
             }
         }
 
+        // print selected move for debugging purposes
         System.out.println(toPerform.getScore());
         System.out.println("Row1: " + toPerform.getMovement()[0].getRow() + 
             " Col1: " + toPerform.getMovement()[0].getCol() + 
@@ -130,6 +131,9 @@ public class TeamB_AI {
         Move bestMove = new Move(new CheckerSquare[]{null, null}, -1);
 
         int r = piece.getRow();
+        if(teamColor.equals(Color.YELLOW)) {
+            r = 7 - r;
+        }
         int c = piece.getCol();
 
         // TODO: Ensure
