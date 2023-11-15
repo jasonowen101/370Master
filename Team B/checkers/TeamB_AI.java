@@ -102,7 +102,7 @@ public class TeamB_AI {
 
     // check if the position is a jump
     private boolean isJump(int r1, int c1, int r2, int c2) {
-        return isEmpty(r1, c1) && validPos(r2, c2) && isEnemy(r2, c2);
+        return isEmpty(r2, c2) && validPos(r2, c2) && isEnemy(r1, c1);
     }
 
     // check if position is safe. isLeft and isDown are for indicating the direction
