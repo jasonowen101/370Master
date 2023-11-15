@@ -6,107 +6,72 @@ import java.util.TreeMap;
 
 public class TeamB_AI {
 
-    private static CheckerSquare[][] boardState = GamePanel.getSquares();
-    private static Color enemyColor;
+    private CheckerSquare[][] boardState;
+    private Color enemyColor;
+    private Color teamColor;
+    
 
     final static int KING_VALUE = 4;
     final static int JUMP_VALUE = 3;
     final static int MOVE_VALUE = 2;
     final static int UNSAFE_MOVE_VALUE = 1;
 
-    private static CheckerSquare[][] checkers = GamePanel.getSquares();
-    private static Move perform;
-
     // constructor for AI
     public TeamB_AI(Color team) {
         if (team != null) {
-            if (Color.BLUE.equals(team))
+            if (Color.BLUE.equals(team)) {
                 enemyColor = Color.YELLOW;
-            else
+                teamColor = Color.BLUE;
+            }
+            else {
                 enemyColor = Color.BLUE;
+                teamColor = Color.YELLOW;
+            }
         } else {
             // Handle the case where team is null (provide default behavior or throw an exception)
             throw new IllegalArgumentException("Team color cannot be null!");
         }
     }
 
-    public static void mainAI() {
-        perform = null;
-        // update boardState and checkers
-        boardState = updateBoard();
-        checkers = updateCheckers();
-    
-        Map<Integer, Move> allMoves = new TreeMap<>();
-    
-        for (int i = 0; i < checkers.length; i++) {
-            for (int j = 0; j < checkers[i].length; j++) {
-                Color checkerColor = checkers[i][j].getCheckerColor();
-                if (checkerColor != null && checkerColor.equals(Color.BLUE)) {
-                    Move move = valuate(checkers[i][j]);
-                    if (move != null) {
-                        allMoves.put(move.getScore(), move);
-                    }
-                }
-            }
-        }
-    
-        if (!allMoves.isEmpty()) {
-            int bestScore = 0;
-            for (int key : allMoves.keySet()) {
-                if (key > bestScore) {
-                    bestScore = key;
-                }
-            }
-            perform = allMoves.get(bestScore);
-            executeMove(perform);
-        } else {
-            // Handle the case when no valid moves are found
-            System.out.println("No valid moves found.");
-        }
-    }
-    
-
     public CheckerSquare[] getMove() {
-        // flip board if AI is yellow
-        if (Color.BLUE.equals(enemyColor)) {
+        boardState = GamePanel.getSquares();
+        if(teamColor==Color.YELLOW) {
             boardState = flipBoard(boardState);
         }
-        mainAI();
 
-        // flip move if AI is yellow
-        if (Color.BLUE.equals(enemyColor)) {
-            perform = flipMove(perform);
+        ArrayList<Move> potentialMoves = new ArrayList<>();
+        for(CheckerSquare[] boardState1D : boardState) {
+            for(CheckerSquare square : boardState1D) {
+                if(square.getCheckerColor() == teamColor) {
+                    potentialMoves.add(valuate(square));
+                }
+            }
         }
 
-        // made two arrays of ints, one of where our piece started from and one where
-        // our piece is going to
-        int[] startingArray = perform.getPieceFrom();
-        int[] endingArray = perform.getPieceTo();
+        Move toPerform = potentialMoves.get(0);
+        int score = -1;
+        for(Move m : potentialMoves) {
+            if(m.getScore() > score) {
+                toPerform = m;
+            }
+        }
 
-        // made two CheckerSquares, one of where our piece started from and one where
-        // our piece is going to
-        CheckerSquare startSquare = checkers[startingArray[0]][startingArray[1]];
-        CheckerSquare endSquare = checkers[endingArray[0]][endingArray[1]];
+        System.out.println(toPerform.getScore());
+        System.out.println("Row1: " + toPerform.getMovement()[0].getRow() + 
+            " Col1: " + toPerform.getMovement()[0].getCol() + 
+            " Row2: " + toPerform.getMovement()[1].getRow() + 
+            " Col2: " + toPerform.getMovement()[1].getCol());
 
-        // made an array of CheckerSquares that will be returned
-        CheckerSquare[] moveToPerform = new CheckerSquare[]{startSquare, endSquare};
-
-        return moveToPerform;
-    }
-
-    // returns highest score move to be executed
-    public static Move executeMove(Move move) {
-        System.out.println("Executing move: " + move);
-        return move;
+        return toPerform.getMovement();
     }
 
     // check if position is within bounds of board
-    private static boolean validPos(int r, int c) {
+    private boolean validPos(int r, int c) {
         return r > -1 && r < 8 && c > -1 && c < 8;
     }
 
     // check if position is an enemy
-    private static boolean isEnemy(int r, int c) {
+    private boolean isEnemy(int r, int c) {
         if (validPos(r, c)) {
             Color checkerColor = boardState[r][c].getCheckerColor();
             return checkerColor != null && checkerColor.equals(enemyColor);
@@ -116,7 +81,7 @@ public class TeamB_AI {
     }
 
     // check if position is an enemy king
-    private static boolean isEnemyKing(int r, int c) {
+    private boolean isEnemyKing(int r, int c) {
         if (validPos(r, c)) {
             Color checkerColor = boardState[r][c].getCheckerColor();
             return checkerColor != null && isEnemy(r, c) && boardState[r][c].isKing();
@@ -126,7 +91,7 @@ public class TeamB_AI {
     }
 
     // check if position is empty
-    private static boolean isEmpty(int r, int c) {
+    private boolean isEmpty(int r, int c) {
         if (validPos(r, c)) {
             return Objects.isNull(boardState[r][c].getCheckerColor());
         } else {
@@ -135,13 +100,13 @@ public class TeamB_AI {
     }
 
     // check if the position is a jump
-    private static boolean isJump(int r1, int c1, int r2, int c2) {
+    private boolean isJump(int r1, int c1, int r2, int c2) {
         return isEmpty(r1, c1) && validPos(r2, c2) && isEnemy(r2, c2);
     }
 
     // check if position is safe. isLeft and isDown are for indicating the direction
     // a piece is moving
-    private static boolean isSafe(int r, int c, boolean isLeft, boolean isDown) {
+    private boolean isSafe(int r, int c, boolean isLeft, boolean isDown) {
         return !(isEnemy(r - 1, c - 1) && (isEmpty(r + 1, c + 1) || (isLeft && !isDown)))
                 || (isEnemy(r - 1, c + 1) && (isEmpty(r + 1, c - 1) || (!isLeft && !isDown)))
                 || (isEnemyKing(r + 1, c - 1) && (isEmpty(r - 1, c + 1) || (isLeft && isDown)))
@@ -149,7 +114,7 @@ public class TeamB_AI {
     }
 
     // check if position will king a piece
-    private static boolean isKingSpace(int r, int c) {
+    private boolean isKingSpace(int r, int c) {
         if (validPos(r, c))
             return isEmpty(r, c) && r == 7;
         else
@@ -157,12 +122,12 @@ public class TeamB_AI {
     }
 
     // calculate all possible moves for a piece and return most valuable
-    public static Move valuate(CheckerSquare piece) {
+    public Move valuate(CheckerSquare piece) {
         if (Objects.isNull(piece))
             throw new NullPointerException("Piece cannot be null!");
 
         ArrayList<Move> moves = new ArrayList<>();
-        Move perform = new Move(new CheckerSquare[]{null, null}, -1);
+        Move bestMove = new Move(new CheckerSquare[]{null, null}, -1);
 
         int r = piece.getRow();
         int c = piece.getCol();
@@ -235,14 +200,11 @@ public class TeamB_AI {
         for (Move m : moves) {
             if (m.getScore() > s) {
                 s = m.getScore();
-                perform = m;
+                bestMove = m;
             }
         }
 
-        System.out.println("Evaluated moves for piece at " + piece.getRow() + ", " + piece.getCol() + ": " + moves);
-        System.out.println("Selected move: " + perform);
-
-        return perform;
+        return bestMove;
     }
 
     // vertically flips the supplied CheckerSquare[][] and returns it
