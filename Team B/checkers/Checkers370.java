@@ -120,18 +120,29 @@ public class Checkers370 {
     //Call everywhere checkPromote is called (Mark said)....I actually just call it at the end of every game loop iteration cause why not
     public static boolean checkGameOver(){
         boolean gameOverStatus = false;
+        boolean hasAvalibleMoves = true;
         int activeBluePiece = 0;
         int activeYellowPiece = 0;
-
-        gameOverStatus = checkStalemate();
 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 if(((GamePanel.getSquares())[row][col]).getCheckerColor() == Color.BLUE){
                     activeBluePiece = activeBluePiece + 1;
+                    if(blueTurn){
+                        if(!checkAvalibleMoves(blueTurn, (GamePanel.getSquares())[row][col])){
+                            yellowWin();
+                            gameOverStatus = true;
+                        }
+                    }
                 }
                 if(((GamePanel.getSquares())[row][col]).getCheckerColor() == Color.YELLOW){
                     activeYellowPiece = activeYellowPiece + 1;
+                    if(!blueTurn){
+                        if(!checkAvalibleMoves((GamePanel.getSquares())[row][col])){
+                            blueWin();
+                            gameOverStatus = true;
+                        }
+                    }
                 }
             }
         }
@@ -156,10 +167,11 @@ public class Checkers370 {
         return gameOverStatus;
     }
 
+    /* 
     //Checks if the nextMove method will return a move or if it'll be null Then based on the current turn will
     //return true to set the status of the game to game over and call the end screens
-    public static boolean checkStalemate() {
-        if (nextMove() == null){
+    public static boolean checkStalemate(boolean avalibleMoves) {
+        if (!avalibleMoves){
             if (blueTurn) {
                 yellowWin();
                 return true;
@@ -171,6 +183,7 @@ public class Checkers370 {
             return false;
         }
     }
+    */
 
     //Call for yellow win
     public static void yellowWin(){

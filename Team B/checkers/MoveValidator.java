@@ -154,4 +154,41 @@ public class MoveValidator {
             endPiece.setIsKing(true);
         }
     }
+
+    public static boolean checkAvalibleMoves(boolean blueTurn, CheckerSquare piece){
+        int pieceX = piece.getRow();
+        int pieceY = piece.getCol();
+
+        if(piece.isKing){
+            return checkPositionEmpty(piece, 1, 1);
+            return checkPositionEmpty(piece, -1, 1);
+            return checkPositionEmpty(piece, 1, -1);
+            return checkPositionEmpty(piece, -1, -1);
+
+            return checkPositionEmpty(piece, 2, 2);
+            return checkPositionEmpty(piece, -2, 2);
+            return checkPositionEmpty(piece, 2, -2);
+            return checkPositionEmpty(piece, -2, -2);
+        } else if (blueTurn) {
+            return checkPositionEmpty(piece, 1, 1);
+            return checkPositionEmpty(piece, -1, 1);
+
+            return checkPositionEmpty(piece, 2, 2);
+            return checkPositionEmpty(piece, -2, 2);
+        } else if (!blueTurn) {
+            return checkPositionEmpty(piece, 1, -1);
+            return checkPositionEmpty(piece, -1, -1);
+
+            return checkPositionEmpty(piece, 2, -2);
+            return checkPositionEmpty(piece, -2, -2);
+        }
+    }
+
+    private static boolean checkPositionEmpty(CheckerSquare piece, int xDiviation, int yDiviation){
+        if (((GamePanel.getSquares)[piece.getRow+xDiviation][piece.getCol+yDiviation]) == null){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
