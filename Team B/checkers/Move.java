@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Move {
     int score;
     int[] PieceFrom = new int[2]; //uses values of existing boardstate
@@ -46,7 +48,7 @@ public class Move {
 
     public String toString()
     {
-    return PieceFrom + " " + PieceTo + " " + score;
+    return Arrays.toString(PieceFrom) + " " + Arrays.toString(PieceTo) + " " + score;
     }
 
 
