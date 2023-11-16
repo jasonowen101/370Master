@@ -10,6 +10,7 @@ import javax.swing.*;
 
 public class Ctegame extends JFrame {
     static final int FRAME_WIDTH = 720;
+    static final int SPLASH_DELAY = 3000;  //Change this to lengthen or shorten time splash screen is displayed
     public static int getFrameWidth() {
         return FRAME_WIDTH;
     }
@@ -61,7 +62,7 @@ public class Ctegame extends JFrame {
         cl.show(cards, "SplashScreen");
 
         // Started a timer to transition from the splashscreen to the MenuPanel after 3 seconds
-        Timer timer = new Timer(3000, new ActionListener() {
+        Timer timer = new Timer(SPLASH_DELAY, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cl.show(cards, "MenuPanel"); // Transition to the MenuPanel
