@@ -53,6 +53,7 @@ public class TeamB_AI {
         for(Move m : potentialMoves) {
             if(m.getScore() > score) {
                 toPerform = m;
+                score = m.getScore();
             }
         }
 
