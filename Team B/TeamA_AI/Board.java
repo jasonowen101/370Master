@@ -26,7 +26,7 @@ public class Board {
         return ((color == CheckerSquare.TEAM1) ? CheckerSquare.TEAM2 : CheckerSquare.TEAM1);
     }
 
-    
+
     public static Board InitialState(Color AIColor, CheckerSquare[][] boardState){
         Board board = new Board();
         board.turn = AIColor;
@@ -41,7 +41,7 @@ public class Board {
 
         for (byte y = 0; y < boardState.length; y++){
             for(byte x = 0; x < boardState[y].length; x++){
-                if(!boardState[x][y].getCheckerColor().equals(null)){
+                if(boardState[x][y].getCheckerColor()!=null){
                     board.state[x][y] = new Piece(boardState[x][y].getCheckerColor());
                     if(boardState[x][y].getCheckerColor().equals(AIColor)){
                         if(boardState[x][y].isKing()) playerKng++;
