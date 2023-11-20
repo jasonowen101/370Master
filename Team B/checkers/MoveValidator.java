@@ -244,7 +244,7 @@ public class MoveValidator {
                 }
 
             }
-        return false; //SHouldn't be reachable but it fusses at me.
+        return false; //Shouldn't be reachable but it fusses at me.
         }
         return false; //Shouldn't be reachable but it fusses at me here too.
     }
