@@ -120,7 +120,6 @@ public class Checkers370 {
     //Call everywhere checkPromote is called (Mark said)....I actually just call it at the end of every game loop iteration cause why not
     public static boolean checkGameOver(){
         boolean gameOverStatus = false;
-        boolean hasAvalibleMoves = true;
         int activeBluePiece = 0;
         int activeYellowPiece = 0;
 
@@ -129,7 +128,7 @@ public class Checkers370 {
                 if(((GamePanel.getSquares())[row][col]).getCheckerColor() == Color.BLUE){
                     activeBluePiece = activeBluePiece + 1;
                     if(blueTurn){
-                        if(!checkAvalibleMoves(blueTurn, (GamePanel.getSquares())[row][col])){
+                        if(!MoveValidator.checkStaleMateMoves(blueTurn, (GamePanel.getSquares())[row][col])){
                             yellowWin();
                             gameOverStatus = true;
                         }
@@ -138,7 +137,7 @@ public class Checkers370 {
                 if(((GamePanel.getSquares())[row][col]).getCheckerColor() == Color.YELLOW){
                     activeYellowPiece = activeYellowPiece + 1;
                     if(!blueTurn){
-                        if(!checkAvalibleMoves((GamePanel.getSquares())[row][col])){
+                        if(!MoveValidator.checkStaleMateMoves(blueTurn, (GamePanel.getSquares())[row][col])){
                             blueWin();
                             gameOverStatus = true;
                         }

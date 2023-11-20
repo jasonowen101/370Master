@@ -155,91 +155,92 @@ public class MoveValidator {
         }
     }
 
-    public static boolean checkAvalibleMoves(boolean blueTurn, CheckerSquare piece){
-        CheckerSquare[] temp = {piece};
+    public static boolean checkStaleMateMoves(boolean blueTurn, CheckerSquare piece){
+        CheckerSquare[] temp = {null, null};
+        temp[0] = piece;
 
         if(piece.isKing()){
             temp[1] = new CheckerSquare(1, 1);
-            if (isValidMove(blueTurn,temp)){
+            if (!isValidMove(blueTurn,temp)){
                 return true;
             }
 
             temp[1] = new CheckerSquare(-1, 1);
-            if (isValidMove(blueTurn, temp)){
+            if (!isValidMove(blueTurn, temp)){
                 return true;
             }
 
             temp[1] = new CheckerSquare(1, -1);
-            if (isValidMove(blueTurn, temp)){
+            if (!isValidMove(blueTurn, temp)){
                 return true;
             }
 
             temp[1] = new CheckerSquare(-1, -1);
-            if (isValidMove(blueTurn, temp)){
+            if (!isValidMove(blueTurn, temp)){
                 return true;
             }
 
             temp[1] = new CheckerSquare(2, 2);
-            if (isValidMove(blueTurn, temp)){
+            if (!isValidMove(blueTurn, temp)){
                 return true;
             }
 
             temp[1] = new CheckerSquare(-2, 2);
-            if (isValidMove(blueTurn, temp)){
+            if (!isValidMove(blueTurn, temp)){
                 return true;
             }
 
             temp[1] = new CheckerSquare(2, -2);
-            if (isValidMove(blueTurn, temp)){
+            if (!isValidMove(blueTurn, temp)){
                 return true;
             }
 
             temp[1] = new CheckerSquare(-2, -2);
-            if (isValidMove(blueTurn, temp)){
+            if (!isValidMove(blueTurn, temp)){
                 return true;
             }
 
         } else {
             if (blueTurn) { 
                 temp[1] = new CheckerSquare(1, 1);
-                if (isValidMove(blueTurn, temp)){
+                if (!isValidMove(blueTurn, temp)){
                     return true;
                 }
 
                 temp[1] = new CheckerSquare(-1, 1);
-                if (isValidMove(blueTurn, temp)){
+                if (!isValidMove(blueTurn, temp)){
                     return true;
                 }
 
                 temp[1] = new CheckerSquare(2, 2);
-                if (isValidMove(blueTurn, temp)){
+                if (!isValidMove(blueTurn, temp)){
                     return true;
                 }
 
                 temp[1] = new CheckerSquare(-2, 2);
-                if (isValidMove(blueTurn, temp)){
+                if (!isValidMove(blueTurn, temp)){
                     return true;
                 }
 
             } else if (!blueTurn){
 
                 temp[1] = new CheckerSquare(1, -1);
-                if (isValidMove(blueTurn, temp)){
+                if (!isValidMove(blueTurn, temp)){
                     return true;
                 }
 
                 temp[1] = new CheckerSquare(-1, -1);
-                if (isValidMove(blueTurn, temp)){
+                if (!isValidMove(blueTurn, temp)){
                     return true;
                 }
 
                 temp[1] = new CheckerSquare(2, -2);
-                if (isValidMove(blueTurn, temp)){
+                if (!isValidMove(blueTurn, temp)){
                     return true;
                 }
 
                 temp[1] = new CheckerSquare(-2, 2);
-                if (isValidMove(blueTurn, temp)){
+                if (!isValidMove(blueTurn, temp)){
                     return true;
                 }
 
