@@ -39,21 +39,29 @@ public class TeamB_AI {
             boardState = flipBoard(boardState);
         }
 
+        // find the best potential move of each piece
         ArrayList<Move> potentialMoves = new ArrayList<>();
         for(CheckerSquare[] boardState1D : boardState) {
             for(CheckerSquare square : boardState1D) {
                 if(square.getCheckerColor() == teamColor) {
-                    potentialMoves.add(valuate(square));
+                    Move m = valuate(square);
+                    if(m.getScore() >= 0) {
+                        potentialMoves.add(m);
+                    }
                 }
             }
         }
 
+        // iterate through potential moves and select the highest score
         Move toPerform = potentialMoves.get(0);
         int score = -1;
         for(Move m : potentialMoves) {
             if(m.getScore() > score) {
                 toPerform = m;
                 score = m.getScore();
+                if(potentialMoves.get(0).getScore() == potentialMoves.get(potentialMoves.size() - 1).getScore()) {
+                    toPerform = potentialMoves.get(0);
+                }
             }
         }
 
@@ -128,16 +136,16 @@ public class TeamB_AI {
         if (Objects.isNull(piece))
             throw new NullPointerException("Piece cannot be null!");
 
+        // create an ArrayList that stores the moves the piece can make
         ArrayList<Move> moves = new ArrayList<>();
         Move bestMove = new Move(new CheckerSquare[]{null, null}, -1);
 
+        // store row and collumn of piece, flip if needed
         int r = piece.getRow();
         if(teamColor.equals(Color.YELLOW)) {
             r = 7 - r;
         }
         int c = piece.getCol();
-
-        // TODO: Ensure
 
         // check if diagonal up-left is a jump
         if (isJump(r - 1, c - 1, r - 2, c - 2)) {
@@ -201,6 +209,7 @@ public class TeamB_AI {
             }
         }
 
+        // iterate through potential moves and select the highest score
         int s = -1;
         for (Move m : moves) {
             if (m.getScore() > s) {
@@ -226,37 +235,4 @@ public class TeamB_AI {
         return flippedBoard;
     }
 
-    // method to update boardState and checkers once TeamB_Ai.getMove() is called
-    public static CheckerSquare[][] updateBoard()
-    {
-        return GamePanel.getSquares();
-    }
-
-    // method to update checkers once TeamB_Ai.getMove() is called
-    public static CheckerSquare[][] updateCheckers()
-    {
-        return GamePanel.getSquares();
-    }
-
-    // method to flip a move if the AI is yellow
-    // returns a Move object
-    public static Move flipMove(Move move)
-    {
-        int[] startingArray = move.getPieceFrom();
-        int[] endingArray = move.getPieceTo();
-
-        int[] flippedStartingArray = new int[2];
-        int[] flippedEndingArray = new int[2];
-
-        flippedStartingArray[0] = 7 - startingArray[0];
-        flippedStartingArray[1] = 7 - startingArray[1];
-
-        flippedEndingArray[0] = 7 - endingArray[0];
-        flippedEndingArray[1] = 7 - endingArray[1];
-
-        move.setPieceFrom(flippedStartingArray[0], flippedStartingArray[1]);
-        move.setPieceTo(flippedEndingArray[0], flippedEndingArray[1]);
-
-        return move;
-    }
 }
