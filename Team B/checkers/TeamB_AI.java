@@ -59,9 +59,9 @@ public class TeamB_AI {
             if(m.getScore() > score) {
                 toPerform = m;
                 score = m.getScore();
-                if(potentialMoves.get(0).getScore() == potentialMoves.get(potentialMoves.size() - 1).getScore()) {
-                    toPerform = potentialMoves.get(0);
-                }
+                // if(potentialMoves.get(0).getScore() == potentialMoves.get(potentialMoves.size() - 1).getScore()) {
+                //     toPerform = potentialMoves.get(0);
+                // }
             }
         }
 
@@ -116,11 +116,11 @@ public class TeamB_AI {
 
     // check if position is safe. isLeft and isDown are for indicating the direction
     // a piece is moving
-    private boolean isSafe(int r, int c, boolean isLeft, boolean isDown) {
-        return !(isEnemy(r - 1, c - 1) && (isEmpty(r + 1, c + 1) || (isLeft && !isDown)))
-                || (isEnemy(r - 1, c + 1) && (isEmpty(r + 1, c - 1) || (!isLeft && !isDown)))
-                || (isEnemyKing(r + 1, c - 1) && (isEmpty(r - 1, c + 1) || (isLeft && isDown)))
-                || (isEnemyKing(r + 1, c + 1) && (isEmpty(r - 1, c - 1) || (!isLeft && isDown)));
+    private boolean isSafe(int r, int c, int originR, int originC) {
+        return !((isEnemy(r - 1, c - 1) && (isEmpty(r + 1, c + 1) || ((r + 1 == originR) && (c + 1 == originC))))
+                || (isEnemy(r - 1, c + 1) && (isEmpty(r + 1, c - 1) || ((r + 1 == originR) && (c - 1 == originC))))
+                || (isEnemyKing(r + 1, c - 1) && (isEmpty(r - 1, c + 1) || ((r - 1 == originR) && (c + 1 == originC))))
+                || (isEnemyKing(r + 1, c + 1) && (isEmpty(r - 1, c - 1) || ((r - 1 == originR) && (c - 1 == originC)))));
     }
 
     // check if position will king a piece
@@ -160,7 +160,7 @@ public class TeamB_AI {
             // check if position results in a king, is safe, or is unsafe
             if (isKingSpace(r - 1, c - 1) && !piece.isKing()) {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c - 1]}, KING_VALUE));
-            } else if (isSafe(r - 1, c - 1, true, false)) {
+            } else if (isSafe(r - 1, c - 1, r, c)) {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c - 1]}, MOVE_VALUE));
             } else {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c - 1]}, UNSAFE_MOVE_VALUE));
@@ -171,7 +171,7 @@ public class TeamB_AI {
             // check if position results in a king, is safe, or is unsafe
             if (isKingSpace(r - 1, c + 1) && !piece.isKing()) {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c + 1]}, KING_VALUE));
-            } else if (isSafe(r - 1, c + 1, false, false)) {
+            } else if (isSafe(r - 1, c + 1, r, c)) {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c + 1]}, MOVE_VALUE));
             } else {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c + 1]}, UNSAFE_MOVE_VALUE));
@@ -190,7 +190,7 @@ public class TeamB_AI {
             // check if diagonal down-left is empty
             if (isEmpty(r + 1, c - 1)) {
                 // check if position is safe
-                if (isSafe(r + 1, c - 1, true, true)) {
+                if (isSafe(r + 1, c - 1, r, c)) {
                     moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c - 1]}, MOVE_VALUE));
                 } else {
                     moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c - 1]},
@@ -200,7 +200,7 @@ public class TeamB_AI {
             // check if diagonal down-right is empty
             if (isEmpty(r + 1, c + 1)) {
                 // check if position is safe
-                if (isSafe(r + 1, c + 1, false, true)) {
+                if (isSafe(r + 1, c + 1, r, c)) {
                     moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c + 1]}, MOVE_VALUE));
                 } else {
                     moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c + 1]},
