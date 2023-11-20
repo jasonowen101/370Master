@@ -1,10 +1,5 @@
 import java.awt.Color;
 
-<<<<<<< HEAD
-=======
-//import checkers.CheckerSquare;
-
->>>>>>> d950b9bdb79931a46a581a5732d15a6d2b8f2c35
 public class Piece {
 
     public static Color TEAM1 = CheckerSquare.TEAM1;
