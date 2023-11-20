@@ -88,6 +88,7 @@ public class Checkers370 {
     //getMoveFromMouse() does exactly what it sounds like
     //this function kinda scuffed but it works...sometimes it seems glitchy in game(i realized this is because my high dpi setting...mouse adapter doesn't like to take clicks when mouse moving)
     private static CheckerSquare[] getMoveFromMouse() {
+        CheckerSquareMouse.clearMove();
         CheckerSquareMouse.active = true;               //activates the Mouse adapter
         while(CheckerSquareMouse.getMove() == null) {   //continually checks if the player has input a potentially valid move
             try{    //slight delay on checks so nothing breaks
@@ -96,11 +97,8 @@ public class Checkers370 {
                 exception.printStackTrace();
             }
         }
-        CheckerSquare[] move;                   //In order to be able to clear the move from mouse and still be able to use it,
-        move = CheckerSquareMouse.getMove();    //   I used a place holder move.
-        CheckerSquareMouse.clearMove();
         CheckerSquareMouse.active = false;      //deactivates the Mouse (so no input to the board when not wanted)
-        return move;
+        return CheckerSquareMouse.getMove();
     }
 
     //This method updates the game board state as well as the board graphics
