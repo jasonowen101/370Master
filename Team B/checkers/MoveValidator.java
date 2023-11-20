@@ -154,4 +154,99 @@ public class MoveValidator {
             endPiece.setIsKing(true);
         }
     }
+
+    public static boolean checkStaleMateMoves(boolean blueTurn, CheckerSquare piece){
+        CheckerSquare[] temp = {null, null};
+        temp[0] = piece;
+
+        if(piece.isKing()){
+            temp[1] = new CheckerSquare(1, 1);
+            if (!isValidMove(blueTurn,temp)){
+                return true;
+            }
+
+            temp[1] = new CheckerSquare(-1, 1);
+            if (!isValidMove(blueTurn, temp)){
+                return true;
+            }
+
+            temp[1] = new CheckerSquare(1, -1);
+            if (!isValidMove(blueTurn, temp)){
+                return true;
+            }
+
+            temp[1] = new CheckerSquare(-1, -1);
+            if (!isValidMove(blueTurn, temp)){
+                return true;
+            }
+
+            temp[1] = new CheckerSquare(2, 2);
+            if (!isValidMove(blueTurn, temp)){
+                return true;
+            }
+
+            temp[1] = new CheckerSquare(-2, 2);
+            if (!isValidMove(blueTurn, temp)){
+                return true;
+            }
+
+            temp[1] = new CheckerSquare(2, -2);
+            if (!isValidMove(blueTurn, temp)){
+                return true;
+            }
+
+            temp[1] = new CheckerSquare(-2, -2);
+            if (!isValidMove(blueTurn, temp)){
+                return true;
+            }
+
+        } else {
+            if (blueTurn) { 
+                temp[1] = new CheckerSquare(1, 1);
+                if (!isValidMove(blueTurn, temp)){
+                    return true;
+                }
+
+                temp[1] = new CheckerSquare(-1, 1);
+                if (!isValidMove(blueTurn, temp)){
+                    return true;
+                }
+
+                temp[1] = new CheckerSquare(2, 2);
+                if (!isValidMove(blueTurn, temp)){
+                    return true;
+                }
+
+                temp[1] = new CheckerSquare(-2, 2);
+                if (!isValidMove(blueTurn, temp)){
+                    return true;
+                }
+
+            } else if (!blueTurn){
+
+                temp[1] = new CheckerSquare(1, -1);
+                if (!isValidMove(blueTurn, temp)){
+                    return true;
+                }
+
+                temp[1] = new CheckerSquare(-1, -1);
+                if (!isValidMove(blueTurn, temp)){
+                    return true;
+                }
+
+                temp[1] = new CheckerSquare(2, -2);
+                if (!isValidMove(blueTurn, temp)){
+                    return true;
+                }
+
+                temp[1] = new CheckerSquare(-2, 2);
+                if (!isValidMove(blueTurn, temp)){
+                    return true;
+                }
+
+            }
+        return false; //Shouldn't be reachable but it fusses at me.
+        }
+        return false; //Shouldn't be reachable but it fusses at me here too.
+    }
 }
