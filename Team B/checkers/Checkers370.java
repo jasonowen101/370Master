@@ -5,6 +5,7 @@ public class Checkers370 {
     public static boolean gameOver = true;  //game is over when gameOver = true
     public static int drawMoves = 0;        //for check end
     public static boolean blueTurn;         //its blue's turn when blueTurn = true
+     public static final int BOT_MOVE_DELAY = 1000;    //ms value of how long the bot move animation lasts
     //Declare bots here
     public static TeamB_AI teamB;
     public static TeamA_AI teamA;
@@ -22,8 +23,6 @@ public class Checkers370 {
             teamB = new TeamB_AI(Color.YELLOW);
         }
     }
-
-    public static final int BOT_MOVE_DELAY = 1000;    //ms value of how long the bot move animation lasts
     public static void main(String[] args){
         new Ctegame(); //Created an instance of Ctegame, which constructs the GUI
 
