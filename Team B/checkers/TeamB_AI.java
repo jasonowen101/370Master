@@ -13,9 +13,11 @@ public class TeamB_AI {
 
     final static int KING_VALUE = 5;
     final static int JUMP_VALUE = 4;
-    final static int MOVE_VALUE = 3;
-    final static int UNSAFE_JUMP_VALUE = 2;
+    final static int UNSAFE_JUMP_VALUE = 3;
+    final static int MOVE_VALUE = 2;
     final static int UNSAFE_MOVE_VALUE = 1;
+    
+    final static int UNSAFE_TO_SAFE = 1;
 
     /**
      * Constructor for the AI.
@@ -60,15 +62,23 @@ public class TeamB_AI {
             }
         }
 
-        // Iterate through potential moves and select the highest score.
+        // Iterate through potential moves and select the ones with the highest score.
         Move toPerform = potentialMoves.get(0);
-        int score = -1;
+        ArrayList<Move> movePool = new ArrayList<>();
+        movePool.add(toPerform);
+        int score = 0;
         for(Move m : potentialMoves) {
-            if(m.getScore() > score) {
-                toPerform = m;
-                score = m.getScore();
+            if(m.getScore() >= score) {
+                if(m.getScore() > score) {
+                    score = m.getScore();
+                    movePool.clear();
+                }
+                movePool.add(m);
             }
         }
+
+        // Assign a random move from the highest scoring moves to toPerform.
+        toPerform = movePool.get((int) (Math.random() * movePool.size()));
 
         // Print selected move for debugging purposes.
         System.out.println(toPerform.getScore());
@@ -195,11 +205,16 @@ public class TeamB_AI {
         }
         int c = piece.getCol();
 
+        // Adds a bonus if the piece is moving from an unsafe position.
+        int safetyBonus = 0;
+        if(!isSafe(r, c, r, c)) {
+            safetyBonus = UNSAFE_TO_SAFE;
+        }
         // Check if diagonal up-left is a jump.
         if (isJump(r - 1, c - 1, r - 2, c - 2)) {
             // Check if the end position is safe.
             if(isSafe(r - 2, c - 2, r - 1, c - 1)) {
-                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 2][c - 2]}, JUMP_VALUE));
+                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 2][c - 2]}, JUMP_VALUE + safetyBonus));
             } else {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 2][c - 2]}, UNSAFE_JUMP_VALUE));
             }
@@ -208,7 +223,7 @@ public class TeamB_AI {
         if (isJump(r - 1, c + 1, r - 2, c + 2)) {
             // Check if the end position is safe.
             if(isSafe(r - 2, c + 2, r - 1, c + 1)) {
-                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 2][c + 2]}, JUMP_VALUE));
+                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 2][c + 2]}, JUMP_VALUE + safetyBonus));
             } else {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 2][c + 2]}, UNSAFE_JUMP_VALUE));
             }
@@ -217,9 +232,9 @@ public class TeamB_AI {
         if (isEmpty(r - 1, c - 1)) {
             // Check if position results in a king, is safe, or is unsafe.
             if (isKingSpace(r - 1, c - 1) && !piece.isKing()) {
-                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c - 1]}, KING_VALUE));
+                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c - 1]}, KING_VALUE + safetyBonus));
             } else if (isSafe(r - 1, c - 1, r, c)) {
-                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c - 1]}, MOVE_VALUE));
+                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c - 1]}, MOVE_VALUE + safetyBonus));
             } else {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c - 1]}, UNSAFE_MOVE_VALUE));
             }
@@ -228,9 +243,9 @@ public class TeamB_AI {
         if (isEmpty(r - 1, c + 1)) {
             // Check if position results in a king, is safe, or is unsafe.
             if (isKingSpace(r - 1, c + 1) && !piece.isKing()) {
-                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c + 1]}, KING_VALUE));
+                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c + 1]}, KING_VALUE + safetyBonus));
             } else if (isSafe(r - 1, c + 1, r, c)) {
-                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c + 1]}, MOVE_VALUE));
+                moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c + 1]}, MOVE_VALUE + safetyBonus));
             } else {
                 moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r - 1][c + 1]}, UNSAFE_MOVE_VALUE));
             }
@@ -241,7 +256,7 @@ public class TeamB_AI {
             if (isJump(r + 1, c - 1, r + 2, c - 2)) {
                 // Check if the end position is safe.
                 if(isSafe(r + 2, c - 2, r + 1, c - 1)) {
-                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 2][c - 2]}, JUMP_VALUE));
+                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 2][c - 2]}, JUMP_VALUE + safetyBonus));
                 } else {
                     moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 2][c - 2]}, UNSAFE_JUMP_VALUE));
                 }
@@ -250,7 +265,7 @@ public class TeamB_AI {
             if (isJump(r + 1, c + 1, r + 2, c + 2)) {
                 // Check if the end position is safe.
                 if(isSafe(r + 2, c + 2, r + 1, c + 1)) {
-                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 2][c + 2]}, JUMP_VALUE));
+                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 2][c + 2]}, JUMP_VALUE + safetyBonus));
                 } else {
                     moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 2][c + 2]}, UNSAFE_JUMP_VALUE));
                 }
@@ -259,34 +274,38 @@ public class TeamB_AI {
             if (isEmpty(r + 1, c - 1)) {
                 // Check if position is safe.
                 if (isSafe(r + 1, c - 1, r, c)) {
-                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c - 1]}, MOVE_VALUE));
+                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c - 1]}, MOVE_VALUE + safetyBonus));
                 } else {
-                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c - 1]},
-                            UNSAFE_MOVE_VALUE));
+                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c - 1]}, UNSAFE_MOVE_VALUE));
                 }
             }
             // Check if diagonal down-right is empty.
             if (isEmpty(r + 1, c + 1)) {
                 // Check if position is safe.
                 if (isSafe(r + 1, c + 1, r, c)) {
-                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c + 1]}, MOVE_VALUE));
+                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c + 1]}, MOVE_VALUE + safetyBonus));
                 } else {
-                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c + 1]},
-                            UNSAFE_MOVE_VALUE));
+                    moves.add(new Move(new CheckerSquare[]{boardState[r][c], boardState[r + 1][c + 1]}, UNSAFE_MOVE_VALUE));
                 }
             }
         }
 
-        // Iterate through potential moves and select the highest score.
-        int s = -1;
+        // Iterate through potential moves and select the ones with the highest score.
+        ArrayList<Move> movePool = new ArrayList<>();
+        movePool.add(bestMove);
+        int s = 0;
         for (Move m : moves) {
-            if (m.getScore() > s) {
-                s = m.getScore();
-                bestMove = m;
+            if (m.getScore() >= s) {
+                if(m.getScore() > s) {
+                    s = m.getScore();
+                    movePool.clear();
+                }
+                movePool.add(m);
             }
         }
 
-        return bestMove;
+        // Return a random move of the ones with a high score.
+        return movePool.get((int) (Math.random() * movePool.size()));
     }
 
     /**
