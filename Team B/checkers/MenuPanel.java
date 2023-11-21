@@ -71,13 +71,15 @@ class MenuPanel extends JPanel {
     // Showing the dropdown menu for the "Play" button
     private void showPlayMenu(Component invoker) {
         JPopupMenu playMenu = new JPopupMenu();
-        JMenuItem playerVsPlayer = new JMenuItem("Player1 vs Player2");
-        JMenuItem playerVsComputer = new JMenuItem("Player vs Computer");
-        JMenuItem computerVsComputer = new JMenuItem("Computer vs Computer");
+        JMenuItem playerVsPlayer = new JMenuItem("Player vs Player");
+        JMenuItem playerVsTeamA = new JMenuItem("Player vs Team A AI");
+        JMenuItem playerVsTeamB = new JMenuItem("Player vs Team B AI");
+        JMenuItem TeamAVsTeamB = new JMenuItem("Team A AI vs Team B AI");
 
         configureMenuItem(playerVsPlayer); // Configured dropdown item
-        configureMenuItem(playerVsComputer); // Configured dropdown item
-        configureMenuItem(computerVsComputer);
+        configureMenuItem(playerVsTeamA); // Configured dropdown item
+        configureMenuItem(playerVsTeamB);
+        configureMenuItem(TeamAVsTeamB);
 
         // Added action listeners to menu items
         playerVsPlayer.addActionListener(new ActionListener() {
@@ -88,28 +90,38 @@ class MenuPanel extends JPanel {
             }
         }); 
 
-        playerVsComputer.addActionListener(new ActionListener() {
+        playerVsTeamA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
                 Checkers370.gameMode = "pvc";
-                Checkers370.createBots();
+                Checkers370.createBots("A");
             }
         });
 
-        computerVsComputer.addActionListener(new ActionListener() {
+        playerVsTeamB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ctegame.cl.show(Ctegame.cards, "GamePanel");
+                Checkers370.gameMode = "pvc";
+                Checkers370.createBots("B");
+            }
+        });
+
+        TeamAVsTeamB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "GamePanel");
                 Checkers370.gameMode = "cvc";
-                Checkers370.createBots();
+                Checkers370.createBots("");
             }
         });
     
 
         playMenu.add(playerVsPlayer);
-        playMenu.add(playerVsComputer);
-        playMenu.add(computerVsComputer);
+        playMenu.add(playerVsTeamA);
+        playMenu.add(playerVsTeamB);
+        playMenu.add(TeamAVsTeamB);
         playMenu.show(invoker, 0, invoker.getHeight());
     }
 

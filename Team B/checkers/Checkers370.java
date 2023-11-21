@@ -9,10 +9,18 @@ public class Checkers370 {
     public static TeamB_AI teamB;
     public static TeamA_AI teamA;
     //made create bots a method that is called in menu panel when game mode is selected, this way bots get recreated at start of new game
-    public static void createBots() {
+    public static void createBots(String team) {
         //CREATE BOTS HERE
-        teamB = new TeamB_AI(Color.YELLOW);
-        teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
+        if(team == "B") {
+            teamB = new TeamB_AI(Color.YELLOW);
+            teamA = null;
+        } else if(team == "A") {
+            teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM1);
+            teamB = null;
+        } else {
+            teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
+            teamB = new TeamB_AI(Color.YELLOW);
+        }
     }
 
     public static final int BOT_MOVE_DELAY = 1000;    //ms value of how long the bot move animation lasts
@@ -53,7 +61,10 @@ public class Checkers370 {
         }
         if(gameMode == "pvc") {         //human v pc game mode.....as of now bot is always yellow
             if(!blueTurn){
-                move = teamA.getMove(GamePanel.getSquares());   //bot makes move here...rest of this method is just animation (if you can call it that)
+                if(teamA != null)
+                    move = teamA.getMove(GamePanel.getSquares());   //bot makes move here...rest of this method is just animation (if you can call it that)
+                if(teamB != null)
+                    move = teamB.getMove();
                 move[0].setSelected(true);      //"animation" of bot move starts here
                 try{                              //bots selected piece gets highlighted
                     Thread.sleep(BOT_MOVE_DELAY);    //the piece stays highlighted for a second for player to see
@@ -68,9 +79,9 @@ public class Checkers370 {
         }
         if(gameMode == "cvc") {         //This will work just like pvc but with two bots
             if(blueTurn){
-                move = teamB.getMove();
-            } else {
                 move = teamA.getMove(GamePanel.getSquares());
+            } else {
+                move = teamB.getMove();
             }
             //Now we animate the move
             move[0].setSelected(true);      //"animation" of bot move starts here
