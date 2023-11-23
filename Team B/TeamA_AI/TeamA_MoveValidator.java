@@ -48,18 +48,20 @@ public class TeamA_MoveValidator {
                             }
                             else return false; // BLUE can't jump BLUE pieces
                             }
+                            else if (abs(endCord[1] - startCord[1]) == 1 && end == null) return true; //single forward?
                         }
                     }else{ // If YELLOW Team [TEAM 1]
-                        if(endCord[1] - startCord[1] < 0){ // If move is not FORWARD [Yellow should go down, so deltaY is positive]
+                        if(endCord[0] - startCord[0] < 0){ // If move is not FORWARD [Yellow should go down, so deltaY is positive]
                             return false;
                         } else { // If YELLOW move is forward
-                            if(abs(endCord[0] - startCord[0]) == 2){ // If move is Jump
+                            if(abs(endCord[1] - startCord[1]) == 2){ // If move is Jump
                                 Piece jumped = board[startCord[0] + ((endCord[0] - startCord[0])/2)][startCord[1] + ((endCord[1] - startCord[1])/2)];
-                                if (jumped != null) if (jumped.getPlayer().equals(Board.oppositeColor(playerColor))){ // If jumping over opposing [BLUE / TEAM 2] piece
-                                return true;
-                            }
+                                if (jumped != null) if (jumped.getPlayer().equals(Board.oppositeColor(playerColor))) return true; // If jumping over opposing [BLUE / TEAM 2] piece
+
+
                             else return false; // YELLOW can't jump YELLOW pieces
                             }
+                            else if (abs(endCord[1] - startCord[1]) == 1 && end == null) return true; //single forward?
                         }
                     }
                 }

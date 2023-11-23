@@ -56,7 +56,7 @@ public class TeamA_AI {
     //This will definently need checking, would be interesting to
     //see if it works
     private Board randomMove(ArrayList<Board> bestMoves){
-        System.out.println(bestMoves.size());
+        //System.out.println(bestMoves.size());
         return bestMoves.get((new Random()).nextInt(bestMoves.size()));
     }
 

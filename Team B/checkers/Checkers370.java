@@ -16,10 +16,10 @@ public class Checkers370 {
             teamB = new TeamB_AI(Color.YELLOW);
             teamA = null;
         } else if(team == "A") {
-            teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM1);
+            teamA = new TeamA_AI((byte) 10, CheckerSquare.TEAM1);
             teamB = null;
         } else {
-            teamA = new TeamA_AI((byte) 5, CheckerSquare.TEAM2);
+            teamA = new TeamA_AI((byte) 10, CheckerSquare.TEAM2);
             teamB = new TeamB_AI(Color.YELLOW);
         }
     }
@@ -166,7 +166,7 @@ public class Checkers370 {
         return gameOverStatus;
     }
 
-    /* 
+    /*
     //Checks if the nextMove method will return a move or if it'll be null Then based on the current turn will
     //return true to set the status of the game to game over and call the end screens
     public static boolean checkStalemate(boolean avalibleMoves) {
