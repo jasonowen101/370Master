@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 class MenuPanel extends JPanel {
     private JButton play = new JButton("Play");
-    private JButton help = new JButton("Help");
+    //private JButton help = new JButton("Help");
     private JButton exit = new JButton("Exit");
 
     private Image menubkg = new ImageIcon("src/images/splash.png").getImage(); // Menu background
@@ -14,7 +14,7 @@ class MenuPanel extends JPanel {
 
         // Configured buttons
         configureButton(play);
-        configureButton(help);
+        //configureButton(help);
         configureButton(exit);
 
         // Created a panel for button layout
@@ -25,7 +25,7 @@ class MenuPanel extends JPanel {
         // Adding buttons to the button panel
         buttonPanel.add(play);
         buttonPanel.add(Box.createVerticalStrut(20)); // Add spacing between buttons
-        buttonPanel.add(help);
+        //buttonPanel.add(help);
         buttonPanel.add(Box.createVerticalStrut(20));
         buttonPanel.add(exit);
 
@@ -44,12 +44,12 @@ class MenuPanel extends JPanel {
             }
         });
 
-        help.addActionListener(new ActionListener() {
+        /* help.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ctegame.cl.show(Ctegame.cards, "HelpPanel");
             }
-        });
+        }); */
 
         exit.addActionListener(new ActionListener() {
             @Override
@@ -72,8 +72,8 @@ class MenuPanel extends JPanel {
     private void showPlayMenu(Component invoker) {
         JPopupMenu playMenu = new JPopupMenu();
         JMenuItem playerVsPlayer = new JMenuItem("Player vs Player");
-        JMenuItem playerVsTeamA = new JMenuItem("Player vs Team A AI");
-        JMenuItem playerVsTeamB = new JMenuItem("Player vs Team B AI");
+        JMenuItem playerVsTeamA = new JMenuItem("Player vs Beginner Bot");
+        JMenuItem playerVsTeamB = new JMenuItem("Player vs Advanced Bot");
         JMenuItem TeamAVsTeamB = new JMenuItem("Team A AI vs Team B AI");
 
         configureMenuItem(playerVsPlayer); // Configured dropdown item
