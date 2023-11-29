@@ -36,7 +36,7 @@ public class Ctegame extends JFrame {
         //This creates an image that will be used as the background to the game
         Image img = null;
         try{
-            img = ImageIO.read(new File("Team B/images/METAL_BG.jpg")); //"https://drive.google.com/uc?id=17X4N_GoW9BAyFgYueQHDUFTvz5GwweyC"
+            img = ImageIO.read(getClass().getResourceAsStream("METAL_BG.jpg")); //"https://drive.google.com/uc?id=17X4N_GoW9BAyFgYueQHDUFTvz5GwweyC"
         } catch(IOException e) {
             e.printStackTrace();
         }

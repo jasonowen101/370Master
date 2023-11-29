@@ -12,7 +12,7 @@ public class splashscreen extends JPanel {
         Image image = null;
         //System.out.println("pre-image");
         try {
-            image = ImageIO.read(new File("Team B/images/ultimaterobotcheckers7.jpeg"));  //"https://drive.google.com/uc?id=18mgucp-j7PwEAcoGkLWFhubJav_YBWTM"
+            image = ImageIO.read(getClass().getResourceAsStream("ultimaterobotcheckers7.jpeg"));  //"https://drive.google.com/uc?id=18mgucp-j7PwEAcoGkLWFhubJav_YBWTM"
         } catch (IOException e) {
             System.out.println("Can not load file");
         }

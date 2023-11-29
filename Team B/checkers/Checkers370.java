@@ -159,7 +159,7 @@ public class Checkers370 {
         } else if (drawMoves > 40){
             GamePanel.setTurnLabelText("It's a draw!");
             //set endscreen winner and show
-            EndScreen.setWinner("draw");
+            Ctegame.endScreen.setWinner("draw");
             Ctegame.cl.show(Ctegame.cards, "EndScreen");
             gameOverStatus = true;
         }
@@ -186,13 +186,13 @@ public class Checkers370 {
 
     //Call for yellow win
     public static void yellowWin(){
-        EndScreen.setWinner("yellow");
+        Ctegame.endScreen.setWinner("yellow");
         Ctegame.cl.show(Ctegame.cards, "EndScreen");
     }
 
     //Call for blue win
     public static void blueWin(){
-        EndScreen.setWinner("blue");
+        Ctegame.endScreen.setWinner("blue");
         Ctegame.cl.show(Ctegame.cards, "EndScreen");
     }
 
